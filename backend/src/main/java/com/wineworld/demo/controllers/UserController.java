@@ -3,7 +3,7 @@ package com.wineworld.demo.controllers;
 import com.wineworld.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +14,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/add")
+    @RequestMapping("/user/add")
     public ResponseEntity<Void> addUser(){
         userService.addUser();
         return new ResponseEntity<>(HttpStatus.OK);
