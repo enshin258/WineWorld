@@ -1,5 +1,6 @@
 package com.wineworld.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,8 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Products")
 @Data
-@Builder
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Product {
  
@@ -16,31 +16,33 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
  
-    @NotNull(message = "Product name is required.")
+    @NonNull
     private String name;
  
-    @NotNull(message = "Price is required.")
+    @NonNull
     private float price;
- 
+
+    @NonNull
     private String pictureUrl;
 
-    @NotNull(message = "Genre is required.")
+    @NonNull
     private String genre;
 
+    @NonNull
+    @ManyToOne
     private Location location;
 
-    @NotNull(message = "Producer is required.")
+    @NonNull
     private String producer;
 
-    @NotNull(message = "Alcohol level is required.")
+    @NonNull
     private float alcoholLevel;
 
-    @NotNull(message = "Year is required.")
+    @NonNull
     private int year;
 
-    @NotNull(message = "Volume is required.")
+    @NonNull
     private float volume;
  
-    // all arguments contructor 
-    // standard getters and setters
+
 }
