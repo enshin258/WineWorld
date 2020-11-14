@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +25,6 @@ public class User {
 
     @NonNull
     private String email;
+
 
 }
