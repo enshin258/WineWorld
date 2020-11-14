@@ -7,21 +7,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Users")
 @Data
-@Builder
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @NonNull(message = "Login is required.")
+    @NonNull
     private String login;
 
-    @NonNull(message = "Password is required.")
+    @NonNull
     private String password;
 
-    @NonNull(message = "Email is required.")
+    @NonNull
     private String email;
 
 

@@ -4,26 +4,26 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Entity
 @Data
-@Builder
-@AllArgsConstructor
+@Table(name = "Locations")
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Location {
- 
-    @NotNull(message = "Latitude is required.")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long locationId;
+
+    @NonNull
     private float latitude;
 
-    @NotNull(message = "Longitude is required.")
+    @NonNull
     private float longitude;
 
-    @NotNull(message = "Description is required.")
+    @NonNull
     private String description;
 
-    @NotNull(message = "Country is required.")
+    @NonNull
     private String country;
- 
 
- 
-    // all arguments contructor 
-    // standard getters and setters
 }

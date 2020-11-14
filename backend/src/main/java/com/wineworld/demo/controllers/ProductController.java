@@ -1,10 +1,15 @@
 package com.wineworld.demo.controllers;
 
+import com.wineworld.demo.entities.Product;
 import com.wineworld.demo.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -21,7 +26,8 @@ public class ProductController {
     }
 
     @GetMapping("/products/get")
-    public ResponseEntity<Void> getAllProducts() {
-        return new ResponseEntity<>(HttpStatus.OK).body(productService.getAllProducts());
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
