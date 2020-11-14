@@ -5,6 +5,7 @@ import com.wineworld.demo.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transanctional
 public class UserService {
     private final UserRepository userRepository;
 
