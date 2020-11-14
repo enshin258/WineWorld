@@ -9,21 +9,19 @@ import javax.persistence.*;
 @Data
 @Builder
 @AllArgsConstructor
-@Getter
-@Setter
 @NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @NonNull
+    @NonNull(message = "Login is required.")
     private String login;
 
-    @NonNull
+    @NonNull(message = "Password is required.")
     private String password;
 
-    @NonNull
+    @NonNull(message = "Email is required.")
     private String email;
 
 
