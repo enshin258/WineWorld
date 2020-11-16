@@ -1,5 +1,6 @@
 package com.wineworld.demo.controllers;
 
+import com.wineworld.demo.entities.Location;
 import com.wineworld.demo.entities.Product;
 import com.wineworld.demo.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +23,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products/add")
-    public ResponseEntity<Void> addProduct(){
-        productService.addProduct();
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/products/add")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product){
+        Location location = new Location(12.9f, 11.3f, "Fabryka smaku", "Polska");
+        Product responeProduct = productService.addProduct(product, location);
+        return new ResponseEntity<>(responeProduct, HttpStatus.OK);
     }
 
     @GetMapping("/products/get")

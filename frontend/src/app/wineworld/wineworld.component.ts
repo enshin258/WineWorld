@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductsServiceService } from '../services/products-service.service';
 import { ProductComponent } from './product/product.component';
 
 @Component({
@@ -12,7 +11,6 @@ export class WineworldComponent implements OnInit {
   collapsed = true;
   orderFinished = false;
 
-  constructor(private productsService: ProductsServiceService){}
 
   ngOnInit(): void {
   }
@@ -33,7 +31,4 @@ export class WineworldComponent implements OnInit {
       // this.productsC.reset();
   }
 
-  saveProduct(){
-      this.productsService.saveProduct().subscribe(()=>{});
-  }
 }

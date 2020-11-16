@@ -22,18 +22,12 @@ public class ProductService {
         this.locationRepository = locationRepository;
     }
 
-    public void addProduct(){
-        Location location =  new Location(12.9f, 11.3f, "Fabryka smaku", "Polska");
+    public Product addProduct(Product product, Location location){
         locationRepository.save(location);
-        productRepository.save(new Product("Amarena",
-        12.99f,
-        "https://placekitten.com/200/300",
-        "Siarczan",
-        location,
-        "Polskie browary S.A",
-        12,
-        2020,
-        0.75f));
+        product.setLocation(location);
+        productRepository.save(product);
+
+        return product;
     }
 
     public List<Product> getAllProducts() {
