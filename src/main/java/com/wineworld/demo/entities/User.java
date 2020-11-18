@@ -1,8 +1,10 @@
 package com.wineworld.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -22,6 +24,14 @@ public class User {
 
     @NonNull
     private String email;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Order> userOrders;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Opinion> opinions;
 
 
 }
