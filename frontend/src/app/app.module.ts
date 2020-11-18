@@ -8,6 +8,8 @@ import { ProductComponent } from './wineworld/product/product.component';
 import { LocationComponent } from './wineworld/location/location.component';
 import { ProductsService } from './services/products.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { AssortmentComponent } from './wineworld/assortment/assortment.component';
 import { LoginComponent } from './wineworld/login/login.component';
 import { RegistrationComponent } from './wineworld/registration/registration.component';
@@ -22,6 +24,8 @@ import { LocationsService } from './services/locations.service';
     WineworldComponent,
     ProductComponent,
     LocationComponent,
+    HeaderComponent,
+    SidebarComponent,
     AssortmentComponent,
     LoginComponent,
     RegistrationComponent,
