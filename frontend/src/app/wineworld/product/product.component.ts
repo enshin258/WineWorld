@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsServiceService } from 'src/app/services/products-service.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+  constructor(private productsService: ProductsService) {}
 
-  constructor(private productsService: ProductsServiceService){}
+  ngOnInit(): void {}
 
-
-  ngOnInit(): void {
+  saveProduct() {
+    this.productsService.saveProduct().subscribe(() => {});
   }
-
-  
-  saveProduct(){
-    this.productsService.saveProduct().subscribe(()=>{});
-}
-
 }

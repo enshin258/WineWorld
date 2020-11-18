@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsServiceService {
+export class ProductsService {
 
   private productsGETUrl = "http://localhost:8080/products/get";
   private productsPOSTUrl = "http://localhost:8080/products/add";
