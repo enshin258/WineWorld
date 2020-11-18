@@ -26,8 +26,24 @@ public class ProductService {
         locationRepository.save(location);
         product.setLocation(location);
         productRepository.save(product);
-
         return product;
+    }
+
+    public Location addLocation(Location location){
+        locationRepository.save(location);
+        return location;
+    }
+
+    public List<Location> getAllLocations(){
+        return locationRepository.findAll();
+    }
+
+    public void deleteProduct(Long productId){
+        productRepository.deleteById(productId);
+    }
+
+    public Product getProductById(Long id){
+        return productRepository.findProductByProductId(id);
     }
 
     public List<Product> getAllProducts() {
