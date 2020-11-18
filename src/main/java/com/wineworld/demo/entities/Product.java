@@ -1,9 +1,13 @@
 package com.wineworld.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Products")
@@ -43,6 +47,14 @@ public class Product {
 
     @NonNull
     private float volume;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<OrderPosition> orderPositions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<Opinion> opinions;
  
 
 }

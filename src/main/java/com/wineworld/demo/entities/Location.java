@@ -1,8 +1,10 @@
 package com.wineworld.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,5 +27,9 @@ public class Location {
 
     @NonNull
     private String country;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "location")
+    private List<Product> products;
 
 }
