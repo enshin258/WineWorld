@@ -1,0 +1,11 @@
+nav {
+    height: 10vh;
+}
+
+nav .navbar-nav li a:hover {
+    color: #e14a59;
+}
+
+nav .btn .btn-outline-succes {
+    color: #e14a59;
+}
