@@ -3,5 +3,10 @@ import { Product } from './product';
 
 export interface Order {
   id: number;
-  orders: OrderPosition[];
+  orderDate: Date;
+  orderAddress: string;
+  orderCity: string;
+  orderPostalCode: string;
+  orderTotalCost: number;
+  orderPositions: OrderPosition[];
 }

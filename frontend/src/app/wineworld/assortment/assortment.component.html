@@ -1,1 +1,61 @@
-<p>assortment works!</p>
+<div class="container">
+  <div id="products" class="row view-group">
+    <div
+      *ngFor="let product of productsMiniatures"
+      class="item col-xs-4 col-lg-4 list-group-item"
+    >
+      <div class="thumbnail card">
+        <div class="img-event">
+          <img
+            class="group list-group-image img-fluid"
+            src="{{ product.imageUrl }}"
+            alt=""
+          />
+        </div>
+        <div class="caption card-body">
+          <h4 class="group card-title inner list-group-item-heading">
+            {{ product.name }} {{ product.id }}
+          </h4>
+          <p class="group inner list-group-item-text">
+            {{ product.shortDescription }}
+          </p>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <p class="lead">${{ product.price }}</p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <a class="btn btn-danger" href="#"> Add to cart </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li [ngClass]="currentPage > 1 ? 'page-item' : 'page-item disabled'">
+        <a class="page-link" (click)="goToPreviousPage()" tabindex="-1"
+          >Previous</a
+        >
+      </li>
+      <li *ngIf="currentPage > 1" class="page-item">
+        <a class="page-link" (click)="goToPreviousPage()">{{
+          currentPage - 1
+        }}</a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">{{ currentPage }}</a>
+      </li>
+      <li *ngIf="currentPage < pagesCount" class="page-item">
+        <a class="page-link" (click)="goToNextPage()">{{ currentPage + 1 }}</a>
+      </li>
+      <li
+        [ngClass]="
+          currentPage < pagesCount ? 'page-item' : 'page-item disabled'
+        "
+      >
+        <a class="page-link" (click)="goToNextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
