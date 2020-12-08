@@ -1,6 +1,5 @@
 package com.wineworld.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -19,7 +18,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
- 
+
     @NonNull
     private String name;
  
@@ -48,11 +47,9 @@ public class Product {
     @NonNull
     private float volume;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<OrderPosition> orderPositions;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Opinion> opinions;
  

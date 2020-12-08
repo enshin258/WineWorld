@@ -1,8 +1,6 @@
 package com.wineworld.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,16 +8,18 @@ import javax.persistence.*;
 @Table(name = "OrderPositions")
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class OrderPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderPositionId;
 
-    @JsonIgnore
+    @NonNull
     @ManyToOne
     private Order order;
 
-    @JsonIgnore
+    @NonNull
     @ManyToOne
     private Product product;
 

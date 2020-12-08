@@ -1,6 +1,5 @@
 package com.wineworld.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -24,11 +23,9 @@ public class Opinion {
     @NonNull
     private String comment;
 
-    @JsonIgnore
     @ManyToOne
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     private Product product;
 }
