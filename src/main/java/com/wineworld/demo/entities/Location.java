@@ -1,7 +1,9 @@
 package com.wineworld.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,7 +30,6 @@ public class Location {
     @NonNull
     private String country;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "location")
     private List<Product> products;
 

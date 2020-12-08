@@ -1,6 +1,5 @@
 package com.wineworld.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -20,25 +19,23 @@ public class Order {
     private long orderId;
 
     @NonNull
-    private String orderDate;
+    private String date;
 
     @NonNull
-    private String orderAddress;
+    private String address;
 
     @NonNull
-    private String orderCity;
+    private String city;
 
     @NonNull
-    private String orderPostalCode;
+    private String postalCode;
 
     @NonNull
-    private float orderTotalCost;
+    private float totalCost;
 
     @ManyToOne
-    @JsonIgnore
     private User user;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderPosition> orderPositions;
 
