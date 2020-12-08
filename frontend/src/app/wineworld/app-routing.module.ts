@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AssortmentComponent } from './wineworld/assortment/assortment.component';
-import { LocationComponent } from './wineworld/location/location.component';
-import { LoginComponent } from './wineworld/login/login.component';
-import { OrderComponent } from './wineworld/order/order.component';
-import { ProductComponent } from './wineworld/product/product.component';
-import { ProfileComponent } from './wineworld/profile/profile.component';
-import { RegistrationComponent } from './wineworld/registration/registration.component';
+import { AssortmentComponent } from './assortment/assortment.component';
+import { LocationComponent } from './location/location.component';
+import { LoginComponent } from './login/login.component';
+import { OrderComponent } from './order/order.component';
+import { ProductComponent } from './product/product.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   { path: '', component: AssortmentComponent },

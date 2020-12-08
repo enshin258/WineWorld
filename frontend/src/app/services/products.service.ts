@@ -59,7 +59,7 @@ export class ProductsService {
         name: 'DummyName',
         shortDescription: shortDescr,
         price: 19.99,
-        imageUrl: 'http://placehold.it/400x250/000/fff',
+        imageUrl: 'https://picsum.photos/400/400?random=' + i,
       };
       productstMiniatures.push(productMiniature);
     }

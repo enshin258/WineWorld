@@ -1,5 +1,14 @@
-.container {
-  position: absolute;
-  left: 32vh;
-  top: 12vh;
+#products,
+.container,
+.item {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 83vw;
+}
+
+.thumbnail {
+    height: auto;
+    margin: 15px;
+    padding: 10px;
 }

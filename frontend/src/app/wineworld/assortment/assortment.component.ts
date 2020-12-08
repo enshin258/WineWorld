@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class AssortmentComponent implements OnInit {
   public productsMiniatures: ProductMiniature[];
-  readonly pageSize: number = 30;
+  readonly pageSize: number = 20;
   currentPage: number;
   pagesCount: number;
 
