@@ -4,5 +4,7 @@ html body {
     background-color: whitesmoke;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     height: auto;
+    font-family: 'Roboto', sans-serif;
 }
