@@ -26,6 +26,14 @@ export class ProductsService {
     return 96;
   }
 
+  getAllCategoryProductsCount(categoryId: number) {
+    return 36;
+  }
+
+  getAllSearchProductsCount(searchText: string) {
+    return 29;
+  }
+
   getProduct(productId: number) {
     return this.http.get(this.getProductUrl + productId.toString());
   }
@@ -64,5 +72,21 @@ export class ProductsService {
       productstMiniatures.push(productMiniature);
     }
     return productstMiniatures;
+  }
+
+  getProductMiniaturesOfCategory(
+    pageSize: number,
+    pageNumber: number,
+    categoryId: number
+  ) {
+    return this.getAllProductMiniatures(pageSize, pageNumber);
+  }
+
+  getProductMiniaturesFromSearch(
+    pageSize: number,
+    pageNumber: number,
+    searchText: string
+  ) {
+    return this.getAllProductMiniatures(pageSize, pageNumber);
   }
 }
