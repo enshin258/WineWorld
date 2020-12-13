@@ -22,29 +22,25 @@ export class CategoryComponent implements OnInit {
     private router: Router
   ) {
     this.currentPage = 1;
-    this.productsService.getProductMiniaturesOfCategory(
-      this.pageSize,
-      this.currentPage,
-      this.categoryId
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
-    this.getPagesCount();
-
     //to refresh router after every category change
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
     this.categoryId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+    this.getPagesCount();
+    this.productsService.getProductMiniaturesOfCategory(
+      this.pageSize,
+      this.currentPage,
+      this.categoryId
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
   getPagesCount() {
-    var allProductsCount: Count;
     this.productsService
-      .getAllProductsCount()
-      .subscribe((pagesCount) => (allProductsCount = pagesCount));
-
-    this.pagesCount = Math.ceil(allProductsCount.count / this.pageSize);
+      .getAllCategoryProductsCount(this.categoryId)
+      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
   }
 
   goToNextPage() {
@@ -53,7 +49,7 @@ export class CategoryComponent implements OnInit {
       this.pageSize,
       this.currentPage,
       this.categoryId
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
@@ -63,7 +59,7 @@ export class CategoryComponent implements OnInit {
       this.pageSize,
       this.currentPage,
       this.categoryId
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 

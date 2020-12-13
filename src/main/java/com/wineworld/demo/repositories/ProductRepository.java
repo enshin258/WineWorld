@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByName(String name);
     Long countAllByGenreGenreId(Long genreId);
+    Long countAllByName(String name);
 }

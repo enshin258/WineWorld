@@ -2,10 +2,10 @@
   <div class="sidebar-heading text-light">Menu</div>
   <div *ngFor="let category of categories" class="list-group">
     <a
-      [routerLink]="['/category', category.id]"
+      [routerLink]="['/category', category.genreId]"
       class="list-group-item list-group-item-action text-light"
     >
-      {{ category.genre }} {{ category.id }}
+      {{ category.name }}
     </a>
   </div>
 </div>

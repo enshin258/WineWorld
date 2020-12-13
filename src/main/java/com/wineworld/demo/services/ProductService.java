@@ -1,7 +1,7 @@
 package com.wineworld.demo.services;
 
 import com.wineworld.demo.config.ModelMapperConfig;
-import com.wineworld.demo.dtos.count.Count;
+import com.wineworld.demo.dtos.count.CountResponse;
 import com.wineworld.demo.dtos.genre.GenreRequest;
 import com.wineworld.demo.dtos.genre.GenreResponse;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
@@ -72,7 +72,9 @@ public class ProductService {
     }
 
     public ProductResponse getProductById(Long id){
-        return modelMapper.map(productRepository.findById(id), ProductResponse.class);
+        Product product = productRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        return modelMapper.map(product, ProductResponse.class);
     }
 
     public List<ProductResponse> getAllProducts() {
@@ -89,9 +91,9 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public Count getProductCount(){
-        Count count = new Count();
-        count.setCount((int)productRepository.count());
+    public CountResponse getProductCount(){
+        CountResponse count = new CountResponse();
+        count.setCount(productRepository.count());
         return count;
     }
 
@@ -101,9 +103,9 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductResponse> getProductByName(String name){
+    public List<MiniProductResponse> getProductByName(String name){
         return productRepository.findAllByName(name).stream()
-                .map(product -> modelMapper.map(product, ProductResponse.class))
+                .map(product -> modelMapper.map(product, MiniProductResponse.class))
                 .collect(Collectors.toList());
     }
 
@@ -147,6 +149,8 @@ public class ProductService {
                .collect(Collectors.toList());
     }
 
+
+
     public List<List<Product>> getDividedProducts(int numberOfProducts, long totalProductsCount, List<Product> products){
        List<List<Product>> productsDivided = new ArrayList<>();
        for(int i = 0; i<totalProductsCount; i+=numberOfProducts){
@@ -156,6 +160,22 @@ public class ProductService {
        }
        return productsDivided;
    }
+
+    public CountResponse getProductCountByGenre(Long genreId){
+        CountResponse count = new CountResponse();
+        count.setCount(productRepository.countAllByGenreGenreId(genreId));
+        return count;
+    }
+
+    public CountResponse getProductCountByName(String name){
+        CountResponse count = new CountResponse();
+        count.setCount(productRepository.countAllByName(name));
+        return count;
+    }
+
+
+
+
 
 
 }

@@ -1,17 +1,18 @@
-import { Location } from './location';
-import { Opinion } from './opinion';
-
 export interface Product {
-  id: number;
+  productId: number;
   name: string;
   price: number;
   pictureUrl: string;
-  genre: string;
-  location: Location;
+  genreId: number;
+  genreName: string;
+  // productDescription: string;
+  locationId: number;
+  latitude: number;
+  longitude: number;
+  description: string;
+  country: string
   producer: string;
   alcoholLevel: number;
   year: number;
   volume: number;
-  opinions: Opinion[];
-  description: string;
 }

@@ -18,6 +18,9 @@ export class ProductsService {
   private deleteProductUrl = 'http://localhost:8080/products/delete/';
   private getAllProductOpinionsUrl = 'http://localhost:8080/get/all/opinions/';
   private getProductsMiniaturesUrl = 'http://localhost:8080/products/get/mini/';
+  private getCountByCategoryUrl = 'http://localhost:8080/products/get/count/';
+  private getProductByNameUrl = 'http://localhost:8080/products/get/by/name/';
+  private getProductCountByNameUrl = 'http://localhost:8080/products/get/count/by/name/';
 
   constructor(private http: HttpClient) {}
 
@@ -30,43 +33,15 @@ export class ProductsService {
   }
 
   getAllCategoryProductsCount(categoryId: number) {
-    return 36;
+    return this.http.get<Count>(this.getCountByCategoryUrl + categoryId);
   }
 
   getAllSearchProductsCount(searchText: string) {
-    return 29;
+    return this.http.get<Count>(this.getProductCountByNameUrl + searchText);
   }
 
-  getProduct(productId: number) {
-    // return this.http.get(this.getProductUrl + productId.toString());
-    var location: Location = {
-      id: productId,
-      latitude: 52.63,
-      longitude: 20.35,
-      description: 'Super winnica',
-      country: 'Poland',
-      name: 'Winnica Lidla',
-    };
-    var product: Product = {
-      id: productId,
-      name: 'DummyName',
-      price: 19.99,
-      pictureUrl: 'https://picsum.photos/400/400?random=' + productId,
-      genre: 'Szato de Jabol',
-      location: location,
-      producer: 'Winniczanka sp. z.o o',
-      alcoholLevel: 20,
-      year: 2020,
-      volume: 0.5,
-      opinions: [],
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar' +
-        'est sit amet turpis ultricies vehicula. Sed interdum posuere' +
-        'consectetur. Sed eget malesuada nibh. Morbi malesuada semper justo,' +
-        'semper rutrum risus scelerisque et. Fusce facilisis mauris facilisis' +
-        'sapien sollicitudin, rutrum tristique elit tincidunt.',
-    };
-    return product;
+  getProduct(productId: number): Observable<Product>{
+    return this.http.get<Product>(this.getProductUrl + productId);
   }
 
   saveProduct(product: Product) {
@@ -94,7 +69,7 @@ export class ProductsService {
     pageNumber: number,
     categoryId: number
   ) {
-    return this.getAllProductMiniatures(pageSize, pageNumber);
+    return this.http.get<ProductMiniature[]>(this.getProductsMiniaturesUrl + pageSize + "/" + pageNumber + "/" + categoryId);
   }
 
   getProductMiniaturesFromSearch(
@@ -102,6 +77,6 @@ export class ProductsService {
     pageNumber: number,
     searchText: string
   ) {
-    return this.getAllProductMiniatures(pageSize, pageNumber);
+    return this.http.get<ProductMiniature[]>(this.getProductByNameUrl + pageSize + "/" + pageNumber + "/" + searchText);
   }
 }

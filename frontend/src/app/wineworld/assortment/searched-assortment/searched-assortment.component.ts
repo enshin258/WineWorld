@@ -22,28 +22,25 @@ export class SearchedAssortmentComponent implements OnInit {
     private router: Router
   ) {
     this.currentPage = 1;
-    this.productsService.getProductMiniaturesFromSearch(
-      this.pageSize,
-      this.currentPage,
-      this.searchText
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
-    this.getPagesCount();
-
     //to refresh router after every category change
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
     this.searchText = this.route.snapshot.paramMap.get('searchText');
+    this.getPagesCount();
+    this.productsService.getProductMiniaturesFromSearch(
+      this.pageSize,
+      this.currentPage,
+      this.searchText
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
   getPagesCount() {
-    var allProductsCount: Count;
     this.productsService
-      .getAllProductsCount()
-      .subscribe((pagesCount) => (allProductsCount = pagesCount));
-    this.pagesCount = Math.ceil(allProductsCount.count / this.pageSize);
+      .getAllSearchProductsCount(this.searchText)
+      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
   }
 
   goToNextPage() {
@@ -52,7 +49,7 @@ export class SearchedAssortmentComponent implements OnInit {
       this.pageSize,
       this.currentPage,
       this.searchText
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
@@ -62,7 +59,7 @@ export class SearchedAssortmentComponent implements OnInit {
       this.pageSize,
       this.currentPage,
       this.searchText
-    ).subscribe((data: ProductMiniature[]) => this.products = {...data});
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
