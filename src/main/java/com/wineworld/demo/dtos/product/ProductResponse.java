@@ -16,7 +16,9 @@ public class ProductResponse {
 
     private String pictureUrl;
 
-    private String genre;
+    private long genreId;
+
+    private String genreName;
 
     private long locationId;
 

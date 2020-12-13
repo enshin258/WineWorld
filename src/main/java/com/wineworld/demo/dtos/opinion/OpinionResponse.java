@@ -1,4 +1,4 @@
-package com.wineworld.demo.dtos.Opinion;
+package com.wineworld.demo.dtos.opinion;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

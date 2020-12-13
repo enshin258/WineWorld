@@ -1,4 +1,4 @@
-package com.wineworld.demo.dtos.OrderPosition;
+package com.wineworld.demo.dtos.orderposition;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

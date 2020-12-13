@@ -1,8 +1,8 @@
 package com.wineworld.demo.controllers;
 
-import com.wineworld.demo.dtos.Opinion.OpinionRequest;
-import com.wineworld.demo.dtos.Opinion.OpinionResponse;
-import com.wineworld.demo.dtos.Order.OrderResponse;
+import com.wineworld.demo.dtos.opinion.OpinionRequest;
+import com.wineworld.demo.dtos.opinion.OpinionResponse;
+import com.wineworld.demo.dtos.order.OrderResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.dtos.user.UserResponse;
 import com.wineworld.demo.services.ProductService;

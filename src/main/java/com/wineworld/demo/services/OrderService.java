@@ -1,10 +1,10 @@
 package com.wineworld.demo.services;
 
 import com.wineworld.demo.config.ModelMapperConfig;
-import com.wineworld.demo.dtos.Order.OrderRequest;
-import com.wineworld.demo.dtos.Order.OrderResponse;
-import com.wineworld.demo.dtos.OrderPosition.OrderPositionRequest;
-import com.wineworld.demo.dtos.OrderPosition.OrderPositionResponse;
+import com.wineworld.demo.dtos.order.OrderRequest;
+import com.wineworld.demo.dtos.order.OrderResponse;
+import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
+import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.entities.Order;
 import com.wineworld.demo.entities.OrderPosition;
 import com.wineworld.demo.entities.Product;
@@ -12,7 +12,6 @@ import com.wineworld.demo.repositories.OrderPositionRepository;
 import com.wineworld.demo.repositories.OrderRepository;
 import com.wineworld.demo.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
@@ -60,12 +59,12 @@ public class OrderService {
 //    public OrderPositionResponse addOrderPosition(OrderPositionRequest orderPositionRequest){
 //        Product product = productRepository.findById(orderPositionRequest.getProductId())
 //                .orElseThrow(EntityNotFoundException::new);
-//        Order order = orderRepository.findById(orderPositionRequest.getOrderId())
+//        order order = orderRepository.findById(orderPositionRequest.getOrderId())
 //                .orElseThrow(EntityNotFoundException::new);
-//        OrderPosition orderPosition = new OrderPosition();
-//        orderPosition.setOrder(order);
-//        orderPosition.setProduct(product);
-//        OrderPosition createdOrderPosition = orderPositionRepository.save(orderPosition);
+//        orderposition orderposition = new orderposition();
+//        orderposition.setOrder(order);
+//        orderposition.setProduct(product);
+//        orderposition createdOrderPosition = orderPositionRepository.save(orderposition);
 //        return modelMapper.map(createdOrderPosition, OrderPositionResponse.class);
 //    }
 

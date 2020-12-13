@@ -1,8 +1,11 @@
 package com.wineworld.demo.controllers;
 
-import com.wineworld.demo.dtos.Opinion.OpinionResponse;
+import com.wineworld.demo.dtos.genre.GenreRequest;
+import com.wineworld.demo.dtos.genre.GenreResponse;
+import com.wineworld.demo.dtos.opinion.OpinionResponse;
 import com.wineworld.demo.dtos.location.LocationRequest;
 import com.wineworld.demo.dtos.location.LocationResponse;
+import com.wineworld.demo.dtos.product.MiniProductResponse;
 import com.wineworld.demo.dtos.product.ProductRequest;
 import com.wineworld.demo.dtos.product.ProductResponse;
 import com.wineworld.demo.services.ProductService;
@@ -62,6 +65,53 @@ public class ProductController {
     @GetMapping("/get/opinions/{productId}")
     public ResponseEntity<List<OpinionResponse>> getOpinions(@PathVariable Long productId){
         return new ResponseEntity<>(productService.getAllOpinions(productId), HttpStatus.OK);
+    }
+
+    @GetMapping("get/count")
+    public ResponseEntity<Long> getProductCount(){
+        return new ResponseEntity<>(productService.getProductCount(), HttpStatus.OK);
+    }
+
+    @GetMapping("get/all/mini")
+    public ResponseEntity<List<MiniProductResponse>> getAllProductsMini(){
+        return new ResponseEntity<>(productService.getAllProductsMini(), HttpStatus.OK);
+    }
+
+    @GetMapping("get/{name}")
+    public ResponseEntity<List<ProductResponse>> getProductByName(@PathVariable String name){
+        return new ResponseEntity<>(productService.getProductByName(name), HttpStatus.OK);
+    }
+
+    @PostMapping("/add/genre")
+    public ResponseEntity<GenreResponse> addGenre(@RequestBody GenreRequest genreRequest){
+        if(genreRequest != null){
+            GenreResponse genreResponse = productService.addGenre(genreRequest);
+            return new ResponseEntity<>(genreResponse, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/get/genres")
+    public ResponseEntity<List<GenreResponse>> getGenres(){
+        return new ResponseEntity<>(productService.getAllGenres(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/genre/{genreId}")
+    public ResponseEntity<Void> deleteGenre(@PathVariable Long genreId){
+        productService.deleteGenre(genreId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/get/mini/{numberOfProducts}/{numberOfPage}")
+    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPage(@PathVariable Integer numberOfProducts, @PathVariable Integer numberOfPage){
+        return new ResponseEntity<>(productService.getMiniProductsByNumber(numberOfProducts, numberOfPage), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/mini/{numberOfProducts}/{numberOfPage}/{genreId}")
+    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPageAndGenre(@PathVariable Integer numberOfProducts,
+                                                                                   @PathVariable Integer numberOfPage, @PathVariable Long genreId){
+        return new ResponseEntity<>(productService.getMiniProductsByNumberAndByCategory(numberOfProducts, numberOfPage, genreId), HttpStatus.OK);
     }
 }
 
