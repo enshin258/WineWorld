@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Count } from 'src/app/models/count';
 import { ProductMiniature } from 'src/app/models/product_miniature';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,42 +13,40 @@ export class AssortmentComponent implements OnInit {
   readonly pageSize: number = 20;
   currentPage: number;
   pagesCount: number;
+  allProductsCount: number;
 
   constructor(private productsService: ProductsService) {
     this.currentPage = 1;
-    this.productsMiniatures = productsService.getAllProductMiniatures(
+    this.getPagesCount();
+    productsService.getAllProductMiniatures(
       this.pageSize,
       this.currentPage
-    );
-    this.getPagesCount();
+    ).subscribe((data) => {this.productsMiniatures = data});
   }
 
   ngOnInit(): void {}
 
   getPagesCount() {
-    var allProductsCount: number;
-    // this.productsService
-    //   .getAllProductsCount()
-    //   .subscribe((pagesCount) => (allProductsCount = pagesCount));
-    allProductsCount = this.productsService.getAllProductsCount();
-    this.pagesCount = Math.ceil(allProductsCount / this.pageSize);
+    this.productsService
+      .getAllProductsCount()
+      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
   }
 
   goToNextPage() {
     this.currentPage++;
-    this.productsMiniatures = this.productsService.getAllProductMiniatures(
+    this.productsService.getAllProductMiniatures(
       this.pageSize,
       this.currentPage
-    );
+    ).subscribe((data) => {this.productsMiniatures = data});
     this.scrollToTop();
   }
 
   goToPreviousPage() {
     this.currentPage--;
-    this.productsMiniatures = this.productsService.getAllProductMiniatures(
+    this.productsService.getAllProductMiniatures(
       this.pageSize,
       this.currentPage
-    );
+    ).subscribe((data) => {this.productsMiniatures = data});
     this.scrollToTop();
   }
 

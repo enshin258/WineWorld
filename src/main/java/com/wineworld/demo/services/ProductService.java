@@ -1,6 +1,7 @@
 package com.wineworld.demo.services;
 
 import com.wineworld.demo.config.ModelMapperConfig;
+import com.wineworld.demo.dtos.count.Count;
 import com.wineworld.demo.dtos.genre.GenreRequest;
 import com.wineworld.demo.dtos.genre.GenreResponse;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
@@ -88,8 +89,10 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public Long getProductCount(){
-        return productRepository.count();
+    public Count getProductCount(){
+        Count count = new Count();
+        count.setCount((int)productRepository.count());
+        return count;
     }
 
     public List<MiniProductResponse> getAllProductsMini(){

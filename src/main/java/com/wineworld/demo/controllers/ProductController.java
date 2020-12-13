@@ -1,5 +1,6 @@
 package com.wineworld.demo.controllers;
 
+import com.wineworld.demo.dtos.count.Count;
 import com.wineworld.demo.dtos.genre.GenreRequest;
 import com.wineworld.demo.dtos.genre.GenreResponse;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
@@ -57,7 +58,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("products/get/{id}")
+    @GetMapping("/products/get/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
@@ -67,17 +68,17 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllOpinions(productId), HttpStatus.OK);
     }
 
-    @GetMapping("get/count")
-    public ResponseEntity<Long> getProductCount(){
+    @GetMapping("/get/count")
+    public ResponseEntity<Count> getProductCount(){
         return new ResponseEntity<>(productService.getProductCount(), HttpStatus.OK);
     }
 
-    @GetMapping("get/all/mini")
+    @GetMapping("/get/all/mini")
     public ResponseEntity<List<MiniProductResponse>> getAllProductsMini(){
         return new ResponseEntity<>(productService.getAllProductsMini(), HttpStatus.OK);
     }
 
-    @GetMapping("get/{name}")
+    @GetMapping("/get/{name}")
     public ResponseEntity<List<ProductResponse>> getProductByName(@PathVariable String name){
         return new ResponseEntity<>(productService.getProductByName(name), HttpStatus.OK);
     }
@@ -97,7 +98,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllGenres(), HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/genre/{genreId}")
+    @DeleteMapping("/delete/genre/{genreId}")
     public ResponseEntity<Void> deleteGenre(@PathVariable Long genreId){
         productService.deleteGenre(genreId);
         return new ResponseEntity<>(HttpStatus.OK);

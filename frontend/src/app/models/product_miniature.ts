@@ -1,7 +1,7 @@
 export interface ProductMiniature {
   id: number;
   name: string;
-  shortDescription: string;
+  description: string;
   price: number;
-  imageUrl: string;
+  pictureUrl: string;
 }
