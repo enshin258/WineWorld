@@ -1,10 +1,9 @@
 package com.wineworld.demo.controllers;
 
-import com.wineworld.demo.dtos.Opinion.OpinionResponse;
-import com.wineworld.demo.dtos.Order.OrderRequest;
-import com.wineworld.demo.dtos.Order.OrderResponse;
-import com.wineworld.demo.dtos.OrderPosition.OrderPositionRequest;
-import com.wineworld.demo.dtos.OrderPosition.OrderPositionResponse;
+import com.wineworld.demo.dtos.order.OrderRequest;
+import com.wineworld.demo.dtos.order.OrderResponse;
+import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
+import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.services.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,15 +1,13 @@
-package com.wineworld.demo.dtos.Order;
+package com.wineworld.demo.dtos.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class OrderResponse {
-    private long orderId;
-
+@NoArgsConstructor
+public class OrderRequest {
     private String date;
 
     private String address;
@@ -21,9 +19,5 @@ public class OrderResponse {
     private float totalCost;
 
     private long userId;
-
-    private String login;
-
-    private String email;
 
 }

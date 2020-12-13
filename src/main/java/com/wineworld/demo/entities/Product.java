@@ -29,7 +29,8 @@ public class Product {
     private String pictureUrl;
 
     @NonNull
-    private String genre;
+    @ManyToOne
+    private Genre genre;
 
     @NonNull
     @ManyToOne

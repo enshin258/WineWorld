@@ -1,10 +1,12 @@
 package com.wineworld.demo.config;
 
-import com.wineworld.demo.dtos.Opinion.OpinionRequest;
-import com.wineworld.demo.dtos.Opinion.OpinionResponse;
-import com.wineworld.demo.dtos.OrderPosition.OrderPositionResponse;
+import com.wineworld.demo.dtos.opinion.OpinionRequest;
+import com.wineworld.demo.dtos.opinion.OpinionResponse;
+import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
+import com.wineworld.demo.dtos.product.ProductRequest;
 import com.wineworld.demo.entities.Opinion;
 import com.wineworld.demo.entities.OrderPosition;
+import com.wineworld.demo.entities.Product;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
@@ -22,7 +24,7 @@ public class ModelMapperConfig {
                 map().setPrice(source.getProduct().getPrice());
                 map().setPictureUrl(source.getProduct().getPictureUrl());
                 map().setProducer(source.getProduct().getProducer());
-                map().setGenre(source.getProduct().getGenre());
+                map().setGenre(source.getProduct().getGenre().getName());
                 map().setAlcoholLevel(source.getProduct().getAlcoholLevel());
                 map().setYear(source.getProduct().getYear());
                 map().setVolume(source.getProduct().getVolume());
@@ -53,6 +55,13 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(opinionRequestMap);
+        PropertyMap<ProductRequest, Product> productMapping = new PropertyMap<ProductRequest, Product>() {
+            @Override
+            protected void configure() {
+                skip(destination.getProductId());
+            }
+        };
+        modelMapper.addMappings(productMapping);
         return modelMapper;
     }
 }
