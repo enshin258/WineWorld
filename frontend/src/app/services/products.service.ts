@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product';
 import { ProductMiniature } from '../models/product_miniature';
+import { Location } from '../models/location';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +27,44 @@ export class ProductsService {
     return 96;
   }
 
+  getAllCategoryProductsCount(categoryId: number) {
+    return 36;
+  }
+
+  getAllSearchProductsCount(searchText: string) {
+    return 29;
+  }
+
   getProduct(productId: number) {
-    return this.http.get(this.getProductUrl + productId.toString());
+    // return this.http.get(this.getProductUrl + productId.toString());
+    var location: Location = {
+      id: productId,
+      latitude: 52.63,
+      longitude: 20.35,
+      description: 'Super winnica',
+      country: 'Poland',
+      name: 'Winnica Lidla',
+    };
+    var product: Product = {
+      id: productId,
+      name: 'DummyName',
+      price: 19.99,
+      pictureUrl: 'https://picsum.photos/400/400?random=' + productId,
+      genre: 'Szato de Jabol',
+      location: location,
+      producer: 'Winniczanka sp. z.o o',
+      alcoholLevel: 20,
+      year: 2020,
+      volume: 0.5,
+      opinions: [],
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar' +
+        'est sit amet turpis ultricies vehicula. Sed interdum posuere' +
+        'consectetur. Sed eget malesuada nibh. Morbi malesuada semper justo,' +
+        'semper rutrum risus scelerisque et. Fusce facilisis mauris facilisis' +
+        'sapien sollicitudin, rutrum tristique elit tincidunt.',
+    };
+    return product;
   }
 
   saveProduct(product: Product) {
@@ -64,5 +101,21 @@ export class ProductsService {
       productstMiniatures.push(productMiniature);
     }
     return productstMiniatures;
+  }
+
+  getProductMiniaturesOfCategory(
+    pageSize: number,
+    pageNumber: number,
+    categoryId: number
+  ) {
+    return this.getAllProductMiniatures(pageSize, pageNumber);
+  }
+
+  getProductMiniaturesFromSearch(
+    pageSize: number,
+    pageNumber: number,
+    searchText: string
+  ) {
+    return this.getAllProductMiniatures(pageSize, pageNumber);
   }
 }

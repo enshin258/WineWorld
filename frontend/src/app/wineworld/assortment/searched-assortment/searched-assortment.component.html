@@ -1,7 +1,8 @@
 <div class="container">
+  <p>Searched {{ searchText }}</p>
   <div id="products" class="row view-group">
     <div
-      *ngFor="let product of productsMiniatures"
+      *ngFor="let product of products"
       [routerLink]="['/product', product.id]"
       class="item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 grid-group-item"
     >

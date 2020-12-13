@@ -1,11 +1,11 @@
 <div id="sidebar-wrapper">
-    <div class="sidebar-heading text-light">Menu</div>
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action text-light">Dry wines</a>
-        <a href="#" class="list-group-item list-group-item-action text-light">Semi-dry Wines</a>
-        <a href="#" class="list-group-item list-group-item-action text-light">Half sweet wine</a>
-        <a href="#" class="list-group-item list-group-item-action text-light">Sweet wine</a>
-        <a href="#" class="list-group-item list-group-item-action text-light">Sparkling wine</a>
-        <a href="#" class="list-group-item list-group-item-action text-light">Champagne</a>
-    </div>
+  <div class="sidebar-heading text-light">Menu</div>
+  <div *ngFor="let category of categories" class="list-group">
+    <a
+      [routerLink]="['/category', category.id]"
+      class="list-group-item list-group-item-action text-light"
+    >
+      {{ category.genre }} {{ category.id }}
+    </a>
+  </div>
 </div>
