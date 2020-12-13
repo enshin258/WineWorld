@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" [routerLink]="['/assortment']">
     <img
       src="../../assets/wine.png"
       width="32"
@@ -54,7 +54,7 @@
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-      <form class="form-signin">
+      <form class="form-signin" [formGroup]="loginForm">
         <img
           class="rounded mx-auto d-block"
           src="../../assets/wine.png"

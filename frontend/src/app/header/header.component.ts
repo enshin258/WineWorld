@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   searchText: string;
   form: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder) {
     this.searchText = '';

@@ -13,9 +13,10 @@ import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   { path: '', component: AssortmentComponent },
+  { path: 'assortment', component: AssortmentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'product', component: ProductComponent },
+  { path: 'product/:id', component: ProductComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'order', component: OrderComponent },
   { path: 'location', component: LocationComponent },

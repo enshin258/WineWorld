@@ -1,3 +1,4 @@
+import { Location } from './location';
 import { Opinion } from './opinion';
 
 export interface Product {
@@ -12,4 +13,5 @@ export interface Product {
   year: number;
   volume: number;
   opinions: Opinion[];
+  description: string;
 }
