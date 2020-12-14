@@ -44,7 +44,9 @@ public class UserService {
     }
 
     public UserResponse getUserByID(Long id){
-        return modelMapper.map(userRepository.findById(id), UserResponse.class);
+        User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        return modelMapper.map(user, UserResponse.class);
     }
 
     public List<UserResponse> getAllUsers(){

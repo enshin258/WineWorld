@@ -3,7 +3,9 @@ package com.wineworld.demo.config;
 import com.wineworld.demo.dtos.opinion.OpinionRequest;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
 import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
+import com.wineworld.demo.dtos.product.MiniProductResponse;
 import com.wineworld.demo.dtos.product.ProductRequest;
+import com.wineworld.demo.dtos.product.ProductResponse;
 import com.wineworld.demo.entities.Opinion;
 import com.wineworld.demo.entities.OrderPosition;
 import com.wineworld.demo.entities.Product;
@@ -46,6 +48,11 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(opinionMap);
+
+        return modelMapper;
+    }
+
+    public static ModelMapper addProductMappings(ModelMapper modelMapper){
         PropertyMap<OpinionRequest, Opinion> opinionRequestMap = new PropertyMap<OpinionRequest, Opinion>() {
             @Override
             protected void configure() {
@@ -62,6 +69,21 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(productMapping);
+        PropertyMap<Product, ProductResponse> productResponsePropertyMap = new PropertyMap<Product, ProductResponse>() {
+            @Override
+            protected void configure() {
+                map().setProductDescription(source.getProductDescription());
+                map().setDescription(source.getLocation().getDescription());
+            }
+        };
+        modelMapper.addMappings(productResponsePropertyMap);
+        PropertyMap<Product, MiniProductResponse> miniProductResponsePropertyMap = new PropertyMap<Product, MiniProductResponse>() {
+            @Override
+            protected void configure() {
+                map().setProductDescription(source.getProductDescription());
+            }
+        };
+        modelMapper.addMappings(miniProductResponsePropertyMap);
         return modelMapper;
     }
 }

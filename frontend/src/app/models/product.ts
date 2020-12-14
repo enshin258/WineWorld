@@ -5,7 +5,7 @@ export interface Product {
   pictureUrl: string;
   genreId: number;
   genreName: string;
-  // productDescription: string;
+  productDescription: string;
   locationId: number;
   latitude: number;
   longitude: number;

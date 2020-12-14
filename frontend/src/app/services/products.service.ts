@@ -19,7 +19,7 @@ export class ProductsService {
   private getAllProductOpinionsUrl = 'http://localhost:8080/get/all/opinions/';
   private getProductsMiniaturesUrl = 'http://localhost:8080/products/get/mini/';
   private getCountByCategoryUrl = 'http://localhost:8080/products/get/count/';
-  private getProductByNameUrl = 'http://localhost:8080/products/get/by/name/';
+  private getProductByNameUrl = 'http://localhost:8080/products/get/mini/by/name/';
   private getProductCountByNameUrl = 'http://localhost:8080/products/get/count/by/name/';
 
   constructor(private http: HttpClient) {}

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findAllByName(String name);
+    List<Product> findAllByNameContaining(String name);
     Long countAllByGenreGenreId(Long genreId);
-    Long countAllByName(String name);
+    Long countAllByNameContaining(String name);
 }

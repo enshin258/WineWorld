@@ -41,6 +41,7 @@ public class ProductService {
         this.genreRepository = genreRepository;
         modelMapper = ModelMapperConfig.getOpinionMapping();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        modelMapper = ModelMapperConfig.addProductMappings(modelMapper);
     }
 
     public ProductResponse addProduct(ProductRequest productRequest){
@@ -104,7 +105,7 @@ public class ProductService {
     }
 
     public List<MiniProductResponse> getProductByName(String name){
-        return productRepository.findAllByName(name).stream()
+        return productRepository.findAllByNameContaining(name).stream()
                 .map(product -> modelMapper.map(product, MiniProductResponse.class))
                 .collect(Collectors.toList());
     }
@@ -139,6 +140,13 @@ public class ProductService {
         return getMiniProductResponses(numberOfProducts, numberOfPage, products, productCount);
    }
 
+
+    public List<MiniProductResponse> getMiniProductsByNumberAndBySearch(int numberOfProducts, int numberOfPage, String name){
+        List<Product> products = productRepository.findAllByNameContaining(name);
+        long productCount = productRepository.countAllByNameContaining(name);
+        return getMiniProductResponses(numberOfProducts, numberOfPage, products, productCount);
+    }
+
     private List<MiniProductResponse> getMiniProductResponses(int numberOfProducts, int numberOfPage, List<Product> products, long productCount) {
         int totalPages = (int) Math.ceil((float) productCount/numberOfProducts);
         if(numberOfPage > totalPages){
@@ -149,9 +157,7 @@ public class ProductService {
                .collect(Collectors.toList());
     }
 
-
-
-    public List<List<Product>> getDividedProducts(int numberOfProducts, long totalProductsCount, List<Product> products){
+    private List<List<Product>> getDividedProducts(int numberOfProducts, long totalProductsCount, List<Product> products){
        List<List<Product>> productsDivided = new ArrayList<>();
        for(int i = 0; i<totalProductsCount; i+=numberOfProducts){
            productsDivided.add(new ArrayList<>(
@@ -169,7 +175,7 @@ public class ProductService {
 
     public CountResponse getProductCountByName(String name){
         CountResponse count = new CountResponse();
-        count.setCount(productRepository.countAllByName(name));
+        count.setCount(productRepository.countAllByNameContaining(name));
         return count;
     }
 

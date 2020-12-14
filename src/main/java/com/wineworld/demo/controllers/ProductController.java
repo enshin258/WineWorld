@@ -123,5 +123,12 @@ public class ProductController {
     public ResponseEntity<CountResponse> getProductCountByName(@PathVariable String name){
         return new ResponseEntity<>(productService.getProductCountByName(name), HttpStatus.OK);
     }
+
+    @GetMapping("get/mini/by/name/{numberOfProducts}/{numberOfPage}/{name}")
+    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByName(@PathVariable Integer numberOfProducts,
+                                                                     @PathVariable Integer numberOfPage,
+                                                                     @PathVariable String name){
+        return new ResponseEntity<>(productService.getMiniProductsByNumberAndBySearch(numberOfProducts, numberOfPage, name), HttpStatus.OK);
+    }
 }
 
