@@ -1,5 +1,6 @@
 package com.wineworld.demo.controllers;
 
+import com.wineworld.demo.dtos.count.CountResponse;
 import com.wineworld.demo.dtos.genre.GenreRequest;
 import com.wineworld.demo.dtos.genre.GenreResponse;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
@@ -57,7 +58,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("products/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
@@ -67,18 +68,18 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllOpinions(productId), HttpStatus.OK);
     }
 
-    @GetMapping("get/count")
-    public ResponseEntity<Long> getProductCount(){
+    @GetMapping("/get/count")
+    public ResponseEntity<CountResponse> getProductCount(){
         return new ResponseEntity<>(productService.getProductCount(), HttpStatus.OK);
     }
 
-    @GetMapping("get/all/mini")
+    @GetMapping("/get/all/mini")
     public ResponseEntity<List<MiniProductResponse>> getAllProductsMini(){
         return new ResponseEntity<>(productService.getAllProductsMini(), HttpStatus.OK);
     }
 
-    @GetMapping("get/{name}")
-    public ResponseEntity<List<ProductResponse>> getProductByName(@PathVariable String name){
+    @GetMapping("/get/by/name/{name}")
+    public ResponseEntity<List<MiniProductResponse>> getProductByName(@PathVariable String name){
         return new ResponseEntity<>(productService.getProductByName(name), HttpStatus.OK);
     }
 
@@ -97,7 +98,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllGenres(), HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/genre/{genreId}")
+    @DeleteMapping("/delete/genre/{genreId}")
     public ResponseEntity<Void> deleteGenre(@PathVariable Long genreId){
         productService.deleteGenre(genreId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -109,9 +110,25 @@ public class ProductController {
     }
 
     @GetMapping("/get/mini/{numberOfProducts}/{numberOfPage}/{genreId}")
-    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPageAndGenre(@PathVariable Integer numberOfProducts,
-                                                                                   @PathVariable Integer numberOfPage, @PathVariable Long genreId){
+    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPageAndGenre(@PathVariable Integer numberOfProducts, @PathVariable Integer numberOfPage, @PathVariable Long genreId){
         return new ResponseEntity<>(productService.getMiniProductsByNumberAndByCategory(numberOfProducts, numberOfPage, genreId), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/count/{genreId}")
+    public ResponseEntity<CountResponse> getProductCountByGenre(@PathVariable Long genreId){
+        return new ResponseEntity<>(productService.getProductCountByGenre(genreId), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/count/by/name/{name}")
+    public ResponseEntity<CountResponse> getProductCountByName(@PathVariable String name){
+        return new ResponseEntity<>(productService.getProductCountByName(name), HttpStatus.OK);
+    }
+
+    @GetMapping("get/mini/by/name/{numberOfProducts}/{numberOfPage}/{name}")
+    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByName(@PathVariable Integer numberOfProducts,
+                                                                     @PathVariable Integer numberOfPage,
+                                                                     @PathVariable String name){
+        return new ResponseEntity<>(productService.getMiniProductsByNumberAndBySearch(numberOfProducts, numberOfPage, name), HttpStatus.OK);
     }
 }
 

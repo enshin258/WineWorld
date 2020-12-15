@@ -1,6 +1,6 @@
 <main class="container">
   <div class="left-column">
-    <img src="https://picsum.photos/400/400" alt="" />
+    <img src="{{product.pictureUrl}}" alt="" />
     <div id="map"></div>
   </div>
 
@@ -15,9 +15,9 @@
     <div class="wine-configuration">
       <div class="wine-parameters">
         <span>Genre</span>
-        <h5>{{ product.genre }}</h5>
+        <h5>{{ product.genreName }}</h5>
         <span>Country</span>
-        <h5>{{ product.location.country }}</h5>
+        <h5>{{ product.country }}</h5>
         <span>Producer</span>
         <h5>{{ product.producer }}</h5>
         <span>AlcoholLevel</span>
@@ -26,12 +26,14 @@
         <h5>{{ product.year }}</h5>
         <span>Volume</span>
         <h5>{{ product.volume }} l</h5>
+        <span>Description</span>
+        <h5>{{ product.productDescription }} </h5>
       </div>
     </div>
 
     <div class="wine-price">
       <span>Price</span>
-      <h5>{{ product.price }}</h5>
+      <h5>{{ product.price }} $</h5>
       <div class="col-xs-12 col-md-12">
         <a class="btn btn-danger" href="#"> Add to cart </a>
       </div>

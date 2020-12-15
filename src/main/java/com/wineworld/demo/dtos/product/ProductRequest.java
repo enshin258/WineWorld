@@ -14,6 +14,8 @@ public class ProductRequest {
 
     private String pictureUrl;
 
+    private String productDescription;
+
     private long genreId;
 
     private long locationId;

@@ -14,7 +14,7 @@ public class MiniProductResponse {
 
     private float price;
 
-    private String description;
+    private String productDescription;
 
     private String pictureUrl;
 }

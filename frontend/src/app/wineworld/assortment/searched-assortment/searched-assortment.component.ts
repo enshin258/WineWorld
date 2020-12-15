@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Count } from 'src/app/models/count';
 import { ProductMiniature } from 'src/app/models/product_miniature';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -21,50 +22,44 @@ export class SearchedAssortmentComponent implements OnInit {
     private router: Router
   ) {
     this.currentPage = 1;
-    this.products = this.productsService.getProductMiniaturesFromSearch(
-      this.pageSize,
-      this.currentPage,
-      this.searchText
-    );
-    this.getPagesCount();
-
     //to refresh router after every category change
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
     this.searchText = this.route.snapshot.paramMap.get('searchText');
+    this.getPagesCount();
+    this.productsService.getProductMiniaturesFromSearch(
+      this.pageSize,
+      this.currentPage,
+      this.searchText
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
   getPagesCount() {
-    var allProductsCount: number;
-    // this.productsService
-    //   .getAllProductsCount()
-    //   .subscribe((pagesCount) => (allProductsCount = pagesCount));
-    allProductsCount = this.productsService.getAllSearchProductsCount(
-      this.searchText
-    );
-    this.pagesCount = Math.ceil(allProductsCount / this.pageSize);
+    this.productsService
+      .getAllSearchProductsCount(this.searchText)
+      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
   }
 
   goToNextPage() {
     this.currentPage++;
-    this.products = this.productsService.getProductMiniaturesFromSearch(
+    this.productsService.getProductMiniaturesFromSearch(
       this.pageSize,
       this.currentPage,
       this.searchText
-    );
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
   goToPreviousPage() {
     this.currentPage--;
-    this.products = this.productsService.getProductMiniaturesFromSearch(
+    this.productsService.getProductMiniaturesFromSearch(
       this.pageSize,
       this.currentPage,
       this.searchText
-    );
+    ).subscribe((data) => {this.products = data});
     this.scrollToTop();
   }
 
