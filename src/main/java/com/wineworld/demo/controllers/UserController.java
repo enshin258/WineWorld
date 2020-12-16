@@ -74,4 +74,14 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserOpinions(userId), HttpStatus.OK);
     }
 
+    @GetMapping("get/by/login/{login}")
+    public ResponseEntity<UserResponse> getUserByLogin(@PathVariable String login) {
+        return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
+    }
+
+    // @GetMapping("login")
+    // public ResponseEntity<> getUserOpinions(@PathVariable String login){
+    //     return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
+    // }
+
 }
