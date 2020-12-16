@@ -14,6 +14,7 @@ import com.wineworld.demo.repositories.ProductRepository;
 import com.wineworld.demo.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -89,5 +90,10 @@ public class UserService {
         return user.getOpinions().stream()
                 .map(opinion -> modelMapper.map(opinion, OpinionResponse.class))
                 .collect(Collectors.toList());
+    }
+
+    public UserResponse findByLogin(String login){
+        User user = userRepository.findByLogin(login).orElseThrow(EntityNotFoundException::new);
+        return modelMapper.map(user, UserResponse.class);
     }
 }
