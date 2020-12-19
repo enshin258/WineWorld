@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 import { AssortmentComponent } from './assortment/assortment.component';
 import { CategoryComponent } from './assortment/category/category.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'category/:id', component: CategoryComponent },
   { path: 'search/:searchText', component: SearchedAssortmentComponent },
-  { path: 'shopping-cart', component: ShoppingCartComponent}
+  { path: 'shopping-cart', component: ShoppingCartComponent },
 ];
 
 @NgModule({

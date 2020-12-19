@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Count } from 'src/app/models/count';
+import { Product } from 'src/app/models/product';
 import { ProductMiniature } from 'src/app/models/product_miniature';
+import { OrderService } from 'src/app/services/order.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -15,38 +17,44 @@ export class AssortmentComponent implements OnInit {
   pagesCount: number;
   allProductsCount: number;
 
-  constructor(private productsService: ProductsService) {
+  constructor(
+    private productsService: ProductsService,
+    private orderService: OrderService
+  ) {
     this.currentPage = 1;
     this.getPagesCount();
-    productsService.getAllProductMiniatures(
-      this.pageSize,
-      this.currentPage
-    ).subscribe((data) => {this.productsMiniatures = data});
+    productsService
+      .getAllProductMiniatures(this.pageSize, this.currentPage)
+      .subscribe((data) => {
+        this.productsMiniatures = data;
+      });
   }
 
   ngOnInit(): void {}
 
   getPagesCount() {
-    this.productsService
-      .getAllProductsCount()
-      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
+    this.productsService.getAllProductsCount().subscribe((data) => {
+      this.pagesCount = Math.ceil(data.count / this.pageSize);
+    });
   }
 
   goToNextPage() {
     this.currentPage++;
-    this.productsService.getAllProductMiniatures(
-      this.pageSize,
-      this.currentPage
-    ).subscribe((data) => {this.productsMiniatures = data});
+    this.productsService
+      .getAllProductMiniatures(this.pageSize, this.currentPage)
+      .subscribe((data) => {
+        this.productsMiniatures = data;
+      });
     this.scrollToTop();
   }
 
   goToPreviousPage() {
     this.currentPage--;
-    this.productsService.getAllProductMiniatures(
-      this.pageSize,
-      this.currentPage
-    ).subscribe((data) => {this.productsMiniatures = data});
+    this.productsService
+      .getAllProductMiniatures(this.pageSize, this.currentPage)
+      .subscribe((data) => {
+        this.productsMiniatures = data;
+      });
     this.scrollToTop();
   }
 
@@ -59,5 +67,13 @@ export class AssortmentComponent implements OnInit {
         window.clearInterval(scrollToTop);
       }
     }, 16);
+  }
+
+  addProductToCart(event, product: ProductMiniature) {
+    event.stopPropagation();
+    var cartPosition = this.orderService.getCartPosition(product.productId);
+    if (cartPosition == null) {
+      this.orderService.addProductToCart(product, 1);
+    }
   }
 }

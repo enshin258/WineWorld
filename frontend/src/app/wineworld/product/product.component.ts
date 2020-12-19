@@ -3,6 +3,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import * as L from 'leaflet';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { OrderService } from 'src/app/services/order.service';
+import { ProductMiniature } from 'src/app/models/product_miniature';
 
 @Component({
   selector: 'app-product',
@@ -16,20 +18,20 @@ export class ProductComponent implements OnInit {
   productId: number;
 
   constructor(
-
     private productsService: ProductsService,
+    private orderService: OrderService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.productId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-    this.productsService.getProduct(this.productId)
-      .subscribe((data) => {this.product = data; this.mapSetup()} );
-
-
+    this.productsService.getProduct(this.productId).subscribe((data) => {
+      this.product = data;
+      this.mapSetup();
+    });
   }
 
-  mapSetup(){
+  mapSetup() {
     this.map = L.map('map').setView(
       [this.product.latitude, this.product.longitude],
       this.mapRadius
@@ -46,15 +48,22 @@ export class ProductComponent implements OnInit {
     ]).addTo(this.map);
     marker
       .bindPopup(
-        '<b>' +
-        this.product.name +
-        '</b><br>' +
-        this.product.description
+        '<b>' + this.product.name + '</b><br>' + this.product.description
       )
       .openPopup();
   }
 
-  saveProduct() {
-    // this.productsService.saveProduct().subscribe(() => {});
+  addProductToCart() {
+    var cartPosition = this.orderService.getCartPosition(this.productId);
+    if (cartPosition == null) {
+      var productMiniature: ProductMiniature = {
+        productId: this.productId,
+        name: this.product.name,
+        productDescription: this.product.productDescription,
+        price: this.product.price,
+        pictureUrl: this.product.pictureUrl,
+      };
+      this.orderService.addProductToCart(productMiniature, 1);
+    }
   }
 }

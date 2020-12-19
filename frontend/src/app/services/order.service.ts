@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProductMiniature } from '../models/product_miniature';
+import { ShoppingCartPosition } from '../models/shoping_cart_position';
+import { ShoppingCartComponent } from '../wineworld/shopping-cart/shopping-cart.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +13,10 @@ export class OrderService {
   private getOrderPositionsUrl =
     'http://localhost:8080/order/position/get/all/';
 
-  // dictionary with productId as a key and quantity as a value
-  private cart: { [productId: number]: number };
+  private cart: ShoppingCartPosition[];
 
   constructor(private http: HttpClient) {
-    this.cart = {};
+    this.cart = [];
   }
 
   getOrder(orderId: number) {
@@ -29,19 +31,49 @@ export class OrderService {
     return this.http.get(this.getOrderPositionsUrl + orderId.toString());
   }
 
-  addProductToCart(productId: number, quantity: number) {
-    this.cart[productId] = quantity;
-  }
-
-  incrementProductQuantity(productId: number, quantity: number) {
-    this.cart[productId]++;
-  }
-
-  decrementProductQuantity(productId: number, quantity: number) {
-    this.cart[productId]--;
+  addProductToCart(product: ProductMiniature, quantity: number) {
+    var position: ShoppingCartPosition = {
+      productMiniature: product,
+      quantity: quantity,
+    };
+    this.cart.push(position);
   }
 
   getCart() {
     return this.cart;
+  }
+
+  getCartPosition(productId: number) {
+    for (var i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].productMiniature.productId == productId) {
+        return this.cart[i];
+      }
+    }
+    return null;
+  }
+
+  removeProduct(productId: number) {
+    for (var i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].productMiniature.productId == productId) {
+        this.cart.splice(i, 1);
+      }
+    }
+  }
+
+  setProductQuantity(productId: number, quantity: number) {
+    for (var i = 0; i < this.cart.length; i++) {
+      var position = this.cart[i];
+      if (position.productMiniature.productId == productId) {
+        position.quantity = quantity;
+      }
+    }
+  }
+
+  getTotalPrice() {
+    var total = 0;
+    this.cart.forEach((position) => {
+      total += position.productMiniature.price * position.quantity;
+    });
+    return total;
   }
 }

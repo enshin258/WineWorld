@@ -1,6 +1,6 @@
 <main class="container">
   <div class="left-column">
-    <img src="{{product.pictureUrl}}" alt="" />
+    <img src="{{ product.pictureUrl }}" alt="" />
     <div id="map"></div>
   </div>
 
@@ -27,15 +27,15 @@
         <span>Volume</span>
         <h5>{{ product.volume }} l</h5>
         <span>Description</span>
-        <h5>{{ product.productDescription }} </h5>
+        <h5>{{ product.productDescription }}</h5>
       </div>
     </div>
 
     <div class="wine-price">
       <span>Price</span>
       <h5>{{ product.price }} $</h5>
-      <div class="col-xs-12 col-md-12">
-        <a class="btn btn-danger" href="#"> Add to cart </a>
+      <div (click)="addProductToCart()" class="col-xs-12 col-md-12">
+        <a class="btn btn-danger"> Add to cart </a>
       </div>
     </div>
   </div>
