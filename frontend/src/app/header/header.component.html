@@ -1,35 +1,59 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" [routerLink]="['/assortment']">
-        <img src="../../assets/wine.png" width="32" height="32" class="d-inline-block align-top" alt="" /> Wine World
-    </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">History of Wine</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="loginBtn">Login</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" [formGroup]="form">
-            <img class="mx-10" src="../../assets/shoping-cart.png" alt="" width="32" height="32" />
-            <input class="form-control mr-sm-2" type="search" placeholder="Enter wine name" aria-label="Search" minlength="1" formControlName="searchText" />
-            <button (click)="onSearch()" class="btn btn-danger my-2 my-sm-0" [disabled]="!form.valid">
+  <a class="navbar-brand" [routerLink]="['/assortment']">
+    <img
+      src="../../assets/wine.png"
+      width="32"
+      height="32"
+      class="d-inline-block align-top"
+      alt=""
+    />
+    Wine World
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">History of Wine</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="loginBtn">Login</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" [formGroup]="form">
+      <img
+        class="mx-10 clickable"
+        [routerLink]="['/shopping-cart']"
+        src="../../assets/shoping-cart.png"
+        alt=""
+        width="32"
+        height="32"
+      />
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Enter wine name"
+        aria-label="Search"
+        minlength="1"
+        formControlName="searchText"
+      />
+      <button
+        (click)="onSearch()"
+        class="btn btn-danger my-2 my-sm-0"
+        [disabled]="!form.valid"
+      >
         Search
       </button>
-        </form>
-    </div>
+    </form>
+  </div>
 
-
-    <!-- <div id="myModal" class="modal">
+  <div id="myModal" class="modal">
     <div class="modal-content">
-      <form class="form-signin" [formGroup]="loginForm">
+      <div class="form-signin">
         <img
           class="rounded mx-auto d-block"
           src="../../assets/wine.png"
@@ -37,42 +61,94 @@
           width="96"
           height="96"
         />
-        <h2 class="mx-auto font-weight-normal" style="width: 200px">
-          Please sign in
-        </h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="inputEmail"
-          class="form-control"
-          placeholder="Email address"
-          required=""
-          autofocus=""
-        />
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input
-          type="password"
-          id="inputPassword"
-          class="form-control"
-          placeholder="Password"
-          required=""
-        />
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
+        <div class="row">
+          <form class="column" [formGroup]="loginForm">
+            <h2 class="mx-auto font-weight-normal" style="width: 200px">
+              Please sign in
+            </h2>
+            <label for="inputLoginSignIn" class="sr-only">Login</label>
+            <input
+              type="text"
+              id="inputLoginSignIn"
+              class="form-control"
+              formControlName="loginText"
+              placeholder="Login"
+              required=""
+              autofocus=""
+            />
+            <label for="inputPasswordSignIn" class="sr-only">Password</label>
+            <input
+              type="password"
+              id="inputPasswordSignIn"
+              class="form-control"
+              formControlName="passwordText"
+              placeholder="Password"
+              required=""
+            />
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me" /> Remember me
+              </label>
+            </div>
+            <button
+              [disabled]="!loginForm.valid"
+              class="btn btn-lg btn-danger btn-block"
+              type="submit"
+              (click)="onLogin()"
+            >
+              Sign in
+            </button>
+          </form>
+          <form class="column" [formGroup]="registerForm">
+            <h2 class="mx-auto font-weight-normal" style="width: 200px">
+              or sign up
+            </h2>
+            <label for="inputEmailSignUp" class="sr-only">Email address</label>
+            <input
+              type="email"
+              name="email"
+              ngModel
+              email
+              id="inputEmailSignUp"
+              class="form-control"
+              formControlName="emailText"
+              placeholder="Email address"
+              required=""
+              autofocus=""
+            />
+            <label for="inputLoginSignUp" class="sr-only">Login</label>
+            <input
+              type="text"
+              id="inputLoginSignUp"
+              class="form-control"
+              formControlName="loginText"
+              placeholder="Login"
+              required=""
+              autofocus=""
+            />
+            <label for="inputPasswordSignUp" class="sr-only">Password</label>
+            <input
+              type="password"
+              id="inputPasswordSignUp"
+              class="form-control"
+              formControlName="passwordText"
+              placeholder="Password"
+              required=""
+            />
+            <button
+              [disabled]="!registerForm.valid"
+              class="btn btn-lg btn-secondary btn-block"
+              type="submit"
+              (click)="onRegister()"
+            >
+              Register account
+            </button>
+          </form>
         </div>
-        <button class="btn btn-lg btn-danger btn-block" type="submit">
-          Sign in
-        </button>
-        <h4 class="mx-auto font-weight-normal" style="width: 14px">Or</h4>
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">
-          Register account
-        </button>
         <p class="mt-5 mb-3 text-muted">
           © WineWorld 2020. All rights reserved
         </p>
-      </form>
+      </div>
     </div>
-  </div> -->
+  </div>
 </nav>

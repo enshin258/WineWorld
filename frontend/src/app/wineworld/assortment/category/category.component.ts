@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Count } from 'src/app/models/count';
 import { ProductMiniature } from 'src/app/models/product_miniature';
+import { OrderService } from 'src/app/services/order.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
+    private orderService: OrderService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -29,37 +31,51 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoryId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.getPagesCount();
-    this.productsService.getProductMiniaturesOfCategory(
-      this.pageSize,
-      this.currentPage,
-      this.categoryId
-    ).subscribe((data) => {this.products = data});
+    this.productsService
+      .getProductMiniaturesOfCategory(
+        this.pageSize,
+        this.currentPage,
+        this.categoryId
+      )
+      .subscribe((data) => {
+        this.products = data;
+      });
     this.scrollToTop();
   }
 
   getPagesCount() {
     this.productsService
       .getAllCategoryProductsCount(this.categoryId)
-      .subscribe((data) => {this.pagesCount = Math.ceil(data.count / this.pageSize);});
+      .subscribe((data) => {
+        this.pagesCount = Math.ceil(data.count / this.pageSize);
+      });
   }
 
   goToNextPage() {
     this.currentPage++;
-    this.productsService.getProductMiniaturesOfCategory(
-      this.pageSize,
-      this.currentPage,
-      this.categoryId
-    ).subscribe((data) => {this.products = data});
+    this.productsService
+      .getProductMiniaturesOfCategory(
+        this.pageSize,
+        this.currentPage,
+        this.categoryId
+      )
+      .subscribe((data) => {
+        this.products = data;
+      });
     this.scrollToTop();
   }
 
   goToPreviousPage() {
     this.currentPage--;
-    this.productsService.getProductMiniaturesOfCategory(
-      this.pageSize,
-      this.currentPage,
-      this.categoryId
-    ).subscribe((data) => {this.products = data});
+    this.productsService
+      .getProductMiniaturesOfCategory(
+        this.pageSize,
+        this.currentPage,
+        this.categoryId
+      )
+      .subscribe((data) => {
+        this.products = data;
+      });
     this.scrollToTop();
   }
 
@@ -72,5 +88,13 @@ export class CategoryComponent implements OnInit {
         window.clearInterval(scrollToTop);
       }
     }, 16);
+  }
+
+  addProductToCart(event, product: ProductMiniature) {
+    event.stopPropagation();
+    var cartPosition = this.orderService.getCartPosition(product.productId);
+    if (cartPosition == null) {
+      this.orderService.addProductToCart(product, 1);
+    }
   }
 }
