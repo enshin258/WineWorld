@@ -21,10 +21,10 @@ export class UsersService {
   }
 
   login(user: User) {
-    return this.http.post(this.loginUserUrl, {
-      username: user.username,
-      password: user.password,
-    });
+    const formData = new FormData();
+    formData.append('username', user.username);
+    formData.append('password', user.password);
+    return this.http.post(this.loginUserUrl, formData);
   }
 
   changeUserInfo(user: User) {

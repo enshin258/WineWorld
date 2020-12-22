@@ -82,9 +82,10 @@ export class HeaderComponent implements OnInit {
       password: this.loginForm.get('passwordText').value,
     };
     this.loginForm.reset();
-    this.userService.login(user).subscribe((data) => {
-      console.log(data);
-    });
+    this.userService.login(user).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
   }
 
   onRegister() {
