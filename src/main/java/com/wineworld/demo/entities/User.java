@@ -30,7 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> userOrders;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Opinion> opinions;
 
 

@@ -11,4 +11,6 @@ public class OrderPositionRequest {
     private long orderId;
 
     private long productId;
+
+    private int quantity;
 }

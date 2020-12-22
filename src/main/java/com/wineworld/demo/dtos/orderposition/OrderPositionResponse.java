@@ -30,4 +30,6 @@ public class OrderPositionResponse {
 
     private float volume;
 
+    private int quantity;
+
 }

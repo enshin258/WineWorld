@@ -54,7 +54,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderPosition> orderPositions;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Opinion> opinions;
  
 

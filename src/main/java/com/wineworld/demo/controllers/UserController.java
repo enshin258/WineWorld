@@ -5,7 +5,6 @@ import com.wineworld.demo.dtos.opinion.OpinionResponse;
 import com.wineworld.demo.dtos.order.OrderResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.dtos.user.UserResponse;
-import com.wineworld.demo.services.ProductService;
 import com.wineworld.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,9 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private final ProductService productService;
 
-    public UserController(UserService userService, ProductService productService){
+    public UserController(UserService userService){
         this.userService = userService;
-        this.productService = productService;
     }
 
     @PostMapping("/add")
@@ -46,42 +43,25 @@ public class UserController {
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
-
-
-
-    @PostMapping("add/opinion")
-    public ResponseEntity<OpinionResponse> addOpinion(@RequestBody OpinionRequest opinionRequest){
-        if(opinionRequest != null){
-            return new ResponseEntity<>(userService.addOpinion(opinionRequest), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @DeleteMapping("/delete/opinion/{userId}/{productId}")
-    public ResponseEntity<Void> removeOpinion(@PathVariable Long userId, @PathVariable Long productId){
-        userService.removeOpinion(userId, productId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("get/orders/{userId}")
+    @GetMapping("/get/orders/{userId}")
     public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId){
         return new ResponseEntity<>(userService.getUserOrders(userId), HttpStatus.OK);
     }
 
-    @GetMapping("get/opinions/{userId}")
-    public ResponseEntity<List<OpinionResponse>> getUserOpinions(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.getUserOpinions(userId), HttpStatus.OK);
-    }
-
-    @GetMapping("get/by/login/{login}")
+    @GetMapping("/get/by/login/{login}")
     public ResponseEntity<UserResponse> getUserByLogin(@PathVariable String login) {
         return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
     }
 
-    // @GetMapping("login")
-    // public ResponseEntity<> getUserOpinions(@PathVariable String login){
-    //     return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
-    // }
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId){
+        userService.deleteUser(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest){
+        return new ResponseEntity<>(userService.updateUser(userId, userRequest), HttpStatus.OK);
+    }
 
 }

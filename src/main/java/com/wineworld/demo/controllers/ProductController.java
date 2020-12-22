@@ -37,20 +37,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
-    @PostMapping("/location/add")
-    public ResponseEntity<LocationResponse> addLocation(@RequestBody LocationRequest locationRequest){
-        if(locationRequest != null){
-           LocationResponse locationResponse = productService.addLocation(locationRequest);
-           return new ResponseEntity<>(locationResponse, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
 
-    @GetMapping("/location/get/all")
-    public ResponseEntity<List<LocationResponse>> getAllLocations(){
-        return new ResponseEntity<>(productService.getAllLocations(), HttpStatus.OK);
-    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
@@ -61,11 +48,6 @@ public class ProductController {
     @GetMapping("/get/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
-    }
-
-    @GetMapping("/get/opinions/{productId}")
-    public ResponseEntity<List<OpinionResponse>> getOpinions(@PathVariable Long productId){
-        return new ResponseEntity<>(productService.getAllOpinions(productId), HttpStatus.OK);
     }
 
     @GetMapping("/get/count")
@@ -83,36 +65,6 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductByName(name), HttpStatus.OK);
     }
 
-    @PostMapping("/add/genre")
-    public ResponseEntity<GenreResponse> addGenre(@RequestBody GenreRequest genreRequest){
-        if(genreRequest != null){
-            GenreResponse genreResponse = productService.addGenre(genreRequest);
-            return new ResponseEntity<>(genreResponse, HttpStatus.CREATED);
-        }else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping("/get/genres")
-    public ResponseEntity<List<GenreResponse>> getGenres(){
-        return new ResponseEntity<>(productService.getAllGenres(), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/genre/{genreId}")
-    public ResponseEntity<Void> deleteGenre(@PathVariable Long genreId){
-        productService.deleteGenre(genreId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/get/mini/{numberOfProducts}/{numberOfPage}")
-    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPage(@PathVariable Integer numberOfProducts, @PathVariable Integer numberOfPage){
-        return new ResponseEntity<>(productService.getMiniProductsByNumber(numberOfProducts, numberOfPage), HttpStatus.OK);
-    }
-
-    @GetMapping("/get/mini/{numberOfProducts}/{numberOfPage}/{genreId}")
-    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByPageAndGenre(@PathVariable Integer numberOfProducts, @PathVariable Integer numberOfPage, @PathVariable Long genreId){
-        return new ResponseEntity<>(productService.getMiniProductsByNumberAndByCategory(numberOfProducts, numberOfPage, genreId), HttpStatus.OK);
-    }
 
     @GetMapping("/get/count/{genreId}")
     public ResponseEntity<CountResponse> getProductCountByGenre(@PathVariable Long genreId){
@@ -124,11 +76,11 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductCountByName(name), HttpStatus.OK);
     }
 
-    @GetMapping("get/mini/by/name/{numberOfProducts}/{numberOfPage}/{name}")
-    public ResponseEntity<List<MiniProductResponse>> getMiniProductsByName(@PathVariable Integer numberOfProducts,
-                                                                     @PathVariable Integer numberOfPage,
-                                                                     @PathVariable String name){
-        return new ResponseEntity<>(productService.getMiniProductsByNumberAndBySearch(numberOfProducts, numberOfPage, name), HttpStatus.OK);
+    @PutMapping("/update/{productId}")
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long productId, @RequestBody ProductRequest productRequest){
+        return new ResponseEntity<>(productService.updateProduct(productId, productRequest), HttpStatus.OK);
     }
+
+
 }
 
