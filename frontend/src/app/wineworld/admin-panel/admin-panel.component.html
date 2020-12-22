@@ -1,0 +1,126 @@
+<div class="containter">
+    <h2>---ADMIN PANEL---</h2>
+
+
+    <ul class="nav nav-tabs mr-auto" id="myTab">
+        <li class="nav-item active"><a class="nav-link active" data-target="#add_wine" data-toggle="tab">ADD WINE</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#profile" data-toggle="tab">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#messages" data-toggle="tab">Messages</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#settings" data-toggle="tab">Settings</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- ADD WINE TAB -->
+        <div class="tab-pane active" id="add_wine">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD WINE
+                </div>
+                <div class="card-body">
+                    <div class="column">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="winename"> NAME </label>
+                            <div class="col-md-12">
+                                <input id="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="price"> PRICE </label>
+                            <div class="col-md-12">
+                                <input id="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="image"> IMAGE</label>
+                            <div class="col-md-12">
+                                <input id="image" name="image" class="input-file" type="file">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="description" placeholder="Description" name="description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="category"> CATEGORY</label>
+                            <div class="col-md-12">
+                                <select id="category" name="category" class="form-control">
+                                    <option>SWEET</option>
+                                    <option>HALF-SWEET</option>
+                                    <option>SEMI-DRY</option>
+                                    <option>DRY</option>
+                                    <option>CHAMPAGNE</option>
+                    </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="location"> CATEGORY</label>
+                            <div class="col-md-12">
+                                <select id="location" name="location" class="form-control">
+                                                    <option>POLAND - BROWARY KOCZKODAN</option>
+                                                    <option>ENGLAND - PALE ALE</option>
+                                                    <option>GEMRAN - OKTOBERFEST ALKOHOLEN</option>
+                                    </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
+                            <div class="col-md-12">
+                                <input id="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
+                            <div class="col-md-12">
+                                <input id="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="year"> YEAR </label>
+                            <div class="col-md-12">
+                                <input id="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="volume"> VOLUME </label>
+                            <div class="col-md-12">
+                                <input id="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD WINE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="profile">Profile</div>
+        <div class="tab-pane" id="messages">Message</div>
+        <div class="tab-pane" id="settings">Settings</div>
+    </div>
+
+
+</div>
