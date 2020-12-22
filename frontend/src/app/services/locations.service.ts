@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocationsService {
-  private getLocationsUrl = 'http://localhost:8080/products/location/get/all';
-  private getLocationUrl = 'http://localhost:8080/products/location/get/';
-  private addLocationUrl = 'http://localhost:8080/products/location/add';
-  private updateLocationUrl = 'http://localhost:8080/products/location/update';
-  private deleteLocationUrl = 'http://localhost:8080/products/location/delete/';
+  private getLocationsUrl = 'http://localhost:8080/locations/get/all';
+  private getLocationUrl = 'http://localhost:8080/locations/get/';
+  private addLocationUrl = 'http://localhost:8080/locations/add';
+  private updateLocationUrl = 'http://localhost:8080/locations/update/';
+  private deleteLocationUrl = 'http://localhost:8080/locations/delete/';
 
   constructor(private http: HttpClient) {}
 

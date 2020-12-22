@@ -78,6 +78,7 @@ public class OrderService {
             OrderPosition orderPosition = new OrderPosition();
             orderPosition.setOrder(order);
             orderPosition.setProduct(product);
+            orderPosition.setQuantity(orderPositionRequest.getQuantity());
             OrderPosition createdOrderPosition = orderPositionRepository.save(orderPosition);
             orderPositions.add(createdOrderPosition);
         }

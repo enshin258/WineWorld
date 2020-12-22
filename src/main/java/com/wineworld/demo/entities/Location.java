@@ -30,7 +30,7 @@ public class Location {
     @NonNull
     private String country;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", cascade = CascadeType.REMOVE)
     private List<Product> products;
 
 }

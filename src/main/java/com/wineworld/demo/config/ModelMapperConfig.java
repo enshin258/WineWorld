@@ -2,6 +2,7 @@ package com.wineworld.demo.config;
 
 import com.wineworld.demo.dtos.opinion.OpinionRequest;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
+import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
 import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.dtos.product.MiniProductResponse;
 import com.wineworld.demo.dtos.product.ProductRequest;
@@ -30,6 +31,7 @@ public class ModelMapperConfig {
                 map().setAlcoholLevel(source.getProduct().getAlcoholLevel());
                 map().setYear(source.getProduct().getYear());
                 map().setVolume(source.getProduct().getVolume());
+                map().setQuantity(source.getQuantity());
             }
         };
         modelMapper.addMappings(orderPositionMap);
@@ -52,7 +54,7 @@ public class ModelMapperConfig {
         return modelMapper;
     }
 
-    public static ModelMapper addProductMappings(ModelMapper modelMapper){
+    public static void addProductMappings(ModelMapper modelMapper){
         PropertyMap<OpinionRequest, Opinion> opinionRequestMap = new PropertyMap<OpinionRequest, Opinion>() {
             @Override
             protected void configure() {
@@ -84,6 +86,5 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(miniProductResponsePropertyMap);
-        return modelMapper;
     }
 }

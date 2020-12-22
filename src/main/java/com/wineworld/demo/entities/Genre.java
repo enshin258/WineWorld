@@ -22,6 +22,6 @@ public class Genre {
     @NonNull
     private String name;
 
-    @OneToMany(mappedBy = "genre")
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.REMOVE)
     List<Product> products;
 }

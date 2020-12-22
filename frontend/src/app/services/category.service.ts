@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root',
 })
 export class CategoryService {
-  private getAllCategoriesUrl = 'http://localhost:8080/products/get/genres';
+  private getAllCategoriesUrl = 'http://localhost:8080/genre/get/all';
 
   constructor(private http: HttpClient) {}
 

@@ -23,4 +23,7 @@ public class OrderPosition {
     @ManyToOne
     private Product product;
 
+    @NonNull
+    private int quantity;
+
 }
