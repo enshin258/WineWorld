@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 
@@ -8,6 +8,7 @@ import { User } from '../models/user';
 export class UsersService {
   private addUserUrl = 'http://localhost:8080/user/add';
   private loginUserUrl = 'http://localhost:8080/login';
+  private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/add';
 
   constructor(private http: HttpClient) {}
@@ -24,7 +25,17 @@ export class UsersService {
     const formData = new FormData();
     formData.append('username', user.username);
     formData.append('password', user.password);
-    return this.http.post(this.loginUserUrl, formData);
+    return this.http.post(this.loginUserUrl, formData, {
+      observe: 'response',
+      withCredentials: true,
+    });
+  }
+
+  logout() {
+    return this.http.get(this.logoutUrl, {
+      observe: 'response',
+      withCredentials: true,
+    });
   }
 
   changeUserInfo(user: User) {

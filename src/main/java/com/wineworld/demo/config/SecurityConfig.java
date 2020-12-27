@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                .successHandler(loginSuccessHandler) 
                .failureHandler(loginFailureHandler)
                .and() 
-               .logout() 
+               .logout()
+               .deleteCookies("JSESSIONID")
                .logoutSuccessHandler(logoutHandler)
                .and()
                .exceptionHandling()
@@ -67,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowCredentials(true).allowedHeaders("*").exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
             }
         };
     }
