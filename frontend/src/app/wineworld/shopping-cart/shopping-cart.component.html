@@ -1,78 +1,92 @@
 <div class="container">
-    <div class="card shopping-cart ">
+    <div class="card shopping-cart">
         <div class="card-header bg-dark text-light">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping cart
-            <a href="" class="btn btn-outline-danger btn-sm float-right">Continue shopping</a>
-            <div class="clearfix"></div>
-        </div>
-        <div class="card-body">
-            <!-- PRODUCT -->
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src="http://placekitten.com/200/200" alt="prewiew" width="120" height="80">
-                </div>
-                <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong>Wine Name</strong></h4>
-                    <h4>
-                        <small>Wine description</small>
-                    </h4>
-                </div>
-                <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 10px">
-                        <h6><strong>25.00PLN <span class="text-muted">x</span></strong></h6>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4">
-                        <div class="quantity">
-                            <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty" size="1">
-                        </div>
-                    </div>
-                    <div class="col-2 col-sm-2 col-md-2 text-right">
-                        <a href="#" class="btn btn-danger btn-sm float-right">
-                            <img class="img-responsive" src="../../assets/trash.svg" alt="prewiew" width="16" height="16">
-                        </a>
-                    </div>
-                </div>
+            <a [routerLink]="['/assortment']" class="btn btn-outline-danger btn-sm float-right">Continue shopping</a
+        >
+        <div class="clearfix"></div>
+      </div>
+      <div class="card-body">
+        <!-- PRODUCT -->
+        <div *ngFor="let position of cartPositions" class="row">
+          <div
+            [routerLink]="['/product', position.productMiniature.productId]"
+            class="col-12 col-sm-12 col-md-2 text-center"
+          >
+            <img
+              class="img-responsive"
+              src="{{ position.productMiniature.pictureUrl }}"
+              alt="prewiew"
+              width="120"
+              height="80"
+            />
+          </div>
+          <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+            <h4 class="product-name">
+              <strong>{{ position.productMiniature.name }}</strong>
+            </h4>
+            <h4>
+              <small>{{ position.productMiniature.productDescription }}</small>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+            <div
+              class="col-3 col-sm-3 col-md-6 text-md-right"
+              style="padding-top: 10px"
+            >
+              <h6>
+                <strong
+                  >{{ position.productMiniature.price }}PLN
+                  <span class="text-muted">x</span></strong
+                >
+              </h6>
             </div>
-            <hr>
-            <!-- END PRODUCT -->
-            <!-- PRODUCT -->
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src="http://placekitten.com/200/200" alt="prewiew" width="120" height="80">
-                </div>
-                <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong>Wine Name</strong></h4>
-                    <h4>
-                        <small>Wine description</small>
-                    </h4>
-                </div>
-                <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 10px">
-                        <h6><strong>25.00PLN <span class="text-muted">x</span></strong></h6>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4">
-                        <div class="quantity">
-                            <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty" size="1">
-                        </div>
-                    </div>
-                    <div class="col-2 col-sm-2 col-md-2 text-right">
-                        <a href="#" class="btn btn-danger btn-sm float-right">
-                            <img class="img-responsive" src="../../assets/trash.svg" alt="prewiew" width="16" height="16">
-                        </a>
-                    </div>
-                </div>
+            <div class="col-4 col-sm-4 col-md-4">
+              <div class="quantity">
+                <input
+                  (change)="
+                    setPositionQuantity(
+                      position.productMiniature.productId,
+                      $event
+                    )
+                  "
+                  type="number"
+                  step="1"
+                  max="99"
+                  min="1"
+                  [value]="position.quantity"
+                  title="Qty"
+                  class="qty"
+                  size="1"
+                />
+              </div>
             </div>
-            <hr>
-            <!-- END PRODUCT -->
-
-        </div>
-        <div class="card-footer">
-            <div class="checkout float-right column">
-                <div class="price">
-                    Total price: <b>9999.99PLN</b>
-                </div>
-                <a href="" class="btn btn-danger pull-right checkoutBtn">Checkout</a>
-            </div>
+            <div
+              (click)="removePosition(position.productMiniature.productId)"
+              class="col-2 col-sm-2 col-md-2 text-right"
+            >
+              <a class="btn btn-danger btn-sm float-right">
+                <img
+                  class="img-responsive"
+                  src="../../assets/trash.svg"
+                  alt="prewiew"
+                  width="16"
+                  height="16"
+                />
+              </a>
         </div>
     </div>
+</div>
+<hr />
+<!-- END PRODUCT -->
+</div>
+<div class="card-footer">
+    <div class="checkout float-right column">
+        <div class="price">
+            Total price: <b>{{ totalPrice }} PLN</b>
+        </div>
+        <a href="" class="btn btn-danger pull-right checkoutBtn">Checkout</a>
+    </div>
+</div>
+</div>
 </div>
