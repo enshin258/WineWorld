@@ -1,0 +1,7 @@
+{
+    "/login": {
+        "target": "localhost:8080",
+        "secure": true,
+        "changeOrigin": false
+    }
+}

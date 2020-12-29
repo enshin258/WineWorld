@@ -3,10 +3,15 @@
 
 
     <ul class="nav nav-tabs mr-auto" id="myTab">
-        <li class="nav-item active"><a class="nav-link active" data-target="#add_wine" data-toggle="tab">ADD WINE</a></li>
-        <li class="nav-item"><a class="nav-link" data-target="#profile" data-toggle="tab">Profile</a></li>
-        <li class="nav-item"><a class="nav-link" data-target="#messages" data-toggle="tab">Messages</a></li>
-        <li class="nav-item"><a class="nav-link" data-target="#settings" data-toggle="tab">Settings</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#add_wine" data-toggle="tab">Add wine</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#delete_wine" data-toggle="tab">Delete wine</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#add_location" data-toggle="tab">Add location</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#delete_location" data-toggle="tab">Delete location</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#add_category" data-toggle="tab">Add category</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#delete_category" data-toggle="tab">Delete category</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#add_admin" data-toggle="tab">Add admin</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#delete_admin" data-toggle="tab">Delete admin</a></li>
+
     </ul>
 
     <div class="tab-content">
@@ -14,7 +19,7 @@
         <div class="tab-pane active" id="add_wine">
             <div class="card">
                 <div class="card-header bg-dark text-light">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD WINE
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add wine
                 </div>
                 <div class="card-body">
                     <div class="column">
@@ -62,7 +67,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-12 control-label" for="location"> CATEGORY</label>
+                            <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
                                 <select id="location" name="location" class="form-control">
                                                     <option>POLAND - BROWARY KOCZKODAN</option>
@@ -117,10 +122,221 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="profile">Profile</div>
-        <div class="tab-pane" id="messages">Message</div>
-        <div class="tab-pane" id="settings">Settings</div>
+        <!-- DELETE WINE TAB -->
+        <div class="tab-pane" id="delete_wine">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete wine
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="wine_id"> WINE ID </label>
+                        <div class="col-md-12">
+                            <input id="wine_id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE WINE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADD LOCATION -->
+        <div class="tab-pane" id="add_location">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add location
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
+                        <div class="col-md-12">
+                            <input id="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
+                        <div class="col-md-12">
+                            <input id="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" id="location_description" placeholder="Location description" name="location_description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="country"> COUNTRY </label>
+                        <div class="col-md-12">
+                            <input id="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD LOCATION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DELETE LOCATION -->
+        <div class="tab-pane" id="delete_location">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete location
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="location_id"> LOCATION ID </label>
+                        <div class="col-md-12">
+                            <input id="location_id" name="location_id" placeholder="Location Id" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE LOCATION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADD CATEGORY -->
+        <div class="tab-pane" id="add_category">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add category
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="winename"> CATEGORY NAME </label>
+                        <div class="col-md-12">
+                            <input id="category_name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DELETE CATEGORY -->
+        <div class="tab-pane" id="delete_category">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete category
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="winename"> CATEGORY ID </label>
+                        <div class="col-md-12">
+                            <input id="category_Id" name="category_Id" placeholder="Category Id" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE CATEGORY</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADD ADMIN -->
+        <div class="tab-pane" id="add_admin">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add Admin
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="e-mail">E-MAIL</label>
+                        <div class="col-md-12">
+                            <input id="e-mail" name="e-mail" placeholder="Email" class="form-control input-md" required="" type="email">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="login">LOGIN</label>
+                        <div class="col-md-12">
+                            <input id="login" name="login" placeholder="Login" class="form-control input-md" required="" type="text">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="password">PASSWORD</label>
+                        <div class="col-md-12">
+                            <input id="password" name="password" placeholder="Password" class="form-control input-md" required="" type="password">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD ADMIN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DELETE ADMIN -->
+        <div class="tab-pane" id="delete_admin">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete Admin
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="admin_id"> ADMIN ID </label>
+                        <div class="col-md-12">
+                            <input id="admin_id" name="admin_id" placeholder="Admin Id" class="form-control input-md" required="" type="number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE ADMIN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </div>
