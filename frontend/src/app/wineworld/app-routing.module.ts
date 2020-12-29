@@ -24,13 +24,9 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'category/:id', component: CategoryComponent },
   { path: 'search/:searchText', component: SearchedAssortmentComponent },
-<<<<<<< HEAD
-  { path: 'shopping-cart', component: ShoppingCartComponent },
-=======
   { path: 'shopping-cart', component: ShoppingCartComponent},
   { path: 'admin-panel', component: AdminPanelComponent}
 
->>>>>>> added admin panel
 ];
 
 @NgModule({
