@@ -11,6 +11,7 @@ import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 const routes: Routes = [
   { path: '', component: AssortmentComponent },
@@ -23,7 +24,9 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'category/:id', component: CategoryComponent },
   { path: 'search/:searchText', component: SearchedAssortmentComponent },
-  { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'shopping-cart', component: ShoppingCartComponent},
+  { path: 'admin-panel', component: AdminPanelComponent}
+
 ];
 
 @NgModule({
