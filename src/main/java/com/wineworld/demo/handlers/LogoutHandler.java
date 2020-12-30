@@ -15,7 +15,6 @@ public class LogoutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-                response.getWriter().append("WYLOGOWANKO");
                 response.setStatus(200);
         // TODO Auto-generated method stub
 

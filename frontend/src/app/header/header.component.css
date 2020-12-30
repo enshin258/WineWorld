@@ -106,3 +106,7 @@ h2 {
   display: table;
   clear: both;
 }
+
+.invisible {
+  visibility: collapse;
+}

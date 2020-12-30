@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   form: FormGroup;
   loginForm: FormGroup;
   registerForm: FormGroup;
+  isUserLoggedIn = false;
+  buttonText = 'Login';
 
   constructor(
     private userService: UsersService,
@@ -83,8 +85,13 @@ export class HeaderComponent implements OnInit {
     };
     this.loginForm.reset();
     this.userService.login(user).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+      (res) => {
+        console.log(res);
+        this.isUserLoggedIn = true;
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+      },
+      (err) => console.error(err)
     );
   }
 
@@ -107,5 +114,15 @@ export class HeaderComponent implements OnInit {
     this.userService.register(user).subscribe((data) => {
       console.log(data);
     });
+  }
+
+  onLogout() {
+    this.userService.logout().subscribe(
+      (res) => {
+        console.log(res);
+        this.isUserLoggedIn = false;
+      },
+      (err) => console.error(err)
+    );
   }
 }

@@ -23,9 +23,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
             throws IOException, ServletException {
-
-
-                response.getWriter().append("ZALOGOWANKO");
         response.setStatus(200);
     }    
 }
