@@ -34,10 +34,17 @@ public class UserService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
-    public String addUser(UserRequest userRequest){
+    public String addUser(UserRequest userRequest, boolean isAdmin){
         User user = modelMapper.map(userRequest, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(roleRepository.findById(userRequest.getRoleId()).orElseThrow(EntityNotFoundException::new));
+        if(isAdmin) {
+            //2L is for admin
+            user.setRole(roleRepository.findById(2L).orElseThrow(EntityNotFoundException::new));
+        }
+        else {
+            //1L is for normal user
+            user.setRole(roleRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
+        }
         User createdUser = userRepository.save(user);
         return "Added " + createdUser.getLogin();
     }

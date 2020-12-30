@@ -6,7 +6,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UsersService {
-  private addUserUrl = 'http://localhost:8080/user/add';
+  private addUserUrl = 'http://localhost:8080/user/add/false';
   private loginUserUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/add';

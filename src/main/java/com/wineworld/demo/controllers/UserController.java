@@ -20,10 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addUser(@RequestBody UserRequest userRequest){
+    @PostMapping("/add/{isAdmin}")
+    public ResponseEntity<String> addUser(@RequestBody UserRequest userRequest, @PathVariable Boolean isAdmin){
         if(userRequest != null) {
-            String userResponse = userService.addUser(userRequest);
+            String userResponse = userService.addUser(userRequest, isAdmin);
             return new ResponseEntity<>(userResponse, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
