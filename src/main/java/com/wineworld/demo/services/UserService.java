@@ -5,6 +5,7 @@ import com.wineworld.demo.dtos.order.OrderResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.dtos.user.UserResponse;
 import com.wineworld.demo.entities.User;
+import com.wineworld.demo.repositories.RoleRepository;
 import com.wineworld.demo.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -22,19 +23,23 @@ public class UserService {
     private ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
         modelMapper = ModelMapperConfig.getOpinionMapping();
+        ModelMapperConfig.addUserMappings(modelMapper);
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
-    public UserResponse addUser(UserRequest userRequest){
+    public String addUser(UserRequest userRequest){
         User user = modelMapper.map(userRequest, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(roleRepository.findById(userRequest.getRoleId()).orElseThrow(EntityNotFoundException::new));
         User createdUser = userRepository.save(user);
-        return modelMapper.map(createdUser, UserResponse.class);
+        return "Added " + createdUser.getLogin();
     }
 
     public UserResponse getUserByID(Long id){

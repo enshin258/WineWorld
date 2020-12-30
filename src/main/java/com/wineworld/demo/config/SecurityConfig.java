@@ -47,10 +47,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                .exceptionHandling()
                .and()
                .authorizeRequests()
-               .antMatchers("/payment")
-               .authenticated()
-               .antMatchers("/**")
-               .permitAll();
+                   .antMatchers("/**")
+                   .permitAll()
+                   .and()
+               .authorizeRequests()
+                   .antMatchers("/payment").hasAnyAuthority("USER", "ADMIN")
+                   .regexMatchers("^.*\\/update.*$").hasAuthority("ADMIN")
+                   .regexMatchers("^.*\\/delete.*$").hasAuthority("ADMIN")
+                   .regexMatchers("^.*\\/add.*$").hasAuthority("ADMIN")
+                   .anyRequest()
+                   .authenticated();
+
    }
 
    @Override

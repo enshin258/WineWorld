@@ -1,7 +1,5 @@
 package com.wineworld.demo.controllers;
 
-import com.wineworld.demo.dtos.opinion.OpinionRequest;
-import com.wineworld.demo.dtos.opinion.OpinionResponse;
 import com.wineworld.demo.dtos.order.OrderResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.dtos.user.UserResponse;
@@ -23,9 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<UserResponse> addUser(@RequestBody UserRequest userRequest){
+    public ResponseEntity<String> addUser(@RequestBody UserRequest userRequest){
         if(userRequest != null) {
-            UserResponse userResponse = userService.addUser(userRequest);
+            String userResponse = userService.addUser(userRequest);
             return new ResponseEntity<>(userResponse, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
