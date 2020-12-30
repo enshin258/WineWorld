@@ -33,5 +33,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Opinion> opinions;
 
+    @ManyToOne
+    @NonNull
+    private Role role;
+
 
 }

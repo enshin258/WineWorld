@@ -7,9 +7,11 @@ import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.dtos.product.MiniProductResponse;
 import com.wineworld.demo.dtos.product.ProductRequest;
 import com.wineworld.demo.dtos.product.ProductResponse;
+import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.entities.Opinion;
 import com.wineworld.demo.entities.OrderPosition;
 import com.wineworld.demo.entities.Product;
+import com.wineworld.demo.entities.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
@@ -87,4 +89,15 @@ public class ModelMapperConfig {
         };
         modelMapper.addMappings(miniProductResponsePropertyMap);
     }
+
+    public static void addUserMappings(ModelMapper modelMapper){
+        PropertyMap<UserRequest, User>  userPropertyMap = new PropertyMap<UserRequest, User>() {
+            @Override
+            protected void configure() {
+                skip(destination.getUserId());
+            }
+        };
+        modelMapper.addMappings(userPropertyMap);
+    }
+
 }
