@@ -22,11 +22,11 @@
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add wine
                 </div>
                 <div class="card-body">
-                    <div class="column">
+                    <form class="column" [formGroup]="addWineForm">
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="winename"> NAME </label>
                             <div class="col-md-12">
-                                <input id="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+                                <input id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="price"> PRICE </label>
                             <div class="col-md-12">
-                                <input id="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+                                <input id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -42,34 +42,34 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
-                                <input id="image" name="image" class="input-file" type="file">
+                                <input id="image" formControlName="image" name="image" class="input-file" type="file">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
                             <div class="col-md-12">
-                                <textarea class="form-control" id="description" placeholder="Description" name="description"></textarea>
+                                <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
-                                <select id="category" name="category" class="form-control">
+                                <select id="category" formControlName="category" name="category" class="form-control">
                                     <option>SWEET</option>
                                     <option>HALF-SWEET</option>
                                     <option>SEMI-DRY</option>
                                     <option>DRY</option>
                                     <option>CHAMPAGNE</option>
-                    </select>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
-                                <select id="location" name="location" class="form-control">
+                                <select id="location" formControlName="location" name="location" class="form-control">
                                                     <option>POLAND - BROWARY KOCZKODAN</option>
                                                     <option>ENGLAND - PALE ALE</option>
                                                     <option>GEMRAN - OKTOBERFEST ALKOHOLEN</option>
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
                             <div class="col-md-12">
-                                <input id="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+                                <input id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
                             <div class="col-md-12">
-                                <input id="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+                                <input id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="year"> YEAR </label>
                             <div class="col-md-12">
-                                <input id="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+                                <input id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -105,17 +105,17 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="volume"> VOLUME </label>
                             <div class="col-md-12">
-                                <input id="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+                                <input id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="card-footer">
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD WINE</button>
+                                <button [disabled]="!addWineForm.valid" id="singlebutton" (click)="onAddWine()" type="submit" name="singlebutton" class="btn btn-danger">ADD WINE</button>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
         </div>
         <!-- DELETE WINE TAB -->
         <div class="tab-pane" id="delete_wine">
-            <div class="card">
+            <form class="card" [formGroup]="deleteWineForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete wine
                 </div>
@@ -132,8 +132,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="wine_id"> WINE ID </label>
                         <div class="col-md-12">
-                            <input id="wine_id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
-
+                            <input id="wine_id" formControlName="id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                 </div>
@@ -141,16 +140,16 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE WINE</button>
+                                <button id="singlebutton" (click)="onDeleteWine()" [disabled]="!deleteWineForm.valid" type="submit" name="singlebutton" class="btn btn-danger">DELETE WINE</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- ADD LOCATION -->
         <div class="tab-pane" id="add_location">
-            <div class="card">
+            <form class="card" [formGroup]="addLocationForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add location
                 </div>
@@ -158,27 +157,27 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
                         <div class="col-md-12">
-                            <input id="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+                            <input id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
                         <div class="col-md-12">
-                            <input id="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+                            <input id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
                         <div class="col-md-12">
-                            <textarea class="form-control" id="location_description" placeholder="Location description" name="location_description"></textarea>
+                            <textarea class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="country"> COUNTRY </label>
                         <div class="col-md-12">
-                            <input id="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+                            <input id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -187,16 +186,16 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD LOCATION</button>
+                                <button id="singlebutton" [disabled]="!addLocationForm.valid" type="submit" (click)="onAddLocation()" name="singlebutton" class="btn btn-danger">ADD LOCATION</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- DELETE LOCATION -->
         <div class="tab-pane" id="delete_location">
-            <div class="card">
+            <form class="card" [formGroup]="deleteLocationForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete location
                 </div>
@@ -204,7 +203,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_id"> LOCATION ID </label>
                         <div class="col-md-12">
-                            <input id="location_id" name="location_id" placeholder="Location Id" class="form-control input-md" required="" type="number">
+                            <input id="location_id" formControlName="id" name="location_id" placeholder="Location Id" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
@@ -213,16 +212,16 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE LOCATION</button>
+                                <button id="singlebutton" [disabled]="!deleteLocationForm.valid" type="submit" (click)="onDeleteLocation()" name="singlebutton" class="btn btn-danger">DELETE LOCATION</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- ADD CATEGORY -->
         <div class="tab-pane" id="add_category">
-            <div class="card">
+            <form class="card" [formGroup]="addCategoryForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add category
                 </div>
@@ -230,8 +229,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY NAME </label>
                         <div class="col-md-12">
-                            <input id="category_name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
-
+                            <input id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
                         </div>
                     </div>
                 </div>
@@ -239,16 +237,16 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
+                                <button id="singlebutton" [disabled]="!addCategoryForm.valid" type="submit" (click)="onAddCategory()" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- DELETE CATEGORY -->
         <div class="tab-pane" id="delete_category">
-            <div class="card">
+            <form class="card" [formGroup]="deleteCategoryForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete category
                 </div>
@@ -256,7 +254,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY ID </label>
                         <div class="col-md-12">
-                            <input id="category_Id" name="category_Id" placeholder="Category Id" class="form-control input-md" required="" type="number">
+                            <input id="category_Id" formControlName="id" name="category_Id" placeholder="Category Id" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
@@ -265,16 +263,16 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE CATEGORY</button>
+                                <button id="singlebutton" type="submit" (click)="onDeleteCategory()" [disabled]="!deleteCategoryForm.valid" name="singlebutton" class="btn btn-danger">DELETE CATEGORY</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- ADD ADMIN -->
         <div class="tab-pane" id="add_admin">
-            <div class="card">
+            <form class="card" [formGroup]="addAdminForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add Admin
                 </div>
@@ -282,21 +280,21 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="e-mail">E-MAIL</label>
                         <div class="col-md-12">
-                            <input id="e-mail" name="e-mail" placeholder="Email" class="form-control input-md" required="" type="email">
+                            <input id="e-mail" ngModel email formControlName="email" name="e-mail" placeholder="Email" class="form-control input-md" required="" type="email">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="login">LOGIN</label>
                         <div class="col-md-12">
-                            <input id="login" name="login" placeholder="Login" class="form-control input-md" required="" type="text">
+                            <input id="login" formControlName="login" name="login" placeholder="Login" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="password">PASSWORD</label>
                         <div class="col-md-12">
-                            <input id="password" name="password" placeholder="Password" class="form-control input-md" required="" type="password">
+                            <input id="password" formControlName="password" name="password" placeholder="Password" class="form-control input-md" required="" type="password">
 
                         </div>
                     </div>
@@ -305,24 +303,24 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">ADD ADMIN</button>
+                                <button id="singlebutton" type="submit" (click)="onAddAdmin()" [disabled]="!addAdminForm.valid" name="singlebutton" class="btn btn-danger">ADD ADMIN</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- DELETE ADMIN -->
         <div class="tab-pane" id="delete_admin">
-            <div class="card">
+            <form class="card" [formGroup]="deleteAdminForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete Admin
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="col-md-12 control-label" for="admin_id"> ADMIN ID </label>
+                        <label class="col-md-12 control-label" for="admin_login"> ADMIN LOGIN </label>
                         <div class="col-md-12">
-                            <input id="admin_id" name="admin_id" placeholder="Admin Id" class="form-control input-md" required="" type="number">
+                            <input id="admin_login" formControlName="login" name="admin_login" placeholder="Admin Login" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -331,12 +329,12 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-danger">DELETE ADMIN</button>
+                                <button id="singlebutton" type="submit" (click)="onDeleteAdmin()" [disabled]="!deleteAdminForm.valid" name="singlebutton" class="btn btn-danger">DELETE ADMIN</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

@@ -20,13 +20,15 @@
       <li class="nav-item">
         <a class="nav-link" href="#">History of Wine</a>
       </li>
+      <li [ngClass]="!isUserLoggedIn ? 'invisible nav-item' : 'nav-item'">
+        <a class="nav-link" [routerLink]="['/admin-panel']">Admin Panel</a>
+      </li>
       <li [ngClass]="isUserLoggedIn ? 'invisible nav-item' : 'nav-item'">
         <a class="nav-link" id="loginBtn">Login</a>
       </li>
       <li
         [ngClass]="!isUserLoggedIn ? 'invisible nav-item' : 'nav-item'"
-        (click)="onLogout()"
-      >
+        (click)="onLogout()">
         <a class="nav-link" id="logoutBtn">Logout</a>
       </li>
     </ul>
