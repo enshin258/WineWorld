@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Category } from 'src/app/models/category';
+import { Location } from 'src/app/models/location';
+import { User } from 'src/app/models/user';
+import { CategoryService } from 'src/app/services/category.service';
+import { LocationsService } from 'src/app/services/locations.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,11 +21,24 @@ export class AdminPanelComponent implements OnInit {
   addCategoryForm: FormGroup;
   deleteCategoryForm: FormGroup;
   addAdminForm: FormGroup;
-  deleteAdminForm: FormGroup;
+  deleteUserForm: FormGroup;
+  categories: Category[];
+  locations: Location[];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private categoryService: CategoryService, 
+    private locationService: LocationsService,
+    private userService: UsersService,
+    private formBuilder: FormBuilder) {
+      
+      categoryService.getAllCategories()
+      .subscribe((data) => {this.categories = data});
+
+      locationService.getAllLocations()
+      .subscribe((data) => {this.locations = data});
+     }
 
   ngOnInit(): void {
+    
     this.addWineForm = this.formBuilder.group({
       name: [null, Validators.required],
       price: [null, Validators.required],
@@ -62,7 +81,7 @@ export class AdminPanelComponent implements OnInit {
       password: [null, Validators.required],
     });
 
-    this.deleteAdminForm = this.formBuilder.group({
+    this.deleteUserForm = this.formBuilder.group({
       login: [null, Validators.required],
     });
   }
@@ -79,32 +98,66 @@ export class AdminPanelComponent implements OnInit {
 
   onAddLocation(){
     console.log(this.addLocationForm);
+    var location: Location = {
+      locationId: 0,
+      latitude: this.addLocationForm.get('latitude').value,
+      longitude: this.addLocationForm.get('longitude').value,
+      description: this.addLocationForm.get('location_description').value,
+      country: this.addLocationForm.get('country').value,
+    }
+    this.locationService.addLocation(location)
+    .subscribe((data) => {
+      console.log(data);
+    })
     this.addLocationForm.reset();
   }
 
   onDeleteLocation(){
     console.log(this.deleteLocationForm);
+    var locationId: number = this.deleteLocationForm.get('id').value.match(/\d+/)[0];
+    this.locationService.deleteLocation(locationId)
+    .subscribe((data) => {
+      console.log(data);
+    });
     this.deleteLocationForm.reset();
   }
 
   onAddCategory(){
     console.log(this.addCategoryForm);
+    this.categoryService.addCategory(this.addCategoryForm.get('name').value)
+    .subscribe((data) => {
+      console.log(data);
+    });
     this.addCategoryForm.reset();
   }
 
   onDeleteCategory(){
     console.log(this.deleteCategoryForm);
+    var genreId: number = this.deleteCategoryForm.get('id').value.match(/\d+/)[0];
+    this.categoryService.deleteCategory(genreId)
+    .subscribe((data) => {
+      console.log(data);
+    });
     this.deleteCategoryForm.reset();
   }
 
   onAddAdmin(){
     console.log(this.addAdminForm);
+    var user: User = {
+      id: 0,
+      username: this.addAdminForm.get('login').value,
+      email: this.addAdminForm.get('email').value,
+      password: this.addAdminForm.get('password').value
+    };
+    this.userService.addAdmin(user).subscribe((data) => {
+      console.log(data);
+    });
     this.addAdminForm.reset();
   }
 
-  onDeleteAdmin(){
-    console.log(this.deleteAdminForm);
-    this.deleteAdminForm.reset();
+  onDeleteUser(){
+    console.log(this.deleteUserForm);
+    this.deleteUserForm.reset();
   }
 
 }

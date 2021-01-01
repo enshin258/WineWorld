@@ -57,11 +57,7 @@
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
                                 <select id="category" formControlName="category" name="category" class="form-control">
-                                    <option>SWEET</option>
-                                    <option>HALF-SWEET</option>
-                                    <option>SEMI-DRY</option>
-                                    <option>DRY</option>
-                                    <option>CHAMPAGNE</option>
+                                    <option *ngFor="let category of categories">{{category.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -70,10 +66,8 @@
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
                                 <select id="location" formControlName="location" name="location" class="form-control">
-                                                    <option>POLAND - BROWARY KOCZKODAN</option>
-                                                    <option>ENGLAND - PALE ALE</option>
-                                                    <option>GEMRAN - OKTOBERFEST ALKOHOLEN</option>
-                                    </select>
+                                    <option *ngFor="let location of locations">{{location.country}} - {{location.description}}</option>
+                                </select>
                             </div>
                         </div>
 
@@ -202,10 +196,9 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_id"> LOCATION ID </label>
-                        <div class="col-md-12">
-                            <input id="location_id" formControlName="id" name="location_id" placeholder="Location Id" class="form-control input-md" required="" type="number">
-
-                        </div>
+                        <select id="location_Id" formControlName="id" name="location_Id" class="form-control">
+                            <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -253,10 +246,9 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY ID </label>
-                        <div class="col-md-12">
-                            <input id="category_Id" formControlName="id" name="category_Id" placeholder="Category Id" class="form-control input-md" required="" type="number">
-
-                        </div>
+                            <select id="category_Id" formControlName="id" name="category_Id" class="form-control">
+                                <option *ngFor="let category of categories">{{category.genreId}} {{category.name}}</option>
+                            </select>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -310,17 +302,17 @@
                 </div>
             </form>
         </div>
-        <!-- DELETE ADMIN -->
-        <div class="tab-pane" id="delete_admin">
-            <form class="card" [formGroup]="deleteAdminForm">
+        <!-- DELETE USER -->
+        <div class="tab-pane" id="delete_user">
+            <form class="card" [formGroup]="deleteUserForm">
                 <div class="card-header bg-dark text-light">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete Admin
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Delete User
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="col-md-12 control-label" for="admin_login"> ADMIN LOGIN </label>
+                        <label class="col-md-12 control-label" for="user_login"> USER LOGIN </label>
                         <div class="col-md-12">
-                            <input id="admin_login" formControlName="login" name="admin_login" placeholder="Admin Login" class="form-control input-md" required="" type="text">
+                            <input id="user_login" formControlName="login" name="user_login" placeholder="User Login" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -329,7 +321,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" type="submit" (click)="onDeleteAdmin()" [disabled]="!deleteAdminForm.valid" name="singlebutton" class="btn btn-danger">DELETE ADMIN</button>
+                                <button id="singlebutton" type="submit" (click)="onDeleteUser()" [disabled]="!deleteUserForm.valid" name="singlebutton" class="btn btn-danger">DELETE USER</button>
                             </div>
                         </div>
                     </div>
