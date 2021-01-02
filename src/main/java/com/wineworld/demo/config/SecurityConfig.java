@@ -4,6 +4,7 @@ import com.wineworld.demo.handlers.LoginFailureHandler;
 import com.wineworld.demo.handlers.LoginSuccessHandler;
 import com.wineworld.demo.handlers.LogoutHandler;
 
+import com.wineworld.demo.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,9 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
    private final LoginFailureHandler loginFailureHandler;
    private final LogoutHandler logoutHandler;
    private final UserDetailsService userDetailsService;
+   private final UserRepository userRepository;
 
-   public SecurityConfig(UserDetailsService userDetailsService) {
-         this.loginSuccessHandler = new LoginSuccessHandler();
+   public SecurityConfig(UserDetailsService userDetailsService, UserRepository userRepository) {
+         this.userRepository = userRepository;
+         this.loginSuccessHandler = new LoginSuccessHandler(userRepository);
          this.loginFailureHandler = new LoginFailureHandler();
          this.logoutHandler = new LogoutHandler();
          this.userDetailsService = userDetailsService;
