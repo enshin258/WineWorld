@@ -7,6 +7,7 @@ import { User } from '../models/user';
 })
 export class UsersService {
   private addUserUrl = 'http://localhost:8080/user/add/false';
+  private addAdminUrl = 'http://localhost:8080/user/add/true';
   private loginUserUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/add';
@@ -19,6 +20,14 @@ export class UsersService {
       login: user.username,
       password: user.password,
     });
+  }
+
+  addAdmin(user: User){
+    return this.http.post(this.addAdminUrl, {
+      email: user.email,
+      login: user.username,
+      password: user.password,
+    }, {withCredentials: true});
   }
 
   login(user: User) {
@@ -41,4 +50,5 @@ export class UsersService {
   changeUserInfo(user: User) {
     return this.http.patch(this.changeUserInfoUrl, user);
   }
+
 }

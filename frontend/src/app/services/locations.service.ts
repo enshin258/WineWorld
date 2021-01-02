@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Location } from 'src/app/models/location';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,8 @@ export class LocationsService {
 
   constructor(private http: HttpClient) {}
 
-  getAllLocations() {
-    return this.http.get(this.getLocationsUrl);
+  getAllLocations(): Observable<Location[]>{
+    return this.http.get<Location[]>(this.getLocationsUrl);
   }
 
   getLocation(locationId: number) {
@@ -22,7 +24,7 @@ export class LocationsService {
   }
 
   addLocation(location: Location) {
-    return this.http.post(this.addLocationUrl, location);
+    return this.http.post(this.addLocationUrl, location, {withCredentials: true});
   }
 
   updateLocation(location: Location) {
@@ -30,6 +32,6 @@ export class LocationsService {
   }
 
   deleteLocation(locationId: number) {
-    return this.http.delete(this.deleteLocationUrl + locationId.toString());
+    return this.http.delete(this.deleteLocationUrl + locationId.toString(), {withCredentials: true, observe: 'response'});
   }
 }

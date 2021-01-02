@@ -108,5 +108,5 @@ h2 {
 }
 
 .invisible {
-  visibility: collapse;
+  display: none
 }
