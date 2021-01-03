@@ -1,42 +1,42 @@
 <main class="container">
-  <div class="left-column">
-    <img src="{{ product.pictureUrl }}" alt="" />
-    <div id="map"></div>
-  </div>
-
-  <div class="right-column">
-    <div class="wine-description">
-      <h1>{{ product.name }}</h1>
-      <p>
-        {{ product.description }}
-      </p>
+    <div class="left-column">
+        <img src="{{ product.pictureUrl }}" alt="" />
+        <div id="map"></div>
     </div>
 
-    <div class="wine-configuration">
-      <div class="wine-parameters">
-        <span>Genre</span>
-        <h5>{{ product.genreName }}</h5>
-        <span>Country</span>
-        <h5>{{ product.country }}</h5>
-        <span>Producer</span>
-        <h5>{{ product.producer }}</h5>
-        <span>AlcoholLevel</span>
-        <h5>{{ product.alcoholLevel }}%</h5>
-        <span>Year</span>
-        <h5>{{ product.year }}</h5>
-        <span>Volume</span>
-        <h5>{{ product.volume }} l</h5>
-        <span>Description</span>
-        <h5>{{ product.productDescription }}</h5>
-      </div>
-    </div>
+    <div class="right-column">
+        <div class="wine-description">
+            <h1>{{ product.name }}</h1>
+            <p>
+                {{ product.description }}
+            </p>
+        </div>
 
-    <div class="wine-price">
-      <span>Price</span>
-      <h5>{{ product.price }} $</h5>
-      <div (click)="addProductToCart()" class="col-xs-12 col-md-12">
-        <a class="btn btn-danger"> Add to cart </a>
-      </div>
+        <div class="wine-configuration">
+            <div class="wine-parameters">
+                <span>Genre</span>
+                <h5>{{ product.genreName }}</h5>
+                <span>Country</span>
+                <h5>{{ product.country }}</h5>
+                <span>Producer</span>
+                <h5>{{ product.producer }}</h5>
+                <span>AlcoholLevel</span>
+                <h5>{{ product.alcoholLevel }}%</h5>
+                <span>Year</span>
+                <h5>{{ product.year }}</h5>
+                <span>Volume</span>
+                <h5>{{ product.volume }} l</h5>
+                <span>Description</span>
+                <h5>{{ product.productDescription }}</h5>
+            </div>
+        </div>
+
+        <div class="wine-price">
+            <span>Price</span>
+            <h5>{{ product.price }} $</h5>
+            <div (click)="addProductToCart()" class="col-xs-12 col-md-12">
+                <a class="btn btn-danger"> Add to cart </a>
+            </div>
+        </div>
     </div>
-  </div>
 </main>

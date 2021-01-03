@@ -1,5 +1,9 @@
 package com.wineworld.demo.dtos.product;
 
+import java.io.File;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +18,7 @@ public class ProductRequest {
 
     private float price;
 
-    private File picture;
+    private MultipartFile picture;
 
     private String productDescription;
 
