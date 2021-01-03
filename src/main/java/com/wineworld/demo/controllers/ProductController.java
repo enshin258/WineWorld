@@ -13,7 +13,9 @@ import com.wineworld.demo.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,8 +28,22 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest){
+    @PostMapping(value = "/add", consumes = "multipart/form-data")
+    public ResponseEntity<ProductResponse> addProduct(@RequestParam("name") String name,
+    @RequestParam("price") Float price,
+    @RequestParam("picture") MultipartFile picture,
+    @RequestParam("productDescription") String productDescription,
+    @RequestParam("genreId") Long genreId,
+    @RequestParam("locationId") Long locationId,
+    @RequestParam("producer") String producer,
+    @RequestParam("alcoholLevel") Float alcoholLevel,
+    @RequestParam("year") Integer year,
+    @RequestParam("volume") Float volume
+    ){
+
+        ProductRequest productRequest = new ProductRequest(name,
+        price, picture, productDescription, genreId, locationId, producer, alcoholLevel, year, volume);
+
         ProductResponse productResponse = productService.addProduct(productRequest);
         return new ResponseEntity<>(productResponse, HttpStatus.CREATED);
     }
@@ -36,8 +52,6 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
-
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id){

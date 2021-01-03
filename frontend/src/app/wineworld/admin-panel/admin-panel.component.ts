@@ -6,6 +6,8 @@ import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { UsersService } from 'src/app/services/users.service';
+import {Add_product} from "../../models/add_product";
+import {ProductsService} from "../../services/products.service";
 
 @Component({
   selector: 'app-admin-panel',
@@ -24,11 +26,12 @@ export class AdminPanelComponent implements OnInit {
   deleteUserForm: FormGroup;
   categories: Category[];
   locations: Location[];
+  uploadFile: File;
 
   constructor(private categoryService: CategoryService, 
     private locationService: LocationsService,
     private userService: UsersService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder, private productService: ProductsService) {
       
       categoryService.getAllCategories()
       .subscribe((data) => {this.categories = data});
@@ -88,6 +91,21 @@ export class AdminPanelComponent implements OnInit {
 
   onAddWine(){
     console.log(this.addWineForm);
+    var locationId: number = this.addWineForm.get('location').value.match(/\d+/)[0];
+    var genreId: number = this.addWineForm.get('category').value.match(/\d+/)[0];
+    var product: Add_product = {
+      name: this.addWineForm.get('name').value,
+      price: this.addWineForm.get('price').value,
+      picture: this.uploadFile,
+      genreId: genreId,
+      productDescription: this.addWineForm.get('description').value,
+      locationId: locationId,
+      producer: this.addWineForm.get('producer').value,
+      alcoholLevel: this.addWineForm.get('alcohol_level').value,
+      year: this.addWineForm.get('year').value,
+      volume: this.addWineForm.get('volume').value
+    }
+    this.productService.saveProduct(product).subscribe((data) => console.log(data));
     this.addWineForm.reset();
   }
 
@@ -158,6 +176,10 @@ export class AdminPanelComponent implements OnInit {
   onDeleteUser(){
     console.log(this.deleteUserForm);
     this.deleteUserForm.reset();
+  }
+
+  handleFile(files: FileList){
+    this.uploadFile = files.item(0);
   }
 
 }

@@ -14,9 +14,19 @@ import com.wineworld.demo.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +37,8 @@ public class ProductService {
     private final LocationRepository locationRepository;
     private final GenreRepository genreRepository;
     private ModelMapper modelMapper;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+
 
     public ProductService(ProductRepository productRepository, LocationRepository locationRepository, GenreRepository genreRepository){
         this.productRepository = productRepository;
@@ -45,11 +57,40 @@ public class ProductService {
         Product product = modelMapper.map(productRequest, Product.class);
         product.setLocation(location);
         product.setGenre(genre);
+
+        //save image
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String fileName = timestamp.getTime() + ".jpg";
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        MultipartFile file = productRequest.getPicture();
+        
+        File newFile = new File("src\\main\\resources\\static\\images\\" + fileName);
+
+        try {
+            inputStream = file.getInputStream();
+
+            if (!newFile.exists()) {
+                newFile.createNewFile();
+            }
+            outputStream = new FileOutputStream(newFile);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        product.setPictureUrl("http://localhost:8080/images/" + fileName);
+
         Product createdProduct = productRepository.save(product);
+
         return modelMapper.map(createdProduct, ProductResponse.class);
     }
-
-
 
     public void deleteProduct(Long productId){
         productRepository.deleteById(productId);
@@ -104,7 +145,7 @@ public class ProductService {
         productToUpdate.setLocation(locationRepository.findById(productRequest.getLocationId()).orElseThrow(EntityNotFoundException::new));
         productToUpdate.setAlcoholLevel(productRequest.getAlcoholLevel());
         productToUpdate.setName(productRequest.getName());
-        productToUpdate.setPictureUrl(productRequest.getPictureUrl());
+        productToUpdate.setPictureUrl(productRequest.getName());
         productToUpdate.setPrice(productRequest.getPrice());
         productToUpdate.setProducer(productRequest.getProducer());
         productToUpdate.setVolume(productRequest.getVolume());
@@ -112,10 +153,4 @@ public class ProductService {
         productRepository.save(productToUpdate);
         return modelMapper.map(productToUpdate, ProductResponse.class);
     }
-
-
-
-
-
-
 }

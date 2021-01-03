@@ -70,6 +70,7 @@ public class ModelMapperConfig {
             @Override
             protected void configure() {
                 skip(destination.getProductId());
+                skip(destination.getPictureUrl());
             }
         };
         modelMapper.addMappings(productMapping);
