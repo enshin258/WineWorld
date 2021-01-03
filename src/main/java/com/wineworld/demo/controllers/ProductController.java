@@ -26,7 +26,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = "multipart/form-data")
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest){
         ProductResponse productResponse = productService.addProduct(productRequest);
         return new ResponseEntity<>(productResponse, HttpStatus.CREATED);

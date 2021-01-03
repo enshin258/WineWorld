@@ -104,7 +104,7 @@ public class ProductService {
         productToUpdate.setLocation(locationRepository.findById(productRequest.getLocationId()).orElseThrow(EntityNotFoundException::new));
         productToUpdate.setAlcoholLevel(productRequest.getAlcoholLevel());
         productToUpdate.setName(productRequest.getName());
-        productToUpdate.setPictureUrl(productRequest.getPictureUrl());
+        productToUpdate.setPictureUrl(productRequest.getPicture().getName());
         productToUpdate.setPrice(productRequest.getPrice());
         productToUpdate.setProducer(productRequest.getProducer());
         productToUpdate.setVolume(productRequest.getVolume());

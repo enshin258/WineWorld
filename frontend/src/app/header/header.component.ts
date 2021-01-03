@@ -71,12 +71,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogin() {
-    console.log(
-      this.loginForm.get('loginText').value +
-        '   ' +
-        this.loginForm.get('passwordText').value
-    );
-
     var user: User = {
       id: 0,
       email: '',

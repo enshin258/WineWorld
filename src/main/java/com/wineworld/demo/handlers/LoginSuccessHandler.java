@@ -35,6 +35,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         response.getWriter().write(roleJson);
         response.setStatus(200);
         response.flushBuffer();
-
     }
 }

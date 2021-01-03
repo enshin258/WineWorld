@@ -5,6 +5,7 @@ import { ProductMiniature } from '../models/product_miniature';
 import { Location } from '../models/location';
 import { Observable } from 'rxjs';
 import { Count } from '../models/count';
+import {Add_product} from "../models/add_product";
 
 @Injectable({
   providedIn: 'root',
@@ -44,8 +45,20 @@ export class ProductsService {
     return this.http.get<Product>(this.getProductUrl + productId);
   }
 
-  saveProduct(product: Product) {
-    return this.http.post(this.addProductUrl, product);
+  saveProduct(product: Add_product) {
+    var formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("price", product.price.toString());
+    formData.append("picture", product.picture, product.picture.name);
+    formData.append("genreId", product.genreId.toString());
+    formData.append("productDescription", product.productDescription);
+    formData.append("locationId", product.locationId.toString());
+    formData.append("producer", product.producer);
+    formData.append("alcoholLevel", product.alcoholLevel.toString());
+    formData.append("year", product.year.toString());
+    formData.append("volume", product.volume.toString());
+    return this.http.post(this.addProductUrl, formData, {
+      withCredentials: true});
   }
 
   updateProduct(product: Product) {

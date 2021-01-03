@@ -17,12 +17,12 @@
     <div class="tab-content">
         <!-- ADD WINE TAB -->
         <div class="tab-pane active" id="add_wine">
-            <div class="card">
+            <form class="card" [formGroup]="addWineForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add wine
                 </div>
                 <div class="card-body">
-                    <form class="column" [formGroup]="addWineForm">
+                    <div class="column">
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="winename"> NAME </label>
                             <div class="col-md-12">
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
-                                <input id="image" formControlName="image" name="image" class="input-file" type="file">
+                                <input id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
                             </div>
                         </div>
 
@@ -57,7 +57,8 @@
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
                                 <select id="category" formControlName="category" name="category" class="form-control">
-                                    <option *ngFor="let category of categories">{{category.name}}</option>
+                                  <option> Choose </option>
+                                    <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -66,7 +67,8 @@
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
                                 <select id="location" formControlName="location" name="location" class="form-control">
-                                    <option *ngFor="let location of locations">{{location.country}} - {{location.description}}</option>
+                                  <option> Choose </option>
+                                    <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                                 </select>
                             </div>
                         </div>
@@ -103,18 +105,18 @@
 
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button [disabled]="!addWineForm.valid" id="singlebutton" (click)="onAddWine()" type="submit" name="singlebutton" class="btn btn-danger">ADD WINE</button>
+                                <button id="singlebutton" [disabled]="!addWineForm.valid" (click)="onAddWine()" type="submit" name="singlebutton" class="btn btn-danger">ADD WINE</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- DELETE WINE TAB -->
         <div class="tab-pane" id="delete_wine">
