@@ -10,7 +10,7 @@
         <li class="nav-item"><a class="nav-link" data-target="#add_category" data-toggle="tab">Add category</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_category" data-toggle="tab">Delete category</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#add_admin" data-toggle="tab">Add admin</a></li>
-        <li class="nav-item"><a class="nav-link" data-target="#delete_admin" data-toggle="tab">Delete admin</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#delete_user" data-toggle="tab">Delete user</a></li>
 
     </ul>
 
@@ -247,7 +247,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY ID </label>
                             <select id="category_Id" formControlName="id" name="category_Id" class="form-control">
-                                <option *ngFor="let category of categories">{{category.genreId}} {{category.name}}</option>
+                                <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                             </select>
                     </div>
                 </div>
