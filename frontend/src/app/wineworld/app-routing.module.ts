@@ -12,6 +12,7 @@ import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 const routes: Routes = [
   { path: '', component: AssortmentComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'category/:id', component: CategoryComponent },
   { path: 'search/:searchText', component: SearchedAssortmentComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent},
-  { path: 'admin-panel', component: AdminPanelComponent}
+  { path: 'admin-panel', component: AdminPanelComponent},
+  { path: 'user-panel', component: UserPanelComponent}
 
 ];
 
