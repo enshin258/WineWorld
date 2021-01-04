@@ -1,4 +1,4 @@
-<div class="containter">
+<div [ngClass]="isAdmin ? 'container' : 'container disabled'">
     <h2>---ADMIN PANEL---</h2>
 
 
@@ -128,7 +128,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="wine_id"> WINE ID </label>
                         <div class="col-md-12">
-                            <input id="wine_id" formControlName="id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
+                            <input id="wine_id" minlength=1 formControlName="id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                 </div>

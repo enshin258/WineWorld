@@ -27,12 +27,15 @@ export class AdminPanelComponent implements OnInit {
   categories: Category[];
   locations: Location[];
   uploadFile: File;
+  isAdmin = false;
 
   constructor(private categoryService: CategoryService, 
     private locationService: LocationsService,
     private userService: UsersService,
     private formBuilder: FormBuilder, private productService: ProductsService) {
       
+      this.isAdmin = (this.userService.role.roleId == 2);
+
       categoryService.getAllCategories()
       .subscribe((data) => {this.categories = data});
 
@@ -111,7 +114,10 @@ export class AdminPanelComponent implements OnInit {
 
   onDeleteWine(){
     console.log(this.deleteWineForm);
-    this.deleteWineForm.reset();
+    this.productService.deleteProduct(this.deleteWineForm.get('id').value).subscribe((data) => {
+      console.log(data);
+    });
+    this.deleteWineForm.reset();   //po tym rzuca nullem ???
   }
 
   onAddLocation(){
@@ -175,6 +181,10 @@ export class AdminPanelComponent implements OnInit {
 
   onDeleteUser(){
     console.log(this.deleteUserForm);
+    this.userService.deleteUser(this.deleteUserForm.get('login').value).
+    subscribe((data) => {
+      console.log(data);
+    });
     this.deleteUserForm.reset();
   }
 

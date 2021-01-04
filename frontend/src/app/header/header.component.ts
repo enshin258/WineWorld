@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Role } from '../models/role';
 import { User } from '../models/user';
 import { UsersService } from '../services/users.service';
 
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   registerForm: FormGroup;
   isUserLoggedIn = false;
   buttonText = 'Login';
+  adminPanelEnabled = false;
 
   constructor(
     private userService: UsersService,
@@ -81,7 +83,10 @@ export class HeaderComponent implements OnInit {
     this.userService.login(user).subscribe(
       (res) => {
         console.log(res);
+        this.userService.role = res.body;
+        console.log(this.userService.role);
         this.isUserLoggedIn = true;
+        this.adminPanelEnabled = this.isUserLoggedIn && (this.userService.role.roleId == 2);
         var modal = document.getElementById('myModal');
         modal.style.display = 'none';
       },
@@ -115,6 +120,8 @@ export class HeaderComponent implements OnInit {
       (res) => {
         console.log(res);
         this.isUserLoggedIn = false;
+        this.adminPanelEnabled = false;
+        this.userService.role = null;
       },
       (err) => console.error(err)
     );

@@ -1,5 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Role } from '../models/role';
 import { User } from '../models/user';
 
 @Injectable({
@@ -11,6 +13,9 @@ export class UsersService {
   private loginUserUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/add';
+  private deleteUserUrl = 'http://localhost:8080/user/delete/';
+
+  role: Role;
 
   constructor(private http: HttpClient) {}
 
@@ -30,11 +35,11 @@ export class UsersService {
     }, {withCredentials: true});
   }
 
-  login(user: User) {
+  login(user: User): Observable<HttpResponse<Role>>{
     const formData = new FormData();
     formData.append('username', user.username);
     formData.append('password', user.password);
-    return this.http.post(this.loginUserUrl, formData, {
+    return this.http.post<Role>(this.loginUserUrl, formData, {
       observe: 'response',
       withCredentials: true,
     });
@@ -44,6 +49,13 @@ export class UsersService {
     return this.http.get(this.logoutUrl, {
       observe: 'response',
       withCredentials: true,
+    });
+  }
+
+  deleteUser(login: string){
+    return this.http.delete(this.deleteUserUrl + login,
+      {
+        observe: 'response', withCredentials: true
     });
   }
 
