@@ -28,6 +28,7 @@ import { SearchedAssortmentComponent } from './wineworld/assortment/searched-ass
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartComponent } from './wineworld/shopping-cart/shopping-cart.component';
 import { AdminPanelComponent } from './wineworld/admin-panel/admin-panel.component';
+import { UserPanelComponent } from './wineworld/user-panel/user-panel.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdminPanelComponent } from './wineworld/admin-panel/admin-panel.compone
     SearchedAssortmentComponent,
     ShoppingCartComponent,
     AdminPanelComponent,
+    UserPanelComponent,
   ],
   imports: [
     BrowserModule,
