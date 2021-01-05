@@ -23,6 +23,11 @@
       <li [ngClass]="adminPanelEnabled ? 'nav-item' : 'invisible nav-item'">
         <a class="nav-link" [routerLink]="['/admin-panel']">Admin Panel</a>
       </li>
+      <li
+        [ngClass]="!isUserLoggedIn ? 'invisible nav-item' : 'nav-item'"
+        [routerLink]="['/user-panel']">
+        <a class="nav-link">User Panel</a>
+      </li>
       <li [ngClass]="isUserLoggedIn ? 'invisible nav-item' : 'nav-item'">
         <a class="nav-link" id="loginBtn">Login</a>
       </li>

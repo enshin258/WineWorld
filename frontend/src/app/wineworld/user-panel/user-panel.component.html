@@ -1,4 +1,4 @@
-<div class="containter">
+<div [ngClass]="isUserLoggedIn ? 'container' : 'container disabled'">
     <h2>---USER PANEL---</h2>
 
     <script>
@@ -30,7 +30,7 @@
                             <label class="col-md-12 control-label" for="e-mail"> E-MAIL </label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="e_mail" name="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" formControlName="e_mail" name="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="e_mail" name="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <label class="col-md-12 control-label" for="username"> NAME </label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="username" name="username" placeholder="@USER_NAME" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" formControlName="username" name="username" placeholder="@USER_NAME" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="username" name="username" placeholder="@USER_NAME" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <label class="col-md-12 control-label" for="password"> PASSWORD </label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="password" name="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" formControlName="password" name="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="password" name="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -58,6 +58,13 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-danger btn-edit js-edit" (click)="onEdit()">{{buttonText}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" [ngClass]="!isEditable ? 'btn btn-danger btn-edit js-edit field' : 'btn btn-danger btn-edit js-edit'" (click)="onReject()">Reject changes</button>
                             </div>
                         </div>
                     </div>
