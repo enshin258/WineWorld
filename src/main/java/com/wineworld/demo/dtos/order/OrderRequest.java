@@ -23,6 +23,8 @@ public class OrderRequest {
 
     private long userId;
 
+    private String status;
+
     private List<OrderPositionRequest> orderPositionRequests;
 
 }

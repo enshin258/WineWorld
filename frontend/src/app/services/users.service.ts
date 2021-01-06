@@ -8,8 +8,8 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UsersService {
-  private addUserUrl = 'http://localhost:8080/user/add/false';
-  private addAdminUrl = 'http://localhost:8080/user/add/true';
+  private addUserUrl = 'http://localhost:8080/user/register/false';
+  private addAdminUrl = 'http://localhost:8080/user/register/true';
   private loginUserUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/add';

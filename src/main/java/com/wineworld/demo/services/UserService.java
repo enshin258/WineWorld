@@ -90,6 +90,10 @@ public class UserService {
         return modelMapper.map(userToUpdate, UserResponse.class);
     }
 
+    public void deleteByLogin(String login){
+        userRepository.deleteByLogin(login);
+    }
+
 
 
 

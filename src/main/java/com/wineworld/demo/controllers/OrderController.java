@@ -50,7 +50,7 @@ public class OrderController {
 //        }
 //    }
 
-    @PostMapping("/add")
+    @PostMapping("/make")
     public ResponseEntity<OrderResponse> addOrder(@RequestBody OrderRequest orderRequest){
         if(orderRequest != null){
             return new ResponseEntity<>(orderService.addOrder(orderRequest), HttpStatus.OK);
