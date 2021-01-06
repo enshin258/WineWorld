@@ -66,7 +66,9 @@ export class ProductsService {
   }
 
   deleteProduct(productId: number) {
-    return this.http.delete(this.deleteProductUrl + productId.toString);
+    return this.http.delete(this.deleteProductUrl + productId.toString(),
+      {observe: 'response', withCredentials: true}
+      );
   }
 
   getAllProductOpinions(productId: number) {
