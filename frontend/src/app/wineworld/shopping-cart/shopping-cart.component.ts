@@ -16,6 +16,7 @@ declare let paypal: any;
   providers: [DatePipe]
 })
 export class ShoppingCartComponent implements OnInit, AfterViewChecked {
+  userEmail: string;
   cartPositions: ShoppingCartPosition[];
   totalPrice: number;
   order_details_form: FormGroup;
@@ -44,21 +45,25 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
           application_context: {
             shipping_preference: "SET_PROVIDED_ADDRESS"
           },
+          payer: {
+            payer_info: {
+              email: this.userEmail
+            }
+          },
           transactions: [{
             amount: {
               total: this.totalPrice,
-              currency: "PLN"
+              currency: "USD"
             },
             item_list: {
               shipping_address: {
-                recipient_name: "jacek jacek",
-                line1: "4th Floor",
-                line2: "Unit #34",
-                city: "Wojeczna uniwersytet mechaniczny",
-                country_code: "PL",
-                postal_code: "95131",
-                phone: "011862212345678",
-                state: "CA"
+                recipient_name: this.order_details_form.get('order_first_and_last_name').value,
+                line1: this.order_details_form.get('order_adress_line_1').value,
+                line2: this.order_details_form.get('order_adress_line_2').value,
+                city: this.order_details_form.get('order_adress_city').value,
+                country_code: this.order_details_form.get('order_adress_country_code').value,
+                postal_code: this.order_details_form.get('zip').value,
+                phone: this.order_details_form.get('order_adress_phone').value
               }
             }
           }],
@@ -123,11 +128,18 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     console.log(this.orderService.getCart());
+    this.userService.getUserData(this.userService.loginData.userId).subscribe((data)=> {
+      this.userEmail = data.email;
+    });
     this.refreshCart();
     this.order_details_form = this.formBuilder.group({
-      address: [null, Validators.required],
-      city: [null, Validators.required],
-      zip: [null, Validators.required]
+      order_first_and_last_name: [null, Validators.required],
+      order_adress_line_1: [null, Validators.required],
+      order_adress_line_2: [null, Validators.required],
+      order_adress_city: [null, Validators.required],
+      order_adress_country_code: [null, Validators.required],
+      zip: [null, Validators.required],
+      order_adress_phone: [null, Validators.required],
     });
   }
 

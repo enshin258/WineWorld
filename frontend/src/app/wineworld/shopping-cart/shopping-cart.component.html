@@ -36,7 +36,7 @@
             >
               <h6>
                 <strong
-                  >{{ position.productMiniature.price }}PLN
+                  >{{ position.productMiniature.price }}$
                   <span class="text-muted">x</span></strong
                 >
               </h6>
@@ -86,18 +86,38 @@
         <form [formGroup]="order_details_form">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="order_adress">Adress</label>
-                    <input type="text" class="form-control" id="order_adress" placeholder="Adress" formControlName="address">
+                    <label for="order_adress">First and last name</label>
+                    <input type="text" class="form-control" id="order_first_and_last_name" placeholder="First and last name" formControlName="order_first_and_last_name">
+                </div>
+            </div>
+            <div div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="order_adress">Adress line 1</label>
+                    <input type="text" class="form-control" id="order_adress_line_1" placeholder="Adress line 1" formControlName="order_adress_line_1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="order_adress">Adress line 2</label>
+                    <input type="text" class="form-control" id="order_adress_line_2" placeholder="Adress line 2" formControlName="order_adress_line_2">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="order_city">City</label>
-                    <input type="text" class="form-control" id="inputCity" placeholder="City" formControlName="city">
+                    <input type="text" class="form-control" id="order_adress_city" placeholder="City" formControlName="order_adress_city">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
+                    <label for="order_city">Country code</label>
+                    <input type="text" class="form-control" id="order_adress_country_code" placeholder="Country code" formControlName="order_adress_country_code">
+                </div>
+                <div class="form-group col-md-2">
                     <label for="order_zip">ZIP</label>
                     <input type="text" class="form-control" id="order_zip" placeholder="ZIP" formControlName="zip">
+                </div>
+            </div>
+            <div div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="order_adress">Phone</label>
+                    <input type="text" class="form-control" id="order_adress_phone" placeholder="Phone number" formControlName="order_adress_phone">
                 </div>
             </div>
         </form>
@@ -105,10 +125,10 @@
 
     <div class="checkout float-right column">
         <div class="price">
-            Total price: <b>{{ totalPrice }} PLN</b>
+            Total price: <b>{{ totalPrice }} $</b>
         </div>
         <div id="paypal-checkout-btn" [ngClass]="order_details_form.valid && isUserLoggedIn && cartPositions.length != 0 ? 'pull-right' : 'disabled'"></div>
-      <label [ngClass]="!isUserLoggedIn ? 'pull-right' : 'disabled'">You have to be logged in to finish your order </label>
+        <label [ngClass]="!isUserLoggedIn ? 'pull-right' : 'disabled'">You have to be logged in to finish your order </label>
     </div>
 </div>
 </div>
