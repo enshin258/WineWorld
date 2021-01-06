@@ -1,9 +1,7 @@
-import { Order } from './order';
-import { Product } from './product';
+
 
 export interface OrderPosition {
-  id: number;
-  product: Product;
+  id: number,
+  productId: number;
   qunatity: number;
-  order: Order;
 }

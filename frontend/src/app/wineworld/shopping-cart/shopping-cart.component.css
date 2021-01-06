@@ -47,3 +47,7 @@
     font-size: 22px;
     margin: 10px;
 }
+
+.disabled {
+  display: none;
+}
