@@ -29,3 +29,7 @@ h2 {
 .disabled {
     display: none;
 }
+
+.field {
+    display: none;
+}

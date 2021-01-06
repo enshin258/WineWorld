@@ -1,17 +1,6 @@
 <div [ngClass]="isUserLoggedIn ? 'container' : 'container disabled'">
     <h2>---USER PANEL---</h2>
 
-    <script>
-        $(document).ready(function() {
-            $('.js-edit, .js-save').on('click', function() {
-                var $form = $(this).closest('form');
-                $form.toggleClass('is-readonly is-editing');
-                var isReadonly = $form.hasClass('is-readonly');
-                $form.find('input,textarea').prop('disabled', isReadonly);
-            });
-        });
-    </script>
-
     <ul class="nav nav-tabs mr-auto" id="myTab">
         <li class="nav-item"><a class="nav-link" data-target="#account_informations" data-toggle="tab">Account informations</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#orders_history" data-toggle="tab">Orders history</a></li>
