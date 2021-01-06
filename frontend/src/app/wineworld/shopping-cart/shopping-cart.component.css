@@ -42,7 +42,8 @@
     margin-top: 20px;
 }
 
-.checkoutBtn {
+.price {
+    font-weight: 400;
+    font-size: 22px;
     margin: 10px;
-    width: 180px;
 }
