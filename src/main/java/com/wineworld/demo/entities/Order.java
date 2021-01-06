@@ -33,6 +33,9 @@ public class Order {
     @NonNull
     private float totalCost;
 
+    @NonNull
+    private String status;
+
     @ManyToOne
     private User user;
 

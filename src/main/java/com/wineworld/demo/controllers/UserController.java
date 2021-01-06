@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/add/{isAdmin}")
+    @PostMapping("/register/{isAdmin}")
     public ResponseEntity<String> addUser(@RequestBody UserRequest userRequest, @PathVariable Boolean isAdmin){
         if(userRequest != null) {
             String userResponse = userService.addUser(userRequest, isAdmin);
@@ -57,9 +57,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update/{userId}")
+    @PutMapping("/renew/{userId}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest){
         return new ResponseEntity<>(userService.updateUser(userId, userRequest), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/by/name/{login}")
+    public ResponseEntity<Void> deleteUserByName(@PathVariable String login){
+        userService.deleteByLogin(login);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

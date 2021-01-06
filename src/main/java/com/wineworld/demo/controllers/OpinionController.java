@@ -19,7 +19,7 @@ public class OpinionController {
         this.opinionService = opinionService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/post")
     public ResponseEntity<OpinionResponse> addOpinion(@RequestBody OpinionRequest opinionRequest){
         if(opinionRequest != null){
             return new ResponseEntity<>(opinionService.addOpinion(opinionRequest), HttpStatus.OK);
@@ -28,7 +28,7 @@ public class OpinionController {
         }
     }
 
-    @DeleteMapping("/delete/{userId}/{productId}")
+    @DeleteMapping("/remove/{userId}/{productId}")
     public ResponseEntity<Void> removeOpinion(@PathVariable Long userId, @PathVariable Long productId){
         opinionService.removeOpinion(userId, productId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -45,7 +45,7 @@ public class OpinionController {
         return new ResponseEntity<>(opinionService.getAllOpinions(productId), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{opinionId}")
+    @PutMapping("/modernize/{opinionId}")
     public ResponseEntity<OpinionResponse> updateOpinion(@PathVariable Long opinionId, @RequestBody OpinionRequest opinionRequest){
         return new ResponseEntity<>(opinionService.updateOpinion(opinionId, opinionRequest), HttpStatus.OK);
     }

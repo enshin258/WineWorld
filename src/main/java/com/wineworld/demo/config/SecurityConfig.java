@@ -58,12 +58,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                            "/swagger-ui.html",
                            "/webjars/**")
                    .permitAll()
+                   .antMatchers("/user/register/**")
+                   .permitAll()
+//               .antMatchers("/**").permitAll()
                    .and()
                .authorizeRequests()
                    .antMatchers("/payment").hasAnyAuthority("USER", "ADMIN")
                    .regexMatchers("^.*\\/update.*$").hasAuthority("ADMIN")
                    .regexMatchers("^.*\\/delete.*$").hasAuthority("ADMIN")
                    .regexMatchers("^.*\\/add.*$").hasAuthority("ADMIN")
+                   .antMatchers("/opinion/modernize/**").hasAuthority("USER")
+                   .antMatchers("/opinion/remove/**").hasAnyAuthority("USER", "ADMIN")
+                   .antMatchers("/opinion/post").hasAuthority("USER")
+                   .antMatchers("/order/make").hasAuthority("USER")
+                   .antMatchers("/user/renew/**").hasAuthority("USER")
                    .anyRequest()
                    .authenticated();
 

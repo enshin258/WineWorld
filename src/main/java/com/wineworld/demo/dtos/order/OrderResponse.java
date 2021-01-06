@@ -29,5 +29,7 @@ public class OrderResponse {
 
     private String email;
 
+    private String status;
+
     private List<OrderPositionResponse> orderPositionResponses;
 }
