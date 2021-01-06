@@ -4,14 +4,16 @@
 
     <ul class="nav nav-tabs mr-auto" id="myTab">
         <li class="nav-item"><a class="nav-link" data-target="#add_wine" data-toggle="tab">Add wine</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#update_wine" data-toggle="tab">Update wine</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_wine" data-toggle="tab">Delete wine</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#add_location" data-toggle="tab">Add location</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#update_location" data-toggle="tab">Update location</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_location" data-toggle="tab">Delete location</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#add_category" data-toggle="tab">Add category</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#update_category" data-toggle="tab">Update category</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_category" data-toggle="tab">Delete category</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#add_admin" data-toggle="tab">Add admin</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_user" data-toggle="tab">Delete user</a></li>
-
     </ul>
 
     <div class="tab-content">
@@ -118,6 +120,140 @@
                 </div>
             </form>
         </div>
+        <!-- UPDATE WINE TAB -->
+        <div class="tab-pane" id="update_wine">
+            <form class="card" [formGroup]="updateWineForm">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Update wine
+                </div>
+                <div class="card-body">
+                    <div class="column">
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="update_wine_id"> WINE TO UPDATE ID </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="update_wine_id" formControlName="update_wine_id" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="update_wine_id" formControlName="update_wine_id" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="winename"> NAME </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="price"> PRICE </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="image"> IMAGE</label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''" id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
+                            <div class="col-md-12">
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" class="form-control" formControlName="description" id="description" placeholder="Description" name="description" disabled></textarea>
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="description" id="description" placeholder="Description" name="description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="category"> CATEGORY</label>
+                            <div class="col-md-12">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="category" formControlName="category" name="category" class="form-control" disabled>
+                                  <option> Choose </option>
+                                    <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
+                                </select>
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="category" formControlName="category" name="category" class="form-control">
+                                    <option> Choose </option>
+                                      <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
+                                  </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="location"> LOCATION</label>
+                            <div class="col-md-12">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="location" formControlName="location" name="location" class="form-control" disabled>
+                                  <option> Choose </option>
+                                    <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
+                                </select>
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="location" formControlName="location" name="location" class="form-control">
+                                    <option> Choose </option>
+                                      <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
+                                  </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="year"> YEAR </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" for="volume"> VOLUME </label>
+                            <div class="col-md-12">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-danger btn-edit js-edit" (click)="onWineUpdateFormEdit()">{{updateWineButtonText}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" [ngClass]="!isUpdateWineEditable ? 'btn btn-danger btn-edit js-edit field' : 'btn btn-danger btn-edit js-edit'" (click)="onWineUpdateReject()">Reject changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <!-- DELETE WINE TAB -->
         <div class="tab-pane" id="delete_wine">
             <form class="card" [formGroup]="deleteWineForm">
@@ -189,6 +325,71 @@
                 </div>
             </form>
         </div>
+        <!-- UPDATE LOCATION -->
+        <div class="tab-pane" id="update_location">
+            <form class="card" [formGroup]="addLocationForm">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Update location
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="update_location_id"> LOCATION TO UPDATE ID </label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="update_location_id" formControlName="update_location_id" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
+                                type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="update_location_id" formControlName="update_location_id" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
+                                type="number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
+                        <div class="col-md-12">
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description" disabled></textarea>
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="country"> COUNTRY </label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-danger btn-edit js-edit" (click)="onLocationUpdateFormEdit()">{{updateLocationButtonText}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" [ngClass]="!isUpdateLocationEditable ? 'btn btn-danger btn-edit js-edit field' : 'btn btn-danger btn-edit js-edit'" (click)="onLocationUpdateReject()">Reject changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <!-- DELETE LOCATION -->
         <div class="tab-pane" id="delete_location">
             <form class="card" [formGroup]="deleteLocationForm">
@@ -233,6 +434,48 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button id="singlebutton" [disabled]="!addCategoryForm.valid" type="submit" (click)="onAddCategory()" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- UPDATE CATEGORY -->
+        <div class="tab-pane" id="update_category">
+            <form class="card" [formGroup]="updateCategoryForm">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>Update category
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="category_to_update_id"> CATEGORY TO UPDATE ID</label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control field' : 'form-control'" id="category_to_update_id" formControlName="category_to_update_id" name="category_to_update_id" placeholder="@CATEGORY_TO_UPDATE_ID" class="form-control input-md" required=""
+                                type="number" disabled>
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control' : 'form-control field'" id="category_to_update_id" formControlName="category_to_update_id" name="category_to_update_id" placeholder="@CATEGORY_TO_UPDATE_ID" class="form-control input-md" required=""
+                                type="number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="winename"> CATEGORY NAME </label>
+                        <div class="col-md-12">
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control' : 'form-control field'" id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text" disabled>
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control field' : 'form-control'" id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-danger btn-edit js-edit" (click)="onCategoryUpdateFormEdit()">{{updateCategoryButtonText}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout float-left column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" [ngClass]="!isUpdateCategoryEditable ? 'btn btn-danger btn-edit js-edit field' : 'btn btn-danger btn-edit js-edit'" (click)="onCategoryUpdateReject()">Reject changes</button>
                             </div>
                         </div>
                     </div>
