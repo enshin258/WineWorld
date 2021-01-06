@@ -1,8 +1,11 @@
 package com.wineworld.demo.dtos.order;
 
+import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,4 +29,5 @@ public class OrderResponse {
 
     private String email;
 
+    private List<OrderPositionResponse> orderPositionResponses;
 }

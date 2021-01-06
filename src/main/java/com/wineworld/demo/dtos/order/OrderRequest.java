@@ -1,8 +1,11 @@
 package com.wineworld.demo.dtos.order;
 
+import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,5 +22,7 @@ public class OrderRequest {
     private float totalCost;
 
     private long userId;
+
+    private List<OrderPositionRequest> orderPositionRequests;
 
 }

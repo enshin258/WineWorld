@@ -68,29 +68,42 @@ public class OrderService {
 //        return modelMapper.map(createdOrderPosition, OrderPositionResponse.class);
 //    }
 
-    public List<OrderPositionResponse> addOrderPositions(List<OrderPositionRequest> orderPositionRequests){
-        List<OrderPosition> orderPositions = new ArrayList<>();
-        for(OrderPositionRequest orderPositionRequest : orderPositionRequests){
-            Product product = productRepository.findById(orderPositionRequest.getProductId())
-                    .orElseThrow(EntityNotFoundException::new);
-            Order order = orderRepository.findById(orderPositionRequest.getOrderId())
+//    public List<OrderPositionResponse> addOrderPositions(List<OrderPositionRequest> orderPositionRequests){
+//        List<OrderPosition> orderPositions = new ArrayList<>();
+//        for(OrderPositionRequest orderPositionRequest : orderPositionRequests){
+//            Product product = productRepository.findById(orderPositionRequest.getProductId())
+//                    .orElseThrow(EntityNotFoundException::new);
+//            Order order = orderRepository.findById(orderPositionRequest.getOrderId())
+//                    .orElseThrow(EntityNotFoundException::new);
+//            OrderPosition orderPosition = new OrderPosition();
+//            orderPosition.setOrder(order);
+//            orderPosition.setProduct(product);
+//            orderPosition.setQuantity(orderPositionRequest.getQuantity());
+//            OrderPosition createdOrderPosition = orderPositionRepository.save(orderPosition);
+//            orderPositions.add(createdOrderPosition);
+//        }
+//        return orderPositions.stream()
+//                .map(orderPosition -> modelMapper.map(orderPosition, OrderPositionResponse.class))
+//                .collect(Collectors.toList());
+//    }
+
+    public OrderResponse addOrder(OrderRequest orderRequest){
+        Order order = modelMapper.map(orderRequest, Order.class);
+        List<OrderPositionResponse> orderPositionResponses = new ArrayList<>();
+        Order createdOrder = orderRepository.save(order);
+        for(OrderPositionRequest orderPositionReq : orderRequest.getOrderPositionRequests()){
+            Product product = productRepository.findById(orderPositionReq.getProductId())
                     .orElseThrow(EntityNotFoundException::new);
             OrderPosition orderPosition = new OrderPosition();
             orderPosition.setOrder(order);
             orderPosition.setProduct(product);
-            orderPosition.setQuantity(orderPositionRequest.getQuantity());
+            orderPosition.setQuantity(orderPositionReq.getQuantity());
             OrderPosition createdOrderPosition = orderPositionRepository.save(orderPosition);
-            orderPositions.add(createdOrderPosition);
+            orderPositionResponses.add(modelMapper.map(createdOrderPosition, OrderPositionResponse.class));
         }
-        return orderPositions.stream()
-                .map(orderPosition -> modelMapper.map(orderPosition, OrderPositionResponse.class))
-                .collect(Collectors.toList());
-    }
-
-    public OrderResponse addOrder(OrderRequest orderRequest){
-        Order order = modelMapper.map(orderRequest, Order.class);
-        Order createdOrder = orderRepository.save(order);
-        return modelMapper.map(createdOrder, OrderResponse.class);
+        OrderResponse orderResponse = modelMapper.map(createdOrder, OrderResponse.class);
+        orderResponse.setOrderPositionResponses(orderPositionResponses);
+        return orderResponse;
     }
 
 

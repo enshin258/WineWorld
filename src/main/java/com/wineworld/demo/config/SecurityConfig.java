@@ -3,7 +3,6 @@ package com.wineworld.demo.config;
 import com.wineworld.demo.handlers.LoginFailureHandler;
 import com.wineworld.demo.handlers.LoginSuccessHandler;
 import com.wineworld.demo.handlers.LogoutHandler;
-
 import com.wineworld.demo.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -52,7 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                .exceptionHandling()
                .and()
                .authorizeRequests()
-                   .antMatchers("/**")
+                   .regexMatchers("^.*\\/get.*$")
+                   .permitAll()
+                   .antMatchers("/v2/api-docs",
+                           "/configuration/ui",
+                           "/swagger-resources/**",
+                           "/configuration/security",
+                           "/swagger-ui.html",
+                           "/webjars/**")
                    .permitAll()
                    .and()
                .authorizeRequests()
@@ -62,6 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                    .regexMatchers("^.*\\/add.*$").hasAuthority("ADMIN")
                    .anyRequest()
                    .authenticated();
+
+
+
 
    }
 

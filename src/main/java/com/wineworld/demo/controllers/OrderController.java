@@ -41,14 +41,14 @@ public class OrderController {
 //        }
 //    }
 
-    @PostMapping("/positions/add")
-    public ResponseEntity<List<OrderPositionResponse>> addOrderPosition(@RequestBody List<OrderPositionRequest> positionRequest){
-        if(positionRequest != null){
-            return new ResponseEntity<>(orderService.addOrderPositions(positionRequest), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
+//    @PostMapping("/positions/add")
+//    public ResponseEntity<List<OrderPositionResponse>> addOrderPosition(@RequestBody List<OrderPositionRequest> positionRequest){
+//        if(positionRequest != null){
+//            return new ResponseEntity<>(orderService.addOrderPositions(positionRequest), HttpStatus.OK);
+//        }else{
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     @PostMapping("/add")
     public ResponseEntity<OrderResponse> addOrder(@RequestBody OrderRequest orderRequest){

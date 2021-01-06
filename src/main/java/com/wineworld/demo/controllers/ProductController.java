@@ -91,7 +91,18 @@ public class ProductController {
     }
 
     @PutMapping("/update/{productId}")
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long productId, @RequestBody ProductRequest productRequest){
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long productId, @RequestParam("name") String name,
+                                                         @RequestParam("price") Float price,
+                                                         @RequestParam("picture") MultipartFile picture,
+                                                         @RequestParam("productDescription") String productDescription,
+                                                         @RequestParam("genreId") Long genreId,
+                                                         @RequestParam("locationId") Long locationId,
+                                                         @RequestParam("producer") String producer,
+                                                         @RequestParam("alcoholLevel") Float alcoholLevel,
+                                                         @RequestParam("year") Integer year,
+                                                         @RequestParam("volume") Float volume){
+        ProductRequest productRequest = new ProductRequest(name,
+                price, picture, productDescription, genreId, locationId, producer, alcoholLevel, year, volume);
         return new ResponseEntity<>(productService.updateProduct(productId, productRequest), HttpStatus.OK);
     }
 

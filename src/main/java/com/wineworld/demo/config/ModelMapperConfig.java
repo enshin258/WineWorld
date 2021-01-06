@@ -2,16 +2,14 @@ package com.wineworld.demo.config;
 
 import com.wineworld.demo.dtos.opinion.OpinionRequest;
 import com.wineworld.demo.dtos.opinion.OpinionResponse;
+import com.wineworld.demo.dtos.order.OrderRequest;
 import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
 import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.dtos.product.MiniProductResponse;
 import com.wineworld.demo.dtos.product.ProductRequest;
 import com.wineworld.demo.dtos.product.ProductResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
-import com.wineworld.demo.entities.Opinion;
-import com.wineworld.demo.entities.OrderPosition;
-import com.wineworld.demo.entities.Product;
-import com.wineworld.demo.entities.User;
+import com.wineworld.demo.entities.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
@@ -37,6 +35,13 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(orderPositionMap);
+        PropertyMap<OrderRequest, Order> orderPropertyMap = new PropertyMap<OrderRequest, Order>() {
+            @Override
+            protected void configure() {
+                skip(destination.getOrderPositions());
+            }
+        };
+        modelMapper.addMappings(orderPropertyMap);
         return modelMapper;
     }
 
