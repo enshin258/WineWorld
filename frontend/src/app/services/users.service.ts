@@ -14,7 +14,7 @@ export class UsersService {
   private logoutUrl = 'http://localhost:8080/logout';
   private changeUserInfoUrl = 'http://localhost:8080/user/renew/';
   private getUserDataUrl = 'http://localhost:8080/user/get/';
-  private deleteUserUrl = 'http://localhost:8080/user/delete/';
+  private deleteUserUrl = 'http://localhost:8080/user/delete/by/name/';
 
   loginData: LoginData;
 
