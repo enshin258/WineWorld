@@ -18,13 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Time;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -59,32 +53,8 @@ public class ProductService {
         product.setGenre(genre);
 
         //save image
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String fileName = timestamp.getTime() + ".jpg";
+        String fileName = saveImage(productRequest.getPicture());
 
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        MultipartFile file = productRequest.getPicture();
-        
-        File newFile = new File("src\\main\\resources\\static\\images\\" + fileName);
-
-        try {
-            inputStream = file.getInputStream();
-
-            if (!newFile.exists()) {
-                newFile.createNewFile();
-            }
-            outputStream = new FileOutputStream(newFile);
-            int read = 0;
-            byte[] bytes = new byte[1024];
-
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
         product.setPictureUrl("http://localhost:8080/images/" + fileName);
 
         Product createdProduct = productRepository.save(product);
@@ -145,12 +115,47 @@ public class ProductService {
         productToUpdate.setLocation(locationRepository.findById(productRequest.getLocationId()).orElseThrow(EntityNotFoundException::new));
         productToUpdate.setAlcoholLevel(productRequest.getAlcoholLevel());
         productToUpdate.setName(productRequest.getName());
-        productToUpdate.setPictureUrl(productRequest.getName());
+        String fileName = saveImage(productRequest.getPicture());
+        productToUpdate.setPictureUrl("http://localhost:8080/images/" + fileName);
+        deleteImage(fileName);
         productToUpdate.setPrice(productRequest.getPrice());
         productToUpdate.setProducer(productRequest.getProducer());
         productToUpdate.setVolume(productRequest.getVolume());
         productToUpdate.setYear(productRequest.getYear());
         productRepository.save(productToUpdate);
         return modelMapper.map(productToUpdate, ProductResponse.class);
+    }
+
+    private String saveImage(MultipartFile picture){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String fileName = timestamp.getTime() + ".jpg";
+
+        InputStream inputStream;
+        OutputStream outputStream;
+
+        File newFile = new File("src\\main\\resources\\static\\images\\" + fileName);
+
+        try {
+            inputStream = picture.getInputStream();
+
+            if (!newFile.exists()) {
+                newFile.createNewFile();
+            }
+            outputStream = new FileOutputStream(newFile);
+            int read;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
+    private void deleteImage(String fileName){
+        File newFile = new File("src\\main\\resources\\static\\images\\" + fileName);
+        newFile.delete();
     }
 }

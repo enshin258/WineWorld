@@ -1,11 +1,9 @@
 package com.wineworld.demo.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wineworld.demo.dtos.role.RoleResponse;
-import com.wineworld.demo.entities.Role;
+import com.wineworld.demo.dtos.role.RoleLoginResponse;
 import com.wineworld.demo.entities.User;
 import com.wineworld.demo.repositories.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -29,9 +27,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
             throws IOException, ServletException {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        Role role = userRepository.findByLogin(userDetails.getUsername()).orElseThrow(EntityExistsException::new).getRole();
-        RoleResponse roleResponse = new ModelMapper().map(role, RoleResponse.class);
-        String roleJson = new ObjectMapper().writeValueAsString(roleResponse);
+        User user = userRepository.findByLogin(userDetails.getUsername()).orElseThrow(EntityExistsException::new);
+        RoleLoginResponse roleLoginResponse = new RoleLoginResponse(user.getRole().getRoleId(), user.getRole().getName(),user.getUserId());
+        String roleJson = new ObjectMapper().writeValueAsString(roleLoginResponse);
         response.getWriter().write(roleJson);
         response.setStatus(200);
         response.flushBuffer();
