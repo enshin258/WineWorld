@@ -29,15 +29,15 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="e-mail"> E-MAIL </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="e_mail" name="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="e_mail" name="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="e_mail" name="e_mail" placeholder="{{user.email}}" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="e_mail" name="e_mail" type="e_mail" placeholder="@USER_EMAIL" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="username"> NAME </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="username" name="username" placeholder="@USER_NAME" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="username" name="username" placeholder="{{user.login}}" class="form-control input-md" required="" type="text" disabled>
                                 <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="username" name="username" placeholder="@USER_NAME" class="form-control input-md" required="" type="text">
 
                             </div>
@@ -47,7 +47,7 @@
                             <label class="col-md-12 control-label" for="password"> PASSWORD </label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isEditable ? 'form-control' : 'form-control field'" formControlName="password" name="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="password" name="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isEditable ? 'form-control field' : 'form-control'" (change)="onChange($event)" formControlName="password" name="password" type="password" placeholder="@USER_PASSWORD" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>

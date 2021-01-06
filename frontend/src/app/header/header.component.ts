@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Role } from '../models/role';
+import { LoginData } from '../models/login_data';
 import { User } from '../models/user';
 import { UsersService } from '../services/users.service';
 
@@ -76,17 +76,18 @@ export class HeaderComponent implements OnInit {
     var user: User = {
       id: 0,
       email: '',
-      username: this.loginForm.get('loginText').value,
+      login: this.loginForm.get('loginText').value,
       password: this.loginForm.get('passwordText').value,
+      roleName: ''
     };
     this.loginForm.reset();
     this.userService.login(user).subscribe(
       (res) => {
         console.log(res);
-        this.userService.role = res.body;
-        console.log(this.userService.role);
+        this.userService.loginData = res.body;
+        console.log(this.userService.loginData);
         this.isUserLoggedIn = true;
-        this.adminPanelEnabled = this.isUserLoggedIn && (this.userService.role.roleId == 2);
+        this.adminPanelEnabled = this.isUserLoggedIn && (this.userService.loginData.roleId == 2);
         var modal = document.getElementById('myModal');
         modal.style.display = 'none';
       },
@@ -106,8 +107,9 @@ export class HeaderComponent implements OnInit {
     var user: User = {
       id: 0,
       email: this.registerForm.get('emailText').value,
-      username: this.registerForm.get('loginText').value,
+      login: this.registerForm.get('loginText').value,
       password: this.registerForm.get('passwordText').value,
+      roleName: ''
     };
     this.registerForm.reset();
     this.userService.register(user).subscribe((data) => {
@@ -121,7 +123,7 @@ export class HeaderComponent implements OnInit {
         console.log(res);
         this.isUserLoggedIn = false;
         this.adminPanelEnabled = false;
-        this.userService.role = null;
+        this.userService.loginData = null;
       },
       (err) => console.error(err)
     );

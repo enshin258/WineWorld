@@ -34,7 +34,7 @@ export class AdminPanelComponent implements OnInit {
     private userService: UsersService,
     private formBuilder: FormBuilder, private productService: ProductsService) {
       
-      this.isAdmin = (this.userService.role.roleId == 2);
+      this.isAdmin = (this.userService.loginData.roleId == 2);
 
       categoryService.getAllCategories()
       .subscribe((data) => {this.categories = data});
@@ -169,9 +169,10 @@ export class AdminPanelComponent implements OnInit {
     console.log(this.addAdminForm);
     var user: User = {
       id: 0,
-      username: this.addAdminForm.get('login').value,
+      login: this.addAdminForm.get('login').value,
       email: this.addAdminForm.get('email').value,
-      password: this.addAdminForm.get('password').value
+      password: this.addAdminForm.get('password').value,
+      roleName: ''
     };
     this.userService.addAdmin(user).subscribe((data) => {
       console.log(data);

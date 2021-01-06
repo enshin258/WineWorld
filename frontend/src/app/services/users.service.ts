@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Role } from '../models/role';
+import { LoginData } from '../models/login_data';
 import { User } from '../models/user';
 
 @Injectable({
@@ -12,17 +12,18 @@ export class UsersService {
   private addAdminUrl = 'http://localhost:8080/user/register/true';
   private loginUserUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
-  private changeUserInfoUrl = 'http://localhost:8080/user/add';
+  private changeUserInfoUrl = 'http://localhost:8080/user/renew/';
+  private getUserDataUrl = 'http://localhost:8080/user/get/';
   private deleteUserUrl = 'http://localhost:8080/user/delete/';
 
-  role: Role;
+  loginData: LoginData;
 
   constructor(private http: HttpClient) {}
 
   register(user: User) {
     return this.http.post(this.addUserUrl, {
       email: user.email,
-      login: user.username,
+      login: user.login,
       password: user.password,
     });
   }
@@ -30,16 +31,16 @@ export class UsersService {
   addAdmin(user: User){
     return this.http.post(this.addAdminUrl, {
       email: user.email,
-      login: user.username,
+      login: user.login,
       password: user.password,
     }, {withCredentials: true});
   }
 
-  login(user: User): Observable<HttpResponse<Role>>{
+  login(user: User): Observable<HttpResponse<LoginData>>{
     const formData = new FormData();
-    formData.append('username', user.username);
+    formData.append('username', user.login);
     formData.append('password', user.password);
-    return this.http.post<Role>(this.loginUserUrl, formData, {
+    return this.http.post<LoginData>(this.loginUserUrl, formData, {
       observe: 'response',
       withCredentials: true,
     });
@@ -60,7 +61,11 @@ export class UsersService {
   }
 
   changeUserInfo(user: User) {
-    return this.http.patch(this.changeUserInfoUrl, user);
+    return this.http.put(this.changeUserInfoUrl + user.id.toString(), user);
+  }
+
+  getUserData(userId: number): Observable<User>{
+    return this.http.get<User>(this.getUserDataUrl + userId.toString());
   }
 
 }
