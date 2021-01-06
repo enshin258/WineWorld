@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { ProductMiniature } from '../models/product_miniature';
 import { ShoppingCartPosition } from '../models/shoping_cart_position';
 import { ShoppingCartComponent } from '../wineworld/shopping-cart/shopping-cart.component';
+import {OrderRequest} from "../models/order_request";
+import {Order} from "../models/order";
+import {observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +15,7 @@ export class OrderService {
   private getUserOrdersUrl = 'http://localhost:8080/order/get/all/';
   private getOrderPositionsUrl =
     'http://localhost:8080/order/position/get/all/';
+  private addOrderUrl = 'http://localhost:8080/order/make'
 
   private cart: ShoppingCartPosition[];
 
@@ -29,6 +33,17 @@ export class OrderService {
 
   getOrderPositions(orderId: number) {
     return this.http.get(this.getOrderPositionsUrl + orderId.toString());
+  }
+
+  addOrder(order: Order){
+    return this.http.post(this.addOrderUrl,{
+        date: order.orderDate,
+        address: order.orderAddress,
+        city: order.orderCity,
+        postalCode: order.orderPostalCode,
+        totalCost: order.orderTotalCost,
+        orderPositions: order.orderPositions,
+    }, {observe: 'response'});
   }
 
   addProductToCart(product: ProductMiniature, quantity: number) {

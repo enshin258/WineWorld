@@ -3,7 +3,7 @@ import { Product } from './product';
 
 export interface Order {
   id: number;
-  orderDate: Date;
+  orderDate: string;
   orderAddress: string;
   orderCity: string;
   orderPostalCode: string;

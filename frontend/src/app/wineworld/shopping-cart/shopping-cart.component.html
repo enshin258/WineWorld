@@ -83,30 +83,32 @@
 </div>
 <div class="card-footer">
     <div>
-        <form [formGroup]="">
+        <form [formGroup]="order_details_form">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="order_adress">Adress</label>
-                    <input type="text" class="form-control" id="order_adress" placeholder="Adress">
+                    <input type="text" class="form-control" id="order_adress" placeholder="Adress" formControlName="address">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="order_city">City</label>
-                    <input type="text" class="form-control" id="inputCity" placeholder="City">
+                    <input type="text" class="form-control" id="inputCity" placeholder="City" formControlName="city">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="order_zip">ZIP</label>
-                    <input type="text" class="form-control" id="order_zip" placeholder="ZIP">
+                    <input type="text" class="form-control" id="order_zip" placeholder="ZIP" formControlName="zip">
                 </div>
             </div>
         </form>
     </div>
+
     <div class="checkout float-right column">
         <div class="price">
             Total price: <b>{{ totalPrice }} PLN</b>
         </div>
-        <div class="pull-right" id="paypal-checkout-btn"></div>
+        <div id="paypal-checkout-btn" [ngClass]="order_details_form.valid && isUserLoggedIn && cartPositions.length != 0 ? 'pull-right' : 'disabled'"></div>
+      <label [ngClass]="!isUserLoggedIn ? 'pull-right' : 'disabled'">You have to be logged in to finish your order </label>
     </div>
 </div>
 </div>

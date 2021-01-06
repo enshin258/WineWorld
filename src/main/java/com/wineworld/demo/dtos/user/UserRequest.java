@@ -14,5 +14,4 @@ public class UserRequest {
 
     private String email;
 
-    private long roleId;
 }
