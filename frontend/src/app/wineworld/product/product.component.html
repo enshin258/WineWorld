@@ -1,42 +1,190 @@
-<main class="container">
-    <div class="left-column">
-        <img src="{{ product.pictureUrl }}" alt="" />
-        <div id="map"></div>
-    </div>
+<div>
 
-    <div class="right-column">
-        <div class="wine-description">
-            <h1>{{ product.name }}</h1>
-            <p>
-                {{ product.description }}
-            </p>
+    <main class="container">
+        <div class="left-column">
+            <img src="{{ product.pictureUrl }}" alt="" />
+            <div id="map"></div>
         </div>
 
-        <div class="wine-configuration">
-            <div class="wine-parameters">
-                <span>Genre</span>
-                <h5>{{ product.genreName }}</h5>
-                <span>Country</span>
-                <h5>{{ product.country }}</h5>
-                <span>Producer</span>
-                <h5>{{ product.producer }}</h5>
-                <span>AlcoholLevel</span>
-                <h5>{{ product.alcoholLevel }}%</h5>
-                <span>Year</span>
-                <h5>{{ product.year }}</h5>
-                <span>Volume</span>
-                <h5>{{ product.volume }} l</h5>
-                <span>Description</span>
-                <h5>{{ product.productDescription }}</h5>
+        <div class="right-column">
+            <div class="wine-description">
+                <h1>{{ product.name }}</h1>
+                <p>
+                    {{ product.description }}
+                </p>
+            </div>
+
+            <div class="wine-configuration">
+                <div class="wine-parameters">
+                    <span>Genre</span>
+                    <h5>{{ product.genreName }}</h5>
+                    <span>Country</span>
+                    <h5>{{ product.country }}</h5>
+                    <span>Producer</span>
+                    <h5>{{ product.producer }}</h5>
+                    <span>AlcoholLevel</span>
+                    <h5>{{ product.alcoholLevel }}%</h5>
+                    <span>Year</span>
+                    <h5>{{ product.year }}</h5>
+                    <span>Volume</span>
+                    <h5>{{ product.volume }} l</h5>
+                    <span>Description</span>
+                    <h5>{{ product.productDescription }}</h5>
+
+                    <span>Average rating</span>
+                    <div id="rating-row" class="row">
+                        <h2 class="star-static">★ </h2>
+                        <h2 class="star-static">★ </h2>
+                        <h2 class="star-static">★ </h2>
+                        <h2 class="star-static-dissabled">★ </h2>
+                        <h2 class="star-static-dissabled">★ </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-price">
+                <span>Price</span>
+                <h5>{{ product.price }} $</h5>
+                <div (click)="addProductToCart()" class="col-xs-12 col-md-12">
+                    <a id="addToCartButton" class="btn btn-danger"> Add to cart </a>
+                </div>
             </div>
         </div>
+    </main>
 
-        <div class="wine-price">
-            <span>Price</span>
-            <h5>{{ product.price }} $</h5>
-            <div (click)="addProductToCart()" class="col-xs-12 col-md-12">
-                <a class="btn btn-danger"> Add to cart </a>
+    <!-- comments -->
+    <div class="comments-section">
+        <div class="col-sm-9">
+            <hr/>
+            <div class="review-block">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="review-block-name">JAN KOWALSKI
+                        </div>
+                        <div class="review-block-date">January 29, 2016</div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="review-block-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                        <div class="review-block-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet nibh sed imperdiet commodo. Nam at quam fringilla, imperdiet sapien non, scelerisque mauris. Fusce dignissim turpis nec massa porta tempus. Nunc et ligula vel
+                            sem interdum efficitur. Sed faucibus nunc id augue vulputate, eu pharetra nisl ultrices. Morbi ac congue risus, maximus dictum ipsum. Fusce ac tempor erat. Quisque vitae ante fermentum, faucibus felis volutpat, lacinia dui</div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <span>User score</span>
+                        <div id="rating-row" class="row">
+                            <div class="review-block-rate">
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <hr/>
+            <div class="review-block">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="review-block-name">JAN KOWALSKI
+                        </div>
+                        <div class="review-block-date">January 29, 2016</div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="review-block-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                        <div class="review-block-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet nibh sed imperdiet commodo. Nam at quam fringilla, imperdiet sapien non, scelerisque mauris. Fusce dignissim turpis nec massa porta tempus. Nunc et ligula vel
+                            sem interdum efficitur. Sed faucibus nunc id augue vulputate, eu pharetra nisl ultrices. Morbi ac congue risus, maximus dictum ipsum. Fusce ac tempor erat. Quisque vitae ante fermentum, faucibus felis volutpat, lacinia dui</div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <span>User score</span>
+                        <div id="rating-row" class="row">
+                            <div class="review-block-rate">
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static-dissabled">★ </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="review-block">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="review-block-name">JAN KOWALSKI
+                        </div>
+                        <div class="review-block-date">January 29, 2016</div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="review-block-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                        <div class="review-block-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet nibh sed imperdiet commodo. Nam at quam fringilla, imperdiet sapien non, scelerisque mauris. Fusce dignissim turpis nec massa porta tempus. Nunc et ligula vel
+                            sem interdum efficitur. Sed faucibus nunc id augue vulputate, eu pharetra nisl ultrices. Morbi ac congue risus, maximus dictum ipsum. Fusce ac tempor erat. Quisque vitae ante fermentum, faucibus felis volutpat, lacinia dui</div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <span>User score</span>
+                        <div id="rating-row" class="row">
+                            <div class="review-block-rate">
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static">★ </h2>
+                                <h2 class="star-static-dissabled">★ </h2>
+                                <h2 class="star-static-dissabled">★ </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- ADD COMMENT -->
+            <form class="card" [formGroup]="add_comment_form">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-card" aria-hidden="true"></i> Add comment
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="comment_title"> TITLE</label>
+                                <div>
+                                    <input [ngClass]="!isUserLoggedIn ? 'form-control' : 'form-control field'" formControlName="comment_title" id="comment_title" placeholder="Title" name="comment_title" disabled>
+                                    <input [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="comment_title" id="comment_title" placeholder="Title" name="comment_title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="comment_description"> DESCRIPTION</label>
+                                <div>
+                                    <textarea [ngClass]="!isUserLoggedIn ? 'form-control' : 'form-control field'" formControlName="comment_description" id="comment_description" placeholder="Description" name="comment_description" disabled></textarea>
+                                    <textarea [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="comment_description" id="comment_description" placeholder="Description" name="comment_description"></textarea>
+                                </div>
+                            </div>
+                            <fieldset class="rating" [disabled]="!isUserLoggedIn">
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 - Great">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 - Pretty good">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 - Okay">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 - Not good">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 - Very bad">1 star</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="checkout float-right column">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="singlebutton" [disabled]="!isUserLoggedIn" (click)="onAddComment()" type="submit" name="singlebutton" class="btn btn-danger">ADD REVIEW</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</main>
+</div>

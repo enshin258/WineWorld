@@ -80,7 +80,122 @@
     line-height: 34px;
 }
 
-.btn {
+#addToCartButton {
     margin-top: 20px;
     width: 100%;
+}
+
+#rating-row {
+    margin-left: 0px;
+}
+
+.review-block-rate {
+    margin-left: 10px;
+}
+
+.comments-section {
+    margin-left: 60px;
+}
+
+hr {
+    border: 1px solid #e14a59;
+}
+
+.review-block-name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 26px;
+}
+
+.review-block-date {
+    font-size: 16px;
+    font-weight: 300;
+    color: #656d78;
+    line-height: 24px;
+}
+
+.review-block-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 26px;
+}
+
+.review-block-description {
+    font-size: 18px;
+    font-weight: 200;
+    color: #656d78;
+    line-height: 24px;
+}
+
+.disabled {
+    display: none;
+}
+
+.field {
+    display: none;
+}
+
+.star-static {
+    font-size: 36px;
+    color: gold;
+    text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+    display: inline;
+}
+
+.star-static-dissabled {
+    font-size: 36px;
+    color: #ddd;
+    text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
+    display: inline;
+}
+
+.rating {
+    float: right;
+}
+
+.rating:not(:checked)>input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.rating:not(:checked)>label {
+    float: right;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 150%;
+    color: #ddd;
+    text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+
+.rating:not(:checked)>label:before {
+    font-size: 36px;
+    content: '★ ';
+}
+
+.rating>input:checked~label {
+    color: #f70;
+    text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+
+.rating:not(:checked)>label:hover,
+.rating:not(:checked)>label:hover~label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+
+.rating>input:checked+label:hover,
+.rating>input:checked+label:hover~label,
+.rating>input:checked~label:hover,
+.rating>input:checked~label:hover~label,
+.rating>label:hover~input:checked~label {
+    color: #ea0;
+    text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+}
+
+.rating>label:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
 }
