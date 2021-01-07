@@ -9,7 +9,8 @@ import {Observable} from "rxjs";
 export class CategoryService {
   private getAllCategoriesUrl = 'http://localhost:8080/genre/get/all';
   private addCategoryUrl = 'http://localhost:8080/genre/add';
-  private deleteCategoryUrl = 'http://localhost:8080/genre/delete/'
+  private deleteCategoryUrl = 'http://localhost:8080/genre/delete/';
+  private updateCategoryUrl = 'http://localhost:8080/genre/update/';
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +27,12 @@ export class CategoryService {
   deleteCategory(genreId: number){
     return this.http.delete(this.deleteCategoryUrl + genreId,
       {withCredentials: true});
+  }
+
+  updateCategory(id: number, name: string){
+    return this.http.put(this.updateCategoryUrl + id.toString(), 
+    {name: name},
+    {withCredentials: true}
+    );
   }
 }

@@ -33,6 +33,7 @@ export class AdminPanelComponent implements OnInit {
   updateCategoryButtonText: string = "Edit";
   updateCategoryForm: FormGroup;
   updateCategoryFormChanged= false;
+  updateCategoryId: number;
 
   addWineForm: FormGroup;
   deleteWineForm: FormGroup;
@@ -87,7 +88,7 @@ export class AdminPanelComponent implements OnInit {
       alcohol_level: [null, Validators.required],
       year: [null, Validators.required],
       volume: [null, Validators.required],
-    })
+    });
 
     this.deleteWineForm = this.formBuilder.group({
       id: [null, Validators.required],
@@ -118,6 +119,7 @@ export class AdminPanelComponent implements OnInit {
     this.updateCategoryForm = this.formBuilder.group({
       name: [null, Validators.required],
     });
+    this.updateCategoryForm.reset();
 
     this.deleteCategoryForm = this.formBuilder.group({
       id: [null, Validators.required],
@@ -172,6 +174,10 @@ export class AdminPanelComponent implements OnInit {
     else {
       if(this.updateCategoryForm.touched && this.updateCategoryFormChanged){
         console.log('time to post changes in categories');
+        this.categoryService.updateCategory(this.updateCategoryId, this.updateCategoryForm.get('name').value)
+        .subscribe((data) => {
+          console.log(data);
+        })
       }
       this.updateCategoryButtonText = "Edit";
       this.updateCategoryFormChanged = false;
@@ -311,6 +317,11 @@ export class AdminPanelComponent implements OnInit {
 
   handleFile(files: FileList){
     this.uploadFile = files.item(0);
+  }
+
+  onUpdateCategoryIdChange(value: string){
+    this.updateCategoryId = +value.match(/\d+/)[0];
+    console.log(this.updateCategoryId);
   }
 
 }

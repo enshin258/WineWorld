@@ -2,7 +2,7 @@
     <h2>---ADMIN PANEL---</h2>
 
 
-    <ul class="nav nav-tabs mr-auto" id="myTab">
+    <ul class="nav nav-tabs mr-auto" >
         <li class="nav-item"><a class="nav-link" data-target="#add_wine" data-toggle="tab">Add wine</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#update_wine" data-toggle="tab">Update wine</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#delete_wine" data-toggle="tab">Delete wine</a></li>
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="winename"> NAME </label>
                             <div class="col-md-12">
-                                <input id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+                                <input  formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="price"> PRICE </label>
                             <div class="col-md-12">
-                                <input id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+                                <input  formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -44,21 +44,21 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
-                                <input id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
+                                <input  formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
                             <div class="col-md-12">
-                                <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"></textarea>
+                                <textarea class="form-control" formControlName="description"  placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
-                                <select id="category" formControlName="category" name="category" class="form-control">
+                                <select  formControlName="category" name="category" class="form-control">
                                   <option> Choose </option>
                                     <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                                 </select>
@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
-                                <select id="location" formControlName="location" name="location" class="form-control">
+                                <select  formControlName="location" name="location" class="form-control">
                                   <option> Choose </option>
                                     <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                                 </select>
@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
                             <div class="col-md-12">
-                                <input id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+                                <input  formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
                             <div class="col-md-12">
-                                <input id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+                                <input  formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="year"> YEAR </label>
                             <div class="col-md-12">
-                                <input id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+                                <input  formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="volume"> VOLUME </label>
                             <div class="col-md-12">
-                                <input id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+                                <input  formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" [disabled]="!addWineForm.valid" (click)="onAddWine()" type="submit" name="singlebutton" class="btn btn-danger">ADD WINE</button>
+                                <button  [disabled]="!addWineForm.valid" (click)="onAddWine()" type="submit" name="singlebutton" class="btn btn-danger">ADD WINE</button>
                             </div>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="update_wine_id"> WINE TO UPDATE ID </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="update_wine_id" formControlName="update_wine_id" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="update_wine_id" formControlName="update_wine_id" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -141,16 +141,16 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="winename"> NAME </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="name" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" placeholder="Name" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="price"> PRICE </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="price" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="price" placeholder="Price" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -158,27 +158,27 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''" id="image" formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
+                                <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''"  formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
                             <div class="col-md-12">
-                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" class="form-control" formControlName="description" id="description" placeholder="Description" name="description" disabled></textarea>
-                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="description" id="description" placeholder="Description" name="description"></textarea>
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" class="form-control" placeholder="Description" name="description" disabled></textarea>
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="description"  placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="category" formControlName="category" name="category" class="form-control" disabled>
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="category" class="form-control" disabled>
                                   <option> Choose </option>
                                     <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                                 </select>
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="category" formControlName="category" name="category" class="form-control">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="category" name="category" class="form-control">
                                     <option> Choose </option>
                                       <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                                   </select>
@@ -188,11 +188,11 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="location" formControlName="location" name="location" class="form-control" disabled>
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="location" class="form-control" disabled>
                                   <option> Choose </option>
                                     <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                                 </select>
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="location" formControlName="location" name="location" class="form-control">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="location" name="location" class="form-control">
                                     <option> Choose </option>
                                       <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                                   </select>
@@ -203,8 +203,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="producer" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -212,8 +212,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="alcohol_level" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -221,8 +221,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="year"> YEAR </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="year" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="year" placeholder="Year" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -230,8 +230,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="volume"> VOLUME </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" id="volume" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
                             </div>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="wine_id"> WINE ID </label>
                         <div class="col-md-12">
-                            <input id="wine_id" minlength=1 formControlName="id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
+                            <input  minlength=1 formControlName="id" name="wine_id" placeholder="Wine Id" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" (click)="onDeleteWine()" [disabled]="!deleteWineForm.valid" type="submit" name="singlebutton" class="btn btn-danger">DELETE WINE</button>
+                                <button  (click)="onDeleteWine()" [disabled]="!deleteWineForm.valid" type="submit" name="singlebutton" class="btn btn-danger">DELETE WINE</button>
                             </div>
                         </div>
                     </div>
@@ -289,27 +289,27 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
                         <div class="col-md-12">
-                            <input id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+                            <input  formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
                         <div class="col-md-12">
-                            <input id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+                            <input  formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
                         <div class="col-md-12">
-                            <textarea class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description"></textarea>
+                            <textarea class="form-control" formControlName="location_description"  placeholder="Location description" name="location_description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="country"> COUNTRY </label>
                         <div class="col-md-12">
-                            <input id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+                            <input  formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -318,7 +318,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" [disabled]="!addLocationForm.valid" type="submit" (click)="onAddLocation()" name="singlebutton" class="btn btn-danger">ADD LOCATION</button>
+                                <button  [disabled]="!addLocationForm.valid" type="submit" (click)="onAddLocation()" name="singlebutton" class="btn btn-danger">ADD LOCATION</button>
                             </div>
                         </div>
                     </div>
@@ -335,39 +335,39 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="update_location_id"> LOCATION TO UPDATE ID </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="update_location_id" formControlName="update_location_id" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
                                 type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="update_location_id" formControlName="update_location_id" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
                                 type="number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="latitude" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="longitude" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
                         <div class="col-md-12">
-                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description" disabled></textarea>
-                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="location_description" id="location_description" placeholder="Location description" name="location_description"></textarea>
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" class="form-control"  placeholder="Location description" name="location_description" disabled></textarea>
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="location_description"  placeholder="Location description" name="location_description"></textarea>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="country"> COUNTRY </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" id="country" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="country" placeholder="Country" class="form-control input-md" required="" type="text" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -399,7 +399,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_id"> LOCATION ID </label>
-                        <select id="location_Id" formControlName="id" name="location_Id" class="form-control">
+                        <select  formControlName="id" name="location_Id" class="form-control">
                             <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                         </select>
                     </div>
@@ -408,7 +408,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" [disabled]="!deleteLocationForm.valid" type="submit" (click)="onDeleteLocation()" name="singlebutton" class="btn btn-danger">DELETE LOCATION</button>
+                                <button  [disabled]="!deleteLocationForm.valid" type="submit" (click)="onDeleteLocation()" name="singlebutton" class="btn btn-danger">DELETE LOCATION</button>
                             </div>
                         </div>
                     </div>
@@ -425,7 +425,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY NAME </label>
                         <div class="col-md-12">
-                            <input id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
+                            <input  formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" [disabled]="!addCategoryForm.valid" type="submit" (click)="onAddCategory()" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
+                                <button  [disabled]="!addCategoryForm.valid" type="submit" (click)="onAddCategory()" name="singlebutton" class="btn btn-danger">ADD CATEGORY</button>
                             </div>
                         </div>
                     </div>
@@ -450,17 +450,17 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="category_to_update_id"> CATEGORY TO UPDATE ID</label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control field' : 'form-control'" id="category_to_update_id" formControlName="category_to_update_id" name="category_to_update_id" placeholder="@CATEGORY_TO_UPDATE_ID" class="form-control input-md" required=""
-                                type="number" disabled>
-                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control' : 'form-control field'" id="category_to_update_id" formControlName="category_to_update_id" name="category_to_update_id" placeholder="@CATEGORY_TO_UPDATE_ID" class="form-control input-md" required=""
-                                type="number">
+                            <select name="category_Id" class="form-control" (change)="onUpdateCategoryIdChange($event.target.value)">
+                                <option>Select category</option>
+                                <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY NAME </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control' : 'form-control field'" id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text" disabled>
-                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control field' : 'form-control'" id="category_name" formControlName="name" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control' : 'form-control field'"  name="category_name" placeholder="Category name" class="form-control input-md" type="text" disabled>
+                            <input [ngClass]="!isUpdateCategoryEditable ? 'form-control field' : 'form-control'"  formControlName="name" (change)="onUpdateCategoryChange($event)" name="category_name" placeholder="Category name" class="form-control input-md" required="" type="text">
                         </div>
                     </div>
                 </div>
@@ -491,7 +491,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="winename"> CATEGORY ID </label>
-                        <select id="category_Id" formControlName="id" name="category_Id" class="form-control">
+                        <select  formControlName="id" name="category_Id" class="form-control">
                                 <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                             </select>
                     </div>
@@ -500,7 +500,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" type="submit" (click)="onDeleteCategory()" [disabled]="!deleteCategoryForm.valid" name="singlebutton" class="btn btn-danger">DELETE CATEGORY</button>
+                                <button  type="submit" (click)="onDeleteCategory()" [disabled]="!deleteCategoryForm.valid" name="singlebutton" class="btn btn-danger">DELETE CATEGORY</button>
                             </div>
                         </div>
                     </div>
@@ -517,21 +517,21 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="e-mail">E-MAIL</label>
                         <div class="col-md-12">
-                            <input id="e-mail" ngModel email formControlName="email" name="e-mail" placeholder="Email" class="form-control input-md" required="" type="email">
+                            <input  ngModel email formControlName="email" name="e-mail" placeholder="Email" class="form-control input-md" required="" type="email">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="login">LOGIN</label>
                         <div class="col-md-12">
-                            <input id="login" formControlName="login" name="login" placeholder="Login" class="form-control input-md" required="" type="text">
+                            <input  formControlName="login" name="login" placeholder="Login" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="password">PASSWORD</label>
                         <div class="col-md-12">
-                            <input id="password" formControlName="password" name="password" placeholder="Password" class="form-control input-md" required="" type="password">
+                            <input  formControlName="password" name="password" placeholder="Password" class="form-control input-md" required="" type="password">
 
                         </div>
                     </div>
@@ -540,7 +540,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" type="submit" (click)="onAddAdmin()" [disabled]="!addAdminForm.valid" name="singlebutton" class="btn btn-danger">ADD ADMIN</button>
+                                <button  type="submit" (click)="onAddAdmin()" [disabled]="!addAdminForm.valid" name="singlebutton" class="btn btn-danger">ADD ADMIN</button>
                             </div>
                         </div>
                     </div>
@@ -557,7 +557,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="user_login"> USER LOGIN </label>
                         <div class="col-md-12">
-                            <input id="user_login" formControlName="login" name="user_login" placeholder="User Login" class="form-control input-md" required="" type="text">
+                            <input  formControlName="login" name="user_login" placeholder="User Login" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>
@@ -566,7 +566,7 @@
                     <div class="checkout float-left column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" type="submit" (click)="onDeleteUser()" [disabled]="!deleteUserForm.valid" name="singlebutton" class="btn btn-danger">DELETE USER</button>
+                                <button  type="submit" (click)="onDeleteUser()" [disabled]="!deleteUserForm.valid" name="singlebutton" class="btn btn-danger">DELETE USER</button>
                             </div>
                         </div>
                     </div>
