@@ -25,7 +25,7 @@ import { OpinionsService } from './services/opinions.service';
 import { OrderService } from './services/order.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SearchedAssortmentComponent } from './wineworld/assortment/searched-assortment/searched-assortment.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartComponent } from './wineworld/shopping-cart/shopping-cart.component';
 import { AdminPanelComponent } from './wineworld/admin-panel/admin-panel.component';
 import { UserPanelComponent } from './wineworld/user-panel/user-panel.component';
@@ -54,6 +54,7 @@ import { UserPanelComponent } from './wineworld/user-panel/user-panel.component'
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     ProductsService,

@@ -327,7 +327,7 @@
         </div>
         <!-- UPDATE LOCATION -->
         <div class="tab-pane" id="update_location">
-            <form class="card" [formGroup]="addLocationForm">
+            <form class="card" [formGroup]="updateLocationForm">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Update location
                 </div>
@@ -335,39 +335,39 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="update_location_id"> LOCATION TO UPDATE ID </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
-                                type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" name="update_location_id" placeholder="@LOCATION_TO_UPDATE_ID" class="form-control input-md" required=""
-                                type="number">
+                            <select (change)="onUpdateLocationIdChange($event.target.value)" name="location_Id" class="form-control">
+                            <option>Select location</option>
+                            <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
+                        </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="latitude"> LATITUDE </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" name="latitude" placeholder="{{updatedLocationData.latitude}}" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" (change)="onUpdateLoactionChange($event)" formControlName="latitude" name="latitude" placeholder="Latitude" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="longitude"> LONGITUDE </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="longitude" placeholder="{{updatedLocationData.longitude}}" class="form-control input-md" required="" type="number" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" (change)="onUpdateLoactionChange($event)" formControlName="longitude" name="longitude" placeholder="Longitude" class="form-control input-md" required="" type="number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="location_description"> LOCATION DESCRIPTION</label>
                         <div class="col-md-12">
-                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" class="form-control"  placeholder="Location description" name="location_description" disabled></textarea>
-                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="location_description"  placeholder="Location description" name="location_description"></textarea>
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" class="form-control"  placeholder="{{updatedLocationData.description}}" name="location_description" disabled></textarea>
+                            <textarea [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" (change)="onUpdateLoactionChange($event)" class="form-control" formControlName="location_description"  placeholder="Location description" name="location_description"></textarea>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="country"> COUNTRY </label>
                         <div class="col-md-12">
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'"  name="country" placeholder="Country" class="form-control input-md" required="" type="text" disabled>
-                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'"  formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control' : 'form-control field'" name="country" placeholder="{{updatedLocationData.country}}" class="form-control input-md" required="" type="text" disabled>
+                            <input [ngClass]="!isUpdateLocationEditable ? 'form-control field' : 'form-control'" (change)="onUpdateLoactionChange($event)" formControlName="country" name="country" placeholder="Country" class="form-control input-md" required="" type="text">
 
                         </div>
                     </div>

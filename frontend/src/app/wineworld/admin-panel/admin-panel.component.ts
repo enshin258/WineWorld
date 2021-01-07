@@ -27,6 +27,14 @@ export class AdminPanelComponent implements OnInit {
   updateLocationButtonText: string = "Edit";
   updateLocationForm: FormGroup;
   updateLocationFormChanged= false;
+  updateLocationId: number;
+  updatedLocationData: Location = {
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: 'Description',
+    country: 'Country'
+  };
 
   //update category
   isUpdateCategoryEditable: boolean = false;
@@ -159,6 +167,15 @@ export class AdminPanelComponent implements OnInit {
     else {
       if(this.updateLocationForm.touched && this.updateLocationFormChanged){
         console.log('time to post changes in locations');
+        this.updatedLocationData.locationId = this.updateLocationId;
+        if(this.updateLocationForm.get('latitude').value != null) this.updatedLocationData.latitude = this.updateLocationForm.get('latitude').value;
+        if(this.updateLocationForm.get('longitude').value != null) this.updatedLocationData.longitude = this.updateLocationForm.get('longitude').value;
+        if(this.updateLocationForm.get('location_description').value != null) this.updatedLocationData.description = this.updateLocationForm.get('location_description').value;
+        if(this.updateLocationForm.get('country').value != null) this.updatedLocationData.country = this.updateLocationForm.get('country').value;
+        console.log(this.updatedLocationData);
+        this.locationService.updateLocation(this.updatedLocationData).subscribe((data) => {
+          console.log(data);
+        });
       }
       this.updateLocationButtonText = "Edit";
       this.updateLocationFormChanged = false;
@@ -322,6 +339,15 @@ export class AdminPanelComponent implements OnInit {
   onUpdateCategoryIdChange(value: string){
     this.updateCategoryId = +value.match(/\d+/)[0];
     console.log(this.updateCategoryId);
+  }
+
+  onUpdateLocationIdChange(value: string){
+    this.updateLocationId = +value.match(/\d+/)[0];
+    console.log(this.updateLocationId);
+    this.locationService.getLocation(this.updateLocationId).subscribe((data) => {
+      this.updatedLocationData = data;
+      console.log(this.updatedLocationData);
+    });
   }
 
 }
