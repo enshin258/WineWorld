@@ -15,11 +15,15 @@ public class OrderResponse {
 
     private String date;
 
-    private String address;
+    private String addressLineOne;
+
+    private String addressLineTwo;
 
     private String city;
 
     private String postalCode;
+
+    private String countryCode;
 
     private float totalCost;
 
@@ -28,6 +32,8 @@ public class OrderResponse {
     private String login;
 
     private String email;
+
+    private String phoneNumber;
 
     private String status;
 

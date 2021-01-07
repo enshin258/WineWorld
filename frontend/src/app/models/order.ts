@@ -1,12 +1,16 @@
 import { OrderPosition } from './order_position';
-import { Product } from './product';
 
 export interface Order {
   id: number;
-  orderDate: string;
-  orderAddress: string;
-  orderCity: string;
-  orderPostalCode: string;
-  orderTotalCost: number;
+  date: string;
+  addressLineOne: string;
+  addressLineTwo: string;
+  city: string;
+  postalCode: string;
+  countryCode: string;
+  totalCost: number;
+  phoneNumber: number;
+  status: string;
+  userId: number;
   orderPositions: OrderPosition[];
 }

@@ -6,6 +6,7 @@ import {UsersService} from "../../services/users.service";
 import {Order} from "../../models/order";
 import { DatePipe } from "@angular/common";
 import {OrderPosition} from "../../models/order_position";
+import {User} from "../../models/user";
 
 declare let paypal: any;
 
@@ -16,11 +17,11 @@ declare let paypal: any;
   providers: [DatePipe]
 })
 export class ShoppingCartComponent implements OnInit, AfterViewChecked {
-  userEmail: string;
+  user: User;
   cartPositions: ShoppingCartPosition[];
   totalPrice: number;
   order_details_form: FormGroup;
-  isUserLoggedIn: boolean;
+  isUserLoggedIn: boolean = false;
 
   addScript: boolean = false;
   paypalLoad: boolean = true;
@@ -47,7 +48,7 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
           },
           payer: {
             payer_info: {
-              email: this.userEmail
+              email: this.user.email
             }
           },
           transactions: [{
@@ -75,26 +76,31 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
       return actions.payment.execute().then((payment) => {
         //on payment success
         console.log('Pay');
-        console.log(data)
         var orderPositions: OrderPosition[];
+        orderPositions = [ ];
         this.cartPositions.forEach((position) => {
           var orderPosition: OrderPosition = {
-            id: 0,
             productId: position.productMiniature.productId,
-            qunatity: position.quantity
+            quantity: position.quantity
           };
           orderPositions.push(orderPosition)
         });
         var myDate = new Date();
         var order: Order = {
           id: 0,
-          orderDate: this.datePipe.transform(myDate, 'dd.MM.yyyy'),
-          orderAddress: this.order_details_form.get('address').value,
-          orderCity: this.order_details_form.get('city').value,
-          orderPostalCode: this.order_details_form.get('zip').value,
-          orderTotalCost: this.totalPrice,
+          date: this.datePipe.transform(myDate, 'dd.MM.yyyy'),
+          addressLineOne: this.order_details_form.get('order_adress_line_1').value,
+          addressLineTwo: this.order_details_form.get('order_adress_line_2').value,
+          city: this.order_details_form.get('order_adress_city').value,
+          postalCode: this.order_details_form.get('zip').value,
+          countryCode: this.order_details_form.get('order_adress_country_code').value,
+          totalCost: this.totalPrice,
+          phoneNumber: this.order_details_form.get('order_adress_phone').value,
+          status: "Accepted",
+          userId: this.userService.loginData.userId,
           orderPositions: orderPositions
         };
+        console.log(order);
         this.orderService.addOrder(order).subscribe((data) => {
           console.log(data);
         })
@@ -128,9 +134,12 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     console.log(this.orderService.getCart());
-    this.userService.getUserData(this.userService.loginData.userId).subscribe((data)=> {
-      this.userEmail = data.email;
-    });
+    if(this.isUserLoggedIn){
+        this.userService.getUserData(this.userService.loginData.userId).subscribe((data)=> {
+        this.user = data;
+      });
+    }
+
     this.refreshCart();
     this.order_details_form = this.formBuilder.group({
       order_first_and_last_name: [null, Validators.required],

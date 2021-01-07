@@ -13,13 +13,19 @@ import java.util.List;
 public class OrderRequest {
     private String date;
 
-    private String address;
+    private String addressLineOne;
+
+    private String addressLineTwo;
 
     private String city;
 
     private String postalCode;
 
+    private String countryCode;
+
     private float totalCost;
+
+    private String phoneNumber;
 
     private long userId;
 
