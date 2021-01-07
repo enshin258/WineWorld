@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
 import { Location } from 'src/app/models/location';
+import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { LocationsService } from 'src/app/services/locations.service';
@@ -21,6 +22,36 @@ export class AdminPanelComponent implements OnInit {
   updateWineButtonText: string = "Edit";
   updateWineForm: FormGroup;
   updateWineFormChanged= false;
+  updateWineId: number;
+  updatedWineData: Product = {
+    productId: 0,
+    name: 'Name',
+    price: 0,
+    pictureUrl: '',
+    genreId: 0,
+    genreName: 'Genre',
+    productDescription: 'Description',
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: '',
+    country: '',
+    producer: 'Producer',
+    alcoholLevel: 0,
+    year: 0,
+    volume: 0
+  };
+  updatedProductLocation: Location = {
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: 'Description',
+    country: 'Country'
+  };
+  updatedProductCategory: Category = {
+    genreId: 0,
+    name: 'Category'
+  };
 
   //update location
   isUpdateLocationEditable: boolean = false;
@@ -348,6 +379,25 @@ export class AdminPanelComponent implements OnInit {
       this.updatedLocationData = data;
       console.log(this.updatedLocationData);
     });
+  }
+
+  onUpdateWineIdChange(value: string){
+    console.log(value);
+    this.updateWineId = +value;
+    this.productService.getProduct(this.updateWineId).subscribe((data) => {
+      this.updatedWineData = data;
+      console.log(this.updatedWineData);
+      this.categories.forEach((category) => {
+        if(category.genreId == this.updatedWineData.genreId){
+          this.updatedProductCategory = category;
+        }   
+      });
+      this.locations.forEach((location) => {
+        if(location.locationId == this.updatedWineData.locationId){
+          this.updatedProductLocation = location;
+        }
+      });
+    })
   }
 
 }

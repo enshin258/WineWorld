@@ -133,7 +133,7 @@
                             <label class="col-md-12 control-label" for="update_wine_id"> WINE TO UPDATE ID </label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" (change)="onUpdateWineIdChange($event.target.value)" name="update_wine_id" placeholder="@WINE_TO_UPDATEID" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -141,16 +141,16 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="winename"> NAME </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" placeholder="Name" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" placeholder="{{updatedWineData.name}}" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="name" name="name" placeholder="Name" class="form-control input-md" required="" type="text">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="price"> PRICE </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="price" placeholder="Price" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="price" placeholder="{{updatedWineData.price}}" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -159,15 +159,15 @@
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
                                 <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''"  formControlName="image" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
+                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''"  formControlName="image" (change)="onUpdateWineChange($event)" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="description"> DESCRIPTION</label>
                             <div class="col-md-12">
-                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" class="form-control" placeholder="Description" name="description" disabled></textarea>
-                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" class="form-control" formControlName="description"  placeholder="Description" name="description"></textarea>
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" class="form-control" placeholder="{{updatedWineData.productDescription}}" name="description" disabled></textarea>
+                                <textarea [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" class="form-control" formControlName="description"  placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
 
@@ -175,10 +175,9 @@
                             <label class="col-md-12 control-label" for="category"> CATEGORY</label>
                             <div class="col-md-12">
                                 <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="category" class="form-control" disabled>
-                                  <option> Choose </option>
-                                    <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
+                                    <option>{{updatedProductCategory.genreId}} - {{updatedProductCategory.name}}</option>
                                 </select>
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="category" name="category" class="form-control">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="category" name="category" class="form-control">
                                     <option> Choose </option>
                                       <option *ngFor="let category of categories">{{category.genreId}} - {{category.name}}</option>
                                   </select>
@@ -189,10 +188,9 @@
                             <label class="col-md-12 control-label" for="location"> LOCATION</label>
                             <div class="col-md-12">
                                 <select [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="location" class="form-control" disabled>
-                                  <option> Choose </option>
-                                    <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
+                                    <option>{{updatedProductLocation.locationId}} - {{updatedProductLocation.country}} - {{updatedProductLocation.description}}</option>
                                 </select>
-                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="location" name="location" class="form-control">
+                                <select [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="location" name="location" class="form-control">
                                     <option> Choose </option>
                                       <option *ngFor="let location of locations">{{location.locationId}} - {{location.country}} - {{location.description}}</option>
                                   </select>
@@ -203,8 +201,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="producer"> PRODUCER </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="producer" placeholder="{{updatedWineData.producer}}" class="form-control input-md" required="" type="text" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="producer" name="producer" placeholder="Producer" class="form-control input-md" required="" type="text">
 
                             </div>
                         </div>
@@ -212,8 +210,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="alcohol_level"> ALCOHOL LEVEL </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="alcohol_level" placeholder="{{updatedWineData.alcoholLevel}}" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="alcohol_level" name="alcohol_level" placeholder="Alcohol level" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -221,8 +219,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="year"> YEAR </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="year" placeholder="Year" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'"  name="year" placeholder="{{updatedWineData.year}}" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="year" name="year" placeholder="Year" class="form-control input-md" required="" type="number">
 
                             </div>
                         </div>
@@ -230,8 +228,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="volume"> VOLUME </label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'"  formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control' : 'form-control field'" name="volume" placeholder="{{updatedWineData.volume}}" class="form-control input-md" required="" type="number" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'form-control field' : 'form-control'" (change)="onUpdateWineChange($event)" formControlName="volume" name="volume" placeholder="Volume" class="form-control input-md" required="" type="number">
                             </div>
                         </div>
                     </div>
