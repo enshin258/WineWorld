@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductMiniature } from 'src/app/models/product_miniature';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-product',
@@ -17,17 +19,28 @@ export class ProductComponent implements OnInit {
   readonly mapRadius: number = 5;
   productId: number;
 
+  isUserLoggedIn: boolean;
+  add_comment_form: FormGroup;
+
+
   constructor(
     private productsService: ProductsService,
     private orderService: OrderService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private userService: UsersService
+  ) {
+    this.isUserLoggedIn = (this.userService.loginData != null);
+  }
 
   ngOnInit(): void {
     this.productId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.productsService.getProduct(this.productId).subscribe((data) => {
       this.product = data;
       this.mapSetup();
+    });
+    this.add_comment_form = this.formBuilder.group({
+      comment_description:[null, Validators.required]
     });
   }
 
@@ -66,4 +79,6 @@ export class ProductComponent implements OnInit {
       this.orderService.addProductToCart(productMiniature, 1);
     }
   }
+
+  onAddComment() {}
 }
