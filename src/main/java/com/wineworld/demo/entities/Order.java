@@ -22,7 +22,10 @@ public class Order {
     private String date;
 
     @NonNull
-    private String address;
+    private String addressLineOne;
+
+    @NonNull
+    private String addressLineTwo;
 
     @NonNull
     private String city;
@@ -31,7 +34,13 @@ public class Order {
     private String postalCode;
 
     @NonNull
+    private String countryCode;
+
+    @NonNull
     private float totalCost;
+
+    @NonNull
+    private String phoneNumber;
 
     @NonNull
     private String status;

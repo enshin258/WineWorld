@@ -32,6 +32,7 @@ public class ModelMapperConfig {
                 map().setYear(source.getProduct().getYear());
                 map().setVolume(source.getProduct().getVolume());
                 map().setQuantity(source.getQuantity());
+
             }
         };
         modelMapper.addMappings(orderPositionMap);
@@ -39,6 +40,7 @@ public class ModelMapperConfig {
             @Override
             protected void configure() {
                 skip(destination.getOrderPositions());
+                skip(destination.getOrderId());
             }
         };
         modelMapper.addMappings(orderPropertyMap);

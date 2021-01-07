@@ -8,9 +8,11 @@ import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.entities.Order;
 import com.wineworld.demo.entities.OrderPosition;
 import com.wineworld.demo.entities.Product;
+import com.wineworld.demo.entities.User;
 import com.wineworld.demo.repositories.OrderPositionRepository;
 import com.wineworld.demo.repositories.OrderRepository;
 import com.wineworld.demo.repositories.ProductRepository;
+import com.wineworld.demo.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -31,12 +33,15 @@ public class OrderService {
 
     private final ProductRepository productRepository;
 
+    private final UserRepository userRepository;
+
     private ModelMapper modelMapper;
 
-    public OrderService(OrderRepository orderRepository, OrderPositionRepository orderPositionRepository, ProductRepository productRepository) {
+    public OrderService(OrderRepository orderRepository, OrderPositionRepository orderPositionRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.orderPositionRepository = orderPositionRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
         modelMapper = ModelMapperConfig.getOrderPositionMapping();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
@@ -88,8 +93,12 @@ public class OrderService {
 //    }
 
     public OrderResponse addOrder(OrderRequest orderRequest){
-        Order order = modelMapper.map(orderRequest, Order.class);
+        Order order = new Order();
+        order = modelMapper.map(orderRequest, Order.class);
         List<OrderPositionResponse> orderPositionResponses = new ArrayList<>();
+        User user = userRepository.findById(orderRequest.getUserId())
+                .orElseThrow(EntityNotFoundException::new);
+        order.setUser(user);
         Order createdOrder = orderRepository.save(order);
         for(OrderPositionRequest orderPositionReq : orderRequest.getOrderPositionRequests()){
             Product product = productRepository.findById(orderPositionReq.getProductId())
