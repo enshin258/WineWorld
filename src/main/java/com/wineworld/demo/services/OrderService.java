@@ -42,7 +42,8 @@ public class OrderService {
         this.orderPositionRepository = orderPositionRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
-        modelMapper = ModelMapperConfig.getOrderPositionMapping();
+        modelMapper = new ModelMapper();
+        ModelMapperConfig.getOrderPositionMapping(modelMapper);
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
