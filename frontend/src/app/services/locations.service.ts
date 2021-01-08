@@ -19,8 +19,8 @@ export class LocationsService {
     return this.http.get<Location[]>(this.getLocationsUrl);
   }
 
-  getLocation(locationId: number) {
-    return this.http.get(this.getLocationUrl + locationId.toString());
+  getLocation(locationId: number): Observable<Location> {
+    return this.http.get<Location>(this.getLocationUrl + locationId.toString());
   }
 
   addLocation(location: Location) {
@@ -28,7 +28,7 @@ export class LocationsService {
   }
 
   updateLocation(location: Location) {
-    return this.http.patch(this.updateLocationUrl, location);
+    return this.http.put(this.updateLocationUrl + location.locationId.toString(), location, {withCredentials: true});
   }
 
   deleteLocation(locationId: number) {

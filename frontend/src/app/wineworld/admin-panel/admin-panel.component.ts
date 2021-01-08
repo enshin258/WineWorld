@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
 import { Location } from 'src/app/models/location';
+import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { LocationsService } from 'src/app/services/locations.service';
@@ -21,18 +22,57 @@ export class AdminPanelComponent implements OnInit {
   updateWineButtonText: string = "Edit";
   updateWineForm: FormGroup;
   updateWineFormChanged= false;
+  updateWineId: number;
+  updatedWineData: Product = {
+    productId: 0,
+    name: 'Name',
+    price: 0,
+    pictureUrl: '',
+    genreId: 0,
+    genreName: 'Genre',
+    productDescription: 'Description',
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: '',
+    country: '',
+    producer: 'Producer',
+    alcoholLevel: 0,
+    year: 0,
+    volume: 0
+  };
+  updatedProductLocation: Location = {
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: 'Description',
+    country: 'Country'
+  };
+  updatedProductCategory: Category = {
+    genreId: 0,
+    name: 'Category'
+  };
 
   //update location
   isUpdateLocationEditable: boolean = false;
   updateLocationButtonText: string = "Edit";
   updateLocationForm: FormGroup;
   updateLocationFormChanged= false;
+  updateLocationId: number;
+  updatedLocationData: Location = {
+    locationId: 0,
+    latitude: 0,
+    longitude: 0,
+    description: 'Description',
+    country: 'Country'
+  };
 
   //update category
   isUpdateCategoryEditable: boolean = false;
   updateCategoryButtonText: string = "Edit";
   updateCategoryForm: FormGroup;
   updateCategoryFormChanged= false;
+  updateCategoryId: number;
 
   addWineForm: FormGroup;
   deleteWineForm: FormGroup;
@@ -87,7 +127,7 @@ export class AdminPanelComponent implements OnInit {
       alcohol_level: [null, Validators.required],
       year: [null, Validators.required],
       volume: [null, Validators.required],
-    })
+    });
 
     this.deleteWineForm = this.formBuilder.group({
       id: [null, Validators.required],
@@ -118,6 +158,7 @@ export class AdminPanelComponent implements OnInit {
     this.updateCategoryForm = this.formBuilder.group({
       name: [null, Validators.required],
     });
+    this.updateCategoryForm.reset();
 
     this.deleteCategoryForm = this.formBuilder.group({
       id: [null, Validators.required],
@@ -157,6 +198,15 @@ export class AdminPanelComponent implements OnInit {
     else {
       if(this.updateLocationForm.touched && this.updateLocationFormChanged){
         console.log('time to post changes in locations');
+        this.updatedLocationData.locationId = this.updateLocationId;
+        if(this.updateLocationForm.get('latitude').value != null) this.updatedLocationData.latitude = this.updateLocationForm.get('latitude').value;
+        if(this.updateLocationForm.get('longitude').value != null) this.updatedLocationData.longitude = this.updateLocationForm.get('longitude').value;
+        if(this.updateLocationForm.get('location_description').value != null) this.updatedLocationData.description = this.updateLocationForm.get('location_description').value;
+        if(this.updateLocationForm.get('country').value != null) this.updatedLocationData.country = this.updateLocationForm.get('country').value;
+        console.log(this.updatedLocationData);
+        this.locationService.updateLocation(this.updatedLocationData).subscribe((data) => {
+          console.log(data);
+        });
       }
       this.updateLocationButtonText = "Edit";
       this.updateLocationFormChanged = false;
@@ -172,6 +222,10 @@ export class AdminPanelComponent implements OnInit {
     else {
       if(this.updateCategoryForm.touched && this.updateCategoryFormChanged){
         console.log('time to post changes in categories');
+        this.categoryService.updateCategory(this.updateCategoryId, this.updateCategoryForm.get('name').value)
+        .subscribe((data) => {
+          console.log(data);
+        })
       }
       this.updateCategoryButtonText = "Edit";
       this.updateCategoryFormChanged = false;
@@ -311,6 +365,39 @@ export class AdminPanelComponent implements OnInit {
 
   handleFile(files: FileList){
     this.uploadFile = files.item(0);
+  }
+
+  onUpdateCategoryIdChange(value: string){
+    this.updateCategoryId = +value.match(/\d+/)[0];
+    console.log(this.updateCategoryId);
+  }
+
+  onUpdateLocationIdChange(value: string){
+    this.updateLocationId = +value.match(/\d+/)[0];
+    console.log(this.updateLocationId);
+    this.locationService.getLocation(this.updateLocationId).subscribe((data) => {
+      this.updatedLocationData = data;
+      console.log(this.updatedLocationData);
+    });
+  }
+
+  onUpdateWineIdChange(value: string){
+    console.log(value);
+    this.updateWineId = +value;
+    this.productService.getProduct(this.updateWineId).subscribe((data) => {
+      this.updatedWineData = data;
+      console.log(this.updatedWineData);
+      this.categories.forEach((category) => {
+        if(category.genreId == this.updatedWineData.genreId){
+          this.updatedProductCategory = category;
+        }   
+      });
+      this.locations.forEach((location) => {
+        if(location.locationId == this.updatedWineData.locationId){
+          this.updatedProductLocation = location;
+        }
+      });
+    })
   }
 
 }
