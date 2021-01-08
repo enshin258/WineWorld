@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                    .antMatchers("/opinion/modernize/**").hasAuthority("USER")
                    .antMatchers("/opinion/remove/**").hasAnyAuthority("USER", "ADMIN")
                    .antMatchers("/opinion/post").hasAuthority("USER")
-                   .antMatchers("/order/make").hasAuthority("USER")
+                   .antMatchers("/order/make").hasAnyAuthority("USER", "ADMIN")
                    .antMatchers("/user/renew/**").hasAuthority("USER")
                    .anyRequest()
                    .authenticated();
