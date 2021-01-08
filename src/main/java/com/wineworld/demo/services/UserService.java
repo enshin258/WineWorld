@@ -31,6 +31,7 @@ public class UserService {
         this.roleRepository = roleRepository;
         modelMapper = ModelMapperConfig.getOpinionMapping();
         ModelMapperConfig.addUserMappings(modelMapper);
+        ModelMapperConfig.getOrderPositionMapping(modelMapper);
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
@@ -83,9 +84,15 @@ public class UserService {
 
     public UserResponse updateUser(Long userId, UserRequest userRequest){
         User userToUpdate = userRepository.getOne(userId);
-        userToUpdate.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        userToUpdate.setLogin(userRequest.getLogin());
-        userToUpdate.setEmail(userRequest.getEmail());
+        if(userRequest.getPassword() != null) {
+            userToUpdate.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        }
+        if(userRequest.getLogin() != null) {
+            userToUpdate.setLogin(userRequest.getLogin());
+        }
+        if(userRequest.getEmail() != null) {
+            userToUpdate.setEmail(userRequest.getEmail());
+        }
         userRepository.save(userToUpdate);
         return modelMapper.map(userToUpdate, UserResponse.class);
     }

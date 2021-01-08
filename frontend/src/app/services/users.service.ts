@@ -61,7 +61,10 @@ export class UsersService {
   }
 
   changeUserInfo(user: User) {
-    return this.http.put(this.changeUserInfoUrl + user.id.toString(), user);
+    return this.http.put(this.changeUserInfoUrl + user.id.toString(), user,
+      {
+        withCredentials: true
+      });
   }
 
   getUserData(userId: number): Observable<User>{

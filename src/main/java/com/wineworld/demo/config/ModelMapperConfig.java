@@ -16,8 +16,7 @@ import org.modelmapper.PropertyMap;
 public class ModelMapperConfig {
 
 
-    public static ModelMapper getOrderPositionMapping(){
-        ModelMapper modelMapper = new ModelMapper();
+    public static void getOrderPositionMapping(ModelMapper modelMapper){
         PropertyMap<OrderPosition, OrderPositionResponse> orderPositionMap = new PropertyMap<OrderPosition, OrderPositionResponse>() {
             @Override
             protected void configure() {
@@ -44,7 +43,6 @@ public class ModelMapperConfig {
             }
         };
         modelMapper.addMappings(orderPropertyMap);
-        return modelMapper;
     }
 
     public static ModelMapper getOpinionMapping(){
