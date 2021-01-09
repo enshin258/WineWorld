@@ -7,6 +7,8 @@ import { OrderService } from 'src/app/services/order.service';
 import { ProductMiniature } from 'src/app/models/product_miniature';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
+import { Opinion } from 'src/app/models/opinion';
+import { OpinionsService } from 'src/app/services/opinions.service';
 
 @Component({
   selector: 'app-product',
@@ -21,6 +23,8 @@ export class ProductComponent implements OnInit {
 
   isUserLoggedIn: boolean;
   add_comment_form: FormGroup;
+  selectedRating: number = 1;
+  opinions: Opinion[];
 
 
   constructor(
@@ -28,7 +32,8 @@ export class ProductComponent implements OnInit {
     private orderService: OrderService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private userService: UsersService
+    private userService: UsersService,
+    private opinionService: OpinionsService
   ) {
     this.isUserLoggedIn = (this.userService.loginData != null);
   }
@@ -39,8 +44,13 @@ export class ProductComponent implements OnInit {
       this.product = data;
       this.mapSetup();
     });
+    this.opinionService.getProductOpinions(this.productId).subscribe((data) => {
+      this.opinions = data;
+      console.log(this.opinions);
+    })
     this.add_comment_form = this.formBuilder.group({
-      comment_description:[null, Validators.required]
+      comment_title: [null, Validators.required],
+      comment_description: [null, Validators.required],
     });
   }
 
@@ -81,4 +91,9 @@ export class ProductComponent implements OnInit {
   }
 
   onAddComment() {}
+
+  onStarClick(value: string){
+    this.selectedRating = Number.parseInt(value);
+    console.log(this.selectedRating);
+  }
 }
