@@ -16,6 +16,7 @@ import com.wineworld.demo.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -35,13 +36,16 @@ public class OrderService {
 
     private final UserRepository userRepository;
 
+    private final MailService mailService;
+
     private ModelMapper modelMapper;
 
-    public OrderService(OrderRepository orderRepository, OrderPositionRepository orderPositionRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public OrderService(OrderRepository orderRepository, OrderPositionRepository orderPositionRepository, ProductRepository productRepository, UserRepository userRepository, MailService mailService) {
         this.orderRepository = orderRepository;
         this.orderPositionRepository = orderPositionRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.mailService = mailService;
         modelMapper = new ModelMapper();
         ModelMapperConfig.getOrderPositionMapping(modelMapper);
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
@@ -94,8 +98,8 @@ public class OrderService {
 //    }
 
     public OrderResponse addOrder(OrderRequest orderRequest){
-        Order order = new Order();
-        order = modelMapper.map(orderRequest, Order.class);
+        //Order order = new Order();
+        Order order = modelMapper.map(orderRequest, Order.class);
         List<OrderPositionResponse> orderPositionResponses = new ArrayList<>();
         User user = userRepository.findById(orderRequest.getUserId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -113,6 +117,9 @@ public class OrderService {
         }
         OrderResponse orderResponse = modelMapper.map(createdOrder, OrderResponse.class);
         orderResponse.setOrderPositionResponses(orderPositionResponses);
+        final String mailTitle = "New order";
+        Context context = new Context();
+        mailService.sendMail(user.getEmail(), mailTitle, context, true);
         return orderResponse;
     }
 

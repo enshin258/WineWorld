@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                    .permitAll()
                    .antMatchers("/user/register/**")
                    .permitAll()
-               .antMatchers("/**").permitAll()
+//               .antMatchers("/**").permitAll()
                    .and()
                .authorizeRequests()
                    .antMatchers("/payment").hasAnyAuthority("USER", "ADMIN")
