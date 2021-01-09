@@ -30,6 +30,7 @@ public class OpinionService {
         this.productRepository = productRepository;
         this.opinionRepository = opinionRepository;
         modelMapper = ModelMapperConfig.getOpinionMapping();
+        ModelMapperConfig.addProductMappings(modelMapper);
     }
 
     public OpinionResponse addOpinion(OpinionRequest opinionRequest){

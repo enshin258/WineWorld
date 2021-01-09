@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OpinionRequest {
+    private String title;
+
+    private String date;
+
     private int rating;
 
     private String comment;
