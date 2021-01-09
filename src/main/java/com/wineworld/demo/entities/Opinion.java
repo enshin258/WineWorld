@@ -18,6 +18,12 @@ public class Opinion {
     private long opinionId;
 
     @NonNull
+    private String title;
+
+    @NonNull
+    private String date;
+
+    @NonNull
     private int rating;
 
     @NonNull
