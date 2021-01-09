@@ -33,11 +33,11 @@
 
                     <span>Average rating</span>
                     <div id="rating-row" class="row">
-                        <h2 class="star-static">★ </h2>
-                        <h2 class="star-static">★ </h2>
-                        <h2 class="star-static">★ </h2>
-                        <h2 class="star-static-dissabled">★ </h2>
-                        <h2 class="star-static-dissabled">★ </h2>
+                        <h2 [ngClass]="avarageRating >= 1 ? 'star-static' : 'disabled'">★ </h2>
+                        <h2 [ngClass]="avarageRating >= 2 ? 'star-static' : 'disabled'">★ </h2>
+                        <h2 [ngClass]="avarageRating >= 3 ? 'star-static' : 'disabled'">★ </h2>
+                        <h2 [ngClass]="avarageRating >= 4 ? 'star-static' : 'disabled'">★ </h2>
+                        <h2 [ngClass]="avarageRating >= 5 ? 'star-static' : 'disabled'">★ </h2>
                     </div>
                 </div>
             </div>
@@ -55,15 +55,15 @@
     <!-- comments -->
     <div class="comments-section">
         <div class="col-sm-9">
-            <hr/>
             <div class="review-block">
+                <hr/>
                 <div *ngFor="let opinion of opinions" class="row">
                     <div class="col-sm-2">
                         <div class="review-block-name">{{opinion.login}}</div>
                         <div class="review-block-date">{{opinion.date}}</div>
                     </div>
 
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <div class="review-block-title">{{opinion.title}}</div>
                         <div class="review-block-description">{{opinion.comment}}</div>
                     </div>
@@ -72,17 +72,22 @@
                         <span>User score</span>
                         <div id="rating-row" class="row">
                             <div class="review-block-rate">
-                                <h2 [ngClass]="opinion.rating >= 1 ? 'star-static' : 'star-static-disabled'">★ </h2>
-                                <h2 [ngClass]="opinion.rating >= 2 ? 'star-static' : 'star-static-disabled'">★ </h2>
-                                <h2 [ngClass]="opinion.rating >= 3 ? 'star-static' : 'star-static-disabled'">★ </h2>
-                                <h2 [ngClass]="opinion.rating >= 4 ? 'star-static' : 'star-static-disabled'">★ </h2>
-                                <h2 [ngClass]="opinion.rating >= 5 ? 'star-static' : 'star-static-disabled'">★ </h2>
+                                <h2 [ngClass]="opinion.rating >= 1 ? 'star-static' : 'disabled'">★ </h2>
+                                <h2 [ngClass]="opinion.rating >= 2 ? 'star-static' : 'disabled'">★ </h2>
+                                <h2 [ngClass]="opinion.rating >= 3 ? 'star-static' : 'disabled'">★ </h2>
+                                <h2 [ngClass]="opinion.rating >= 4 ? 'star-static' : 'disabled'">★ </h2>
+                                <h2 [ngClass]="opinion.rating >= 5 ? 'star-static' : 'disabled'">★ </h2>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-1">
+                        <button [ngClass]="isUserLoggedIn && opinion.userId == loggedInUserId ? 'btn btn-danger' : 'disabled'" (click)="onOpinionDelete(opinion)" type="submit">Delete</button>
+                    </div>
                 </div>
+                <hr>
             </div>
-            <hr>
+            
             <!-- ADD COMMENT -->
             <form class="card" [formGroup]="add_comment_form">
                 <div class="card-header bg-dark text-light">
@@ -95,14 +100,14 @@
                                 <label class="control-label" for="comment_title"> TITLE</label>
                                 <div>
                                     <input [ngClass]="!isUserLoggedIn ? 'form-control' : 'form-control field'" placeholder="Title" name="comment_title" disabled>
-                                    <input [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="comment_title" placeholder="Title" name="comment_title">
+                                    <input [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="title" placeholder="Title" name="comment_title">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="comment_description"> DESCRIPTION</label>
                                 <div>
                                     <textarea [ngClass]="!isUserLoggedIn ? 'form-control' : 'form-control field'" placeholder="Description" name="comment_description" disabled></textarea>
-                                    <textarea [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="comment_description" placeholder="Description" name="comment_description"></textarea>
+                                    <textarea [ngClass]="!isUserLoggedIn ? 'form-control field' : 'form-control'" formControlName="description" placeholder="Description" name="comment_description"></textarea>
                                 </div>
                             </div>
                             <fieldset class="rating" [disabled]="!isUserLoggedIn">
