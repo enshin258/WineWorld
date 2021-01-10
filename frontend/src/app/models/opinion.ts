@@ -2,9 +2,12 @@ import { Product } from './product';
 import { User } from './user';
 
 export interface Opinion {
-  id: number;
+  opinionId: number;
   rating: number;
   comment: string;
-  user: User;
-  product: Product;
+  login: string;
+  userId: number;
+  productId: number;
+  title: string;
+  date: string;
 }
