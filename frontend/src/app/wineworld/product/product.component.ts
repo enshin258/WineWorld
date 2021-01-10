@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import * as L from 'leaflet';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductMiniature } from 'src/app/models/product_miniature';
@@ -27,20 +27,23 @@ export class ProductComponent implements OnInit {
   loggedInUserId: number;
   add_comment_form: FormGroup;
   selectedRating: number = 1;
-  didUserAlreadyCommented: boolean;
+  didUserAlreadyCommented: boolean = false;
   opinions: Opinion[];
   avarageRating: number = 1;
+  isAbleToComment: boolean = false;
 
 
   constructor(
     private productsService: ProductsService,
     private orderService: OrderService,
     private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private opinionService: OpinionsService,
     private datePipe: DatePipe
   ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.isUserLoggedIn = (this.userService.loginData != null);
     if(this.isUserLoggedIn == true){
       this.loggedInUserId = this.userService.loginData.userId;
@@ -49,31 +52,34 @@ export class ProductComponent implements OnInit {
       title: [null, Validators.required],
       description: [null, Validators.required],
     });
+    this.productId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+
+    this.opinionService.getProductOpinions(this.productId).subscribe((data) => {
+      this.opinions = data;
+      console.log(this.opinions);
+      var ratingSum = 0;
+      this.opinions.forEach((opinion) => {
+        ratingSum += opinion.rating;
+        if(opinion.userId == this.loggedInUserId){
+          this.didUserAlreadyCommented = true;
+          console.log('no w ifie a gdzie?')
+          console.log(this.didUserAlreadyCommented)
+        }
+        try {
+          this.avarageRating = Math.floor(ratingSum / this.opinions.length);
+        } catch (error) {
+          this.avarageRating = 0;
+        }
+      });
+    });
+
   }
 
   ngOnInit(): void {
-    this.productId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.productsService.getProduct(this.productId).subscribe((data) => {
       this.product = data;
       this.mapSetup();
     });
-    this.opinionService.getProductOpinions(this.productId).subscribe((data) => {
-      this.opinions = data;
-      console.log(this.opinions);
-    });
-    this.didUserAlreadyCommented = false;
-    var ratingSum = 0;
-    this.opinions.forEach((opinion) => {
-      ratingSum += opinion.rating;
-      if(opinion.userId == this.loggedInUserId){
-        this.didUserAlreadyCommented = true;
-      }
-    });
-    try {
-      this.avarageRating = Math.floor(ratingSum / this.opinions.length);
-    } catch (error) {
-      this.avarageRating = 0;
-    }
   }
 
   mapSetup() {
@@ -113,28 +119,25 @@ export class ProductComponent implements OnInit {
   }
 
   onAddComment() {
-    if(this.didUserAlreadyCommented){
-      var date = new Date();
-      var dateString: string = this.datePipe.transform(date, 'dd.MM.yyyy');
-      var opinionToAdd: Opinion = {
-        opinionId: 0,
-        rating: this.selectedRating,
-        comment: this.add_comment_form.get('description').value,
-        userId: this.userService.loginData.userId,
-        productId: this.productId,
-        login: '',
-        title: this.add_comment_form.get('title').value,
-        date: dateString
-      }
-      console.log(opinionToAdd);
-      this.opinionService.addOpinion(opinionToAdd).subscribe((data) => {
-        console.log(data);
-        this.ngOnInit();
+    var date = new Date();
+    var dateString: string = this.datePipe.transform(date, 'dd.MM.yyyy');
+    var opinionToAdd: Opinion = {
+      opinionId: 0,
+      rating: this.selectedRating,
+      comment: this.add_comment_form.get('description').value,
+      userId: this.userService.loginData.userId,
+      productId: this.productId,
+      login: '',
+      title: this.add_comment_form.get('title').value,
+      date: dateString
+    };
+    console.log(opinionToAdd);
+    this.opinionService.addOpinion(opinionToAdd).subscribe((data) => {
+      console.log(data);
+      this.router.navigateByUrl('/product/' + this.productId, { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/product/' + this.productId]);
       });
-    }
-    else{
-      console.log('user laready commented');
-    }
+    });
   }
 
   onStarClick(value: string){
@@ -145,7 +148,9 @@ export class ProductComponent implements OnInit {
   onOpinionDelete(opinion: Opinion){
     this.opinionService.deleteOpinion(this.loggedInUserId, this.productId).subscribe((data) => {
       console.log(data);
-      this.ngOnInit();
+      this.router.navigateByUrl('/product/' + this.productId, { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/product/' + this.productId]);
+      });
     });
   }
 }

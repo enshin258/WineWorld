@@ -124,7 +124,7 @@
                     <div class="checkout float-right column">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="singlebutton" [disabled]="!isUserLoggedIn" (click)="onAddComment()" type="submit" name="singlebutton" class="btn btn-danger">ADD REVIEW</button>
+                                <button id="singlebutton" [disabled]="!isUserLoggedIn || didUserAlreadyCommented" (click)="onAddComment()" type="submit" name="singlebutton" class="btn btn-danger">ADD REVIEW</button>
                             </div>
                         </div>
                     </div>

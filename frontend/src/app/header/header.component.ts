@@ -90,6 +90,10 @@ export class HeaderComponent implements OnInit {
         this.adminPanelEnabled = this.isUserLoggedIn && (this.userService.loginData.roleId == 2);
         var modal = document.getElementById('myModal');
         modal.style.display = 'none';
+        var url = this.router.url;
+        this.router.navigateByUrl(url, { skipLocationChange: true }).then(() => {
+          this.router.navigate([url]);
+        });
       },
       (err) => console.error(err)
     );
@@ -124,6 +128,10 @@ export class HeaderComponent implements OnInit {
         this.isUserLoggedIn = false;
         this.adminPanelEnabled = false;
         this.userService.loginData = null;
+        var url = this.router.url;
+        this.router.navigateByUrl(url, { skipLocationChange: true }).then(() => {
+          this.router.navigate([url]);
+        });
       },
       (err) => console.error(err)
     );
