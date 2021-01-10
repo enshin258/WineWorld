@@ -119,6 +119,9 @@ public class OrderService {
         orderResponse.setOrderPositionResponses(orderPositionResponses);
         final String mailTitle = "New order";
         Context context = new Context();
+        context.setVariable("name", user.getLogin());
+        context.setVariable("date", order.getDate());
+        context.setVariable("orderId", order.getOrderId());
         mailService.sendMail(user.getEmail(), mailTitle, context, true);
         return orderResponse;
     }
