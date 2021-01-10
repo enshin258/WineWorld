@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title th:remove="all">Template for HTML email with inline image</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-<p>
-    Hej,
-</p>
-<p>
-    Dziękujemy za złożenie zamówienia w naszym sklepie!
-</p>
+
+
+
+<body style="width: 600px; height: 550px; margin: 50px auto; border: 3px solid black;">
+
+    <div id="header" style="background-color: #4d545c; height: 120px;">
+        <img src="wine.png " width="100px " height="100px" style="margin: 10px; float: left;" />
+        <h1 style="margin:0 auto; float: left;  color: white; padding-top: 40px;">WineWorld - best wine shop</h1>
+
+    </div>
+
+
+
+    <div id="body" class="row" style="background-color: whitesmoke; height: 350px; margin: 0;">
+        <h2 style="margin: 0;">Hello, @USER_NAME</h1>
+
+            <h3 style="margin: 0 10;">Thank you for making a purchase on our website.</h3>
+            <h3 style="margin: 0;">Your order from @ORDER_DAY with number @ORDER_ID is already on its way to you :)</h3>
+            <h3 style="margin: 0;">Our courier should reach you within 7 days.</h3>
+            <h3 style="margin: 0 10;">If you have any question, please contatct support or call us.</h3>
+
+            <h4 style="margin: 0 5;">Email: wineworld@support.com</h4>
+            <h4 style="margin: 0 5;">Phone number: 123456789</h4>
+            <hr/>
+            <h4 style="margin: 0; ">Wineworld team</h4>
+
+
+    </div>
+
+
+    <div id="body " class="row " style="background-color: #e14a59; height: 80px; margin: 0; ">
+        <h4 style="margin: 0 auto; padding-top: 30px;">WineWorld©All rights reserved 2020 </h4>
+
+    </div>
 </body>
+
 </html>
