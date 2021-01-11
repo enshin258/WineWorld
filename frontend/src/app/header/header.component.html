@@ -5,13 +5,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" [routerLink]="['/about-us']">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" [routerLink]="['/contact']">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">History of Wine</a>
+                <a class="nav-link" [routerLink]="['/history-of-wine']">History of Wine</a>
             </li>
             <li [ngClass]="adminPanelEnabled ? 'nav-item' : 'invisible nav-item clickable'">
                 <a class="nav-link" [routerLink]="['/admin-panel']">Admin Panel</a>
@@ -27,7 +27,11 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" [formGroup]="form">
-            <img class="mx-10 clickable" [routerLink]="['/shopping-cart']" src="../../assets/shoping-cart.png" alt="" width="32" height="32" />
+            <div class="container-for-shopping-cart-image">
+                <img class="mx-10 clickable" [routerLink]="['/shopping-cart']" src="../../assets/shoping-cart.png" alt="" width="32" height="32" />
+                <div class="text-on-image">{{this.numberOFProductsInCart}}</div>
+            </div>
+
             <input class="form-control mr-sm-2" type="search" placeholder="Enter wine name" aria-label="Search" minlength="1" formControlName="searchText" />
             <button (click)="onSearch()" class="btn btn-danger my-2 my-sm-0" [disabled]="!form.valid">
         Search

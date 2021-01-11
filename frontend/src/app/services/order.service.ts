@@ -18,6 +18,8 @@ export class OrderService {
 
   private cart: ShoppingCartPosition[];
 
+  public numberOfItemsInCart: Observable<number>;
+
   constructor(private http: HttpClient) {
     this.cart = [];
   }
