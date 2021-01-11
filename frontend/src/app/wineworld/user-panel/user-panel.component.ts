@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BookedOrder } from 'src/app/models/booked_order';
+import { BookedOrderPosition } from 'src/app/models/booked_order_position';
 import { User } from 'src/app/models/user';
+import { OrderService } from 'src/app/services/order.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -16,8 +19,10 @@ export class UserPanelComponent implements OnInit {
   formChanged= false;
   userId: number;
   user: User;
+  bookedOrders: BookedOrder[];
 
   constructor(private userService: UsersService,
+    private orderService: OrderService,
     private formBuilder: FormBuilder) {
       this.isUserLoggedIn = (this.userService.loginData != null);
     }
@@ -33,6 +38,20 @@ export class UserPanelComponent implements OnInit {
       this.userService.getUserData(this.userId).subscribe((data) => {
         console.log(data);
         this.user = data;
+      });
+      this.orderService.getUserOrders(this.userId).subscribe((data) => {
+        this.bookedOrders = data;
+        console.log(this.bookedOrders);
+        this.bookedOrders.forEach((order) => {
+          order.firstOrderPosition = order.orderPositionResponses[0];
+          if(order.orderPositionResponses.length > 1){
+            order.orderPositionResponses = order.orderPositionResponses.slice(1);
+          }
+          else if(order.orderPositionResponses.length == 1){
+            order.orderPositionResponses = [];
+          }
+        });
+        console.log(this.bookedOrders);
       });
     }
   }

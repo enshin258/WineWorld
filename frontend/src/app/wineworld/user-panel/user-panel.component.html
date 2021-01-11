@@ -67,7 +67,7 @@
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Orders history
             </div>
             <div class="card-body">
-                <!-- First order -->
+                <!-- Order -->
                 <table class="table table-bordered">
                     <thead class="table-dark">
                         <tr>
@@ -80,54 +80,22 @@
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- first order with 3 positions -->
+                    <tbody *ngFor="let order of bookedOrders, let index = index">
+                        
                         <tr class="table-success">
-                            <td rowspan=3>1</td>
-                            <td rowspan=3>01.01.2020r</td>
-                            <td>Nice wine</td>
-                            <td>2</td>
-                            <td>199.99PLN</td>
-                            <td rowspan=3>1299.99PLN</td>
-                            <td rowspan=3>Delivered</td>
+                            <td [attr.rowspan]="order.orderPositionResponses.length + 1">{{index + 1}}</td>
+                            <td [attr.rowspan]="order.orderPositionResponses.length + 1">{{order.date}}</td>
+                            <td class="pointer" [routerLink]="['/product', order.firstOrderPosition.productId]">{{order.firstOrderPosition.name}}</td>
+                            <td>{{order.firstOrderPosition.quantity}}</td>
+                            <td>{{order.firstOrderPosition.price}} $</td>
+                            <td [attr.rowspan]="order.orderPositionResponses.length + 1">{{order.totalCost}} $</td>
+                            <td [attr.rowspan]="order.orderPositionResponses.length + 1">Delivered</td>
                         </tr>
 
-                        <tr class="table-success">
-                            <td>Champagne</td>
-                            <td>1</td>
-                            <td>99PLN</td>
-                        </tr>
-
-                        <tr class="table-success">
-                            <td>Carlo rossi</td>
-                            <td>3</td>
-                            <td>19.99</td>
-                        </tr>
-
-                        <tr class="table-danger">
-                            <td rowspan=1>3</td>
-                            <td rowspan=1>12.3.2021r</td>
-                            <td>Chateu de Wino</td>
-                            <td>1</td>
-                            <td>301.11PLN</td>
-                            <td rowspan=1>1299.99PLN</td>
-                            <td rowspan=1>Canceled</td>
-                        </tr>
-
-                        <tr class="table-warning">
-                            <td rowspan=2>1</td>
-                            <td rowspan=2>01.01.2020r</td>
-                            <td>Nice wine</td>
-                            <td>2</td>
-                            <td>199.99PLN</td>
-                            <td rowspan=2>1299.99PLN</td>
-                            <td rowspan=2>In progress</td>
-                        </tr>
-
-                        <tr class="table-warning">
-                            <td>3</td>
-                            <td>Chateu de Wino</td>
-                            <td>12.22PLN</td>
+                        <tr *ngFor="let orderPosition of order.orderPositionResponses" class="table-success">
+                            <td class="pointer" [routerLink]="['/product', orderPosition.productId]">{{orderPosition.name}}</td>
+                            <td>{{orderPosition.quantity}}</td>
+                            <td>{{orderPosition.price}} $</td>
                         </tr>
                     </tbody>
                 </table>
