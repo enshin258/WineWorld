@@ -35,7 +35,7 @@ export class ContactComponent implements OnInit {
     
     marker
       .bindPopup(
-        '<b>WineWorld shop :)</b>'
+        '<b>WineWorld shop :)</b> </br><span> gen. Sylwestra Kaliskiego 2, 00-908 Warszawa <span>'
       )
       .openPopup();
 

@@ -18,10 +18,15 @@ export class OrderService {
 
   private cart: ShoppingCartPosition[];
 
-  public numberOfItemsInCart: Observable<number>;
+  public numberOfItemsInCartObservable: Observable<number>;
+  public numberOfItemsInCart : number = 0;
 
   constructor(private http: HttpClient) {
     this.cart = [];
+
+    this.numberOfItemsInCartObservable = new Observable((observer) =>{
+      observer.next(this.numberOfItemsInCart);
+    });
   }
 
   getOrder(orderId: number) {
@@ -59,6 +64,9 @@ export class OrderService {
       quantity: quantity,
     };
     this.cart.push(position);
+
+    this.numberOfItemsInCart++;
+    this.numberOfItemsInCartObservable.
   }
 
   getCart() {

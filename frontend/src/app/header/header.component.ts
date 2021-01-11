@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginData } from '../models/login_data';
-import { ShoppingCartPosition } from '../models/shoping_cart_position';
 import { User } from '../models/user';
 import { UsersService } from '../services/users.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -22,8 +20,7 @@ export class HeaderComponent implements OnInit {
   buttonText = 'Login';
   adminPanelEnabled = false;
 
-  cartPositions: ShoppingCartPosition[];
-  numberOFProductsInCart = 0;
+  cartItems: number;
 
   constructor(
     private userService: UsersService,
@@ -34,6 +31,10 @@ export class HeaderComponent implements OnInit {
     this.searchText = '';
     //to refresh router after every category change
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    this.orderService.numberOfItemsInCartObservable.subscribe((data) => {
+      this.cartItems = data;
+    });
   }
 
   ngOnInit(): void {
@@ -104,13 +105,6 @@ export class HeaderComponent implements OnInit {
       },
       (err) => console.error(err)
     );
-
-    this.cartPositions = this.orderService.getCart();
-    this.cartPositions.forEach((position) => {
-      this.numberOFProductsInCart++;
-    });
-    console.log("ACTUAL NUMBER OF ITEMS IN SHOPPIN CART: " + this.numberOFProductsInCart);
-
   }
 
   onRegister() {
