@@ -55,7 +55,6 @@
     <!-- comments -->
     <div class="comments-section">
         <div class="col-sm-12">
-            <hr/>
             <div class="review-block">
                 <hr/>
                 <div *ngFor="let opinion of opinions" class="row">
@@ -81,14 +80,13 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-sm-1">
                         <button [ngClass]="isUserLoggedIn && opinion.userId == loggedInUserId ? 'btn btn-danger' : 'disabled'" (click)="onOpinionDelete(opinion)" type="submit">Delete</button>
                     </div>
                 </div>
-                <hr>
-            </div>
+                <hr/>
 
+            </div>
             <!-- ADD COMMENT -->
             <form class="card" [formGroup]="add_comment_form">
                 <div class="card-header bg-dark text-light">
