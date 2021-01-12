@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginData } from '../models/login_data';
 import { User } from '../models/user';
 import { UsersService } from '../services/users.service';
+import { OrderService } from 'src/app/services/order.service';
+
 
 @Component({
   selector: 'app-header',
@@ -19,14 +20,21 @@ export class HeaderComponent implements OnInit {
   buttonText = 'Login';
   adminPanelEnabled = false;
 
+  cartItems: number;
+
   constructor(
     private userService: UsersService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private orderService: OrderService
   ) {
     this.searchText = '';
     //to refresh router after every category change
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    this.orderService.numberOfItemsInCartObservable.subscribe((data) => {
+      this.cartItems = data;
+    });
   }
 
   ngOnInit(): void {
@@ -43,6 +51,7 @@ export class HeaderComponent implements OnInit {
       emailText: [null, Validators.required],
       loginText: [null, Validators.required],
       passwordText: [null, Validators.required],
+      ageCheckbox: [null, Validators.requiredTrue]
     });
 
     this.preparePopup();

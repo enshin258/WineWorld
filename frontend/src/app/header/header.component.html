@@ -5,13 +5,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" [routerLink]="['/about-us']">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" [routerLink]="['/contact']">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">History of Wine</a>
+                <a class="nav-link" [routerLink]="['/history-of-wine']">History of Wine</a>
             </li>
             <li [ngClass]="adminPanelEnabled ? 'nav-item' : 'invisible nav-item clickable'">
                 <a class="nav-link" [routerLink]="['/admin-panel']">Admin Panel</a>
@@ -27,7 +27,11 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" [formGroup]="form">
-            <img class="mx-10 clickable" [routerLink]="['/shopping-cart']" src="../../assets/shoping-cart.png" alt="" width="32" height="32" />
+            <div class="container-for-shopping-cart-image">
+                <img class="mx-10 clickable" [routerLink]="['/shopping-cart']" src="../../assets/shoping-cart.png" alt="" width="32" height="32" />
+                <!-- <div class="text-on-image">{{this.cartItems}}</div> -->
+            </div>
+
             <input class="form-control mr-sm-2" type="search" placeholder="Enter wine name" aria-label="Search" minlength="1" formControlName="searchText" />
             <button (click)="onSearch()" class="btn btn-danger my-2 my-sm-0" [disabled]="!form.valid">
         Search
@@ -48,7 +52,7 @@
                         <input type="text" id="inputLoginSignIn" class="form-control" formControlName="loginText" placeholder="Login" required="" autofocus="" />
                         <label for="inputPasswordSignIn" class="sr-only">Password</label>
                         <input type="password" id="inputPasswordSignIn" class="form-control" formControlName="passwordText" placeholder="Password" required="" />
-                        <button [disabled]="!loginForm.valid" class="btn btn-lg btn-danger btn-block" type="submit" (click)="onLogin()" style="margin-top: 65px;">
+                        <button [disabled]="!loginForm.valid" class="btn btn-lg btn-danger btn-block" type="submit" (click)="onLogin()" style="margin-top: 100px;">
               Sign in
             </button>
                     </form>
@@ -62,6 +66,8 @@
                         <input type="text" id="inputLoginSignUp" class="form-control" formControlName="loginText" placeholder="Login" required="" autofocus="" />
                         <label for="inputPasswordSignUp" class="sr-only">Password</label>
                         <input type="password" id="inputPasswordSignUp" class="form-control" formControlName="passwordText" placeholder="Password" required="" />
+                        <input type="checkbox" class="form-check-input" id="ageCheckbox" formControlName="ageCheckbox">
+                        <label class="form-check-label ageCheckboxLabel" for="ageCheckbox">I confirm that I am at least 18 years old</label>
                         <button [disabled]="!registerForm.valid" class="btn btn-lg btn-secondary btn-block" type="submit" (click)="onRegister()">
               Register account
             </button>

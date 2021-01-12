@@ -1,18 +1,27 @@
 #products,
 .container,
 .item {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 83vw;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 83vw;
 }
 
 .thumbnail {
-  height: auto;
-  margin: 15px;
-  padding: 10px;
+    height: auto;
+    margin: 15px;
+    padding: 15px;
+    border: 3px solid #656d78;
 }
 
 .item {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.img-event {
+    text-align: center;
+}
+
+.img-fluid {
+    border: 3px solid #e14a59;
 }

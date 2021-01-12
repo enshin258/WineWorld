@@ -1,0 +1,50 @@
+.container {
+    padding: 0;
+    height: 92vh;
+    width: 84vw;
+    max-width: 84vw;
+    margin: 0;
+}
+
+#map {
+    height: 75%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    border: 3px solid black;
+}
+
+#contact {
+    height: 25%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    background-color: #656d78;
+    border: 3px solid #e14a59;
+}
+
+h3 {
+    padding: 5px;
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 24px;
+    color: white;
+}
+
+h5 {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 14px;
+    color: red;
+}
+
+h6 {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 14px;
+    color: aliceblue;
+}
