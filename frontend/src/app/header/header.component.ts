@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
       emailText: [null, Validators.required],
       loginText: [null, Validators.required],
       passwordText: [null, Validators.required],
+      ageCheckbox: [null, Validators.requiredTrue]
     });
 
     this.preparePopup();

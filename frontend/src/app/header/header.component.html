@@ -52,7 +52,7 @@
                         <input type="text" id="inputLoginSignIn" class="form-control" formControlName="loginText" placeholder="Login" required="" autofocus="" />
                         <label for="inputPasswordSignIn" class="sr-only">Password</label>
                         <input type="password" id="inputPasswordSignIn" class="form-control" formControlName="passwordText" placeholder="Password" required="" />
-                        <button [disabled]="!loginForm.valid" class="btn btn-lg btn-danger btn-block" type="submit" (click)="onLogin()" style="margin-top: 65px;">
+                        <button [disabled]="!loginForm.valid" class="btn btn-lg btn-danger btn-block" type="submit" (click)="onLogin()" style="margin-top: 100px;">
               Sign in
             </button>
                     </form>
@@ -66,6 +66,8 @@
                         <input type="text" id="inputLoginSignUp" class="form-control" formControlName="loginText" placeholder="Login" required="" autofocus="" />
                         <label for="inputPasswordSignUp" class="sr-only">Password</label>
                         <input type="password" id="inputPasswordSignUp" class="form-control" formControlName="passwordText" placeholder="Password" required="" />
+                        <input type="checkbox" class="form-check-input" id="ageCheckbox" formControlName="ageCheckbox">
+                        <label class="form-check-label ageCheckboxLabel" for="ageCheckbox">I confirm that I am at least 18 years old</label>
                         <button [disabled]="!registerForm.valid" class="btn btn-lg btn-secondary btn-block" type="submit" (click)="onRegister()">
               Register account
             </button>

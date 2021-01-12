@@ -1,6 +1,6 @@
 <div>
 
-    <main class="container">
+    <main class="container col-md-12">
         <div class="left-column">
             <img src="{{ product.pictureUrl }}" alt="" />
             <div id="map"></div>
@@ -54,7 +54,8 @@
 
     <!-- comments -->
     <div class="comments-section">
-        <div class="col-sm-9">
+        <div class="col-sm-12">
+            <hr/>
             <div class="review-block">
                 <hr/>
                 <div *ngFor="let opinion of opinions" class="row">
@@ -87,7 +88,7 @@
                 </div>
                 <hr>
             </div>
-            
+
             <!-- ADD COMMENT -->
             <form class="card" [formGroup]="add_comment_form">
                 <div class="card-header bg-dark text-light">

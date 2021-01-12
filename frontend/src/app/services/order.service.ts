@@ -66,7 +66,7 @@ export class OrderService {
     this.cart.push(position);
 
     this.numberOfItemsInCart++;
-    this.numberOfItemsInCartObservable.
+    // this.numberOfItemsInCartObservable.
   }
 
   getCart() {

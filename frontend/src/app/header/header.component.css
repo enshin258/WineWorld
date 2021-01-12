@@ -1,5 +1,6 @@
 nav {
     height: 8vh;
+    z-index: 2;
 }
 
 nav .navbar-nav li a:hover {
@@ -59,9 +60,16 @@ h2 {
     color: white;
 }
 
-.form-signin .checkbox {
+#ageCheckbox {
     font-weight: 400;
     color: white;
+    margin-left: 3px;
+}
+
+.ageCheckboxLabel {
+    margin-left: 30px;
+    color: white;
+    margin-bottom: 10px;
 }
 
 .form-signin .form-control {

@@ -27,6 +27,7 @@ import { UserPanelComponent } from './wineworld/user-panel/user-panel.component'
 import { AboutUsComponent } from './wineworld/about-us/about-us.component';
 import { ContactComponent } from './wineworld/contact/contact.component';
 import { HistoryOfWineComponent } from './wineworld/history-of-wine/history-of-wine.component';
+import { AgeDialogComponent } from './age-dialog/age-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HistoryOfWineComponent } from './wineworld/history-of-wine/history-of-w
     AboutUsComponent,
     ContactComponent,
     HistoryOfWineComponent,
+    AgeDialogComponent,
   ],
   imports: [
     BrowserModule,
