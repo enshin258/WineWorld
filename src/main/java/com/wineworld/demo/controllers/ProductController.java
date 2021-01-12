@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.File;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class ProductController {
 
         ProductRequest productRequest = new ProductRequest(name,
         price, picture, productDescription, genreId, locationId, producer, alcoholLevel, year, volume);
-
         ProductResponse productResponse = productService.addProduct(productRequest);
         return new ResponseEntity<>(productResponse, HttpStatus.CREATED);
     }
@@ -61,7 +61,11 @@ public class ProductController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
-        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/get/count")

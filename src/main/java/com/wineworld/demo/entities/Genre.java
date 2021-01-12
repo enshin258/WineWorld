@@ -20,6 +20,7 @@ public class Genre {
     private long genreId;
 
     @NonNull
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.REMOVE)

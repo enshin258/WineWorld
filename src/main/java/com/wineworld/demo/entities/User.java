@@ -19,12 +19,14 @@ public class User {
     private long userId;
 
     @NonNull
+    @Column(unique = true)
     private String login;
 
     @NonNull
     private String password;
 
     @NonNull
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "user")

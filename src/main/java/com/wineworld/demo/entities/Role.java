@@ -19,6 +19,7 @@ public class Role {
     private long roleId;
 
     @NonNull
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE)

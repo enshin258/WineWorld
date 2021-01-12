@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,11 @@ public class RoleController {
 
     @GetMapping("/get/{roleId}")
     public ResponseEntity<RoleResponse> getRole(@PathVariable Long roleId){
-        return new ResponseEntity<>(roleService.getRoleById(roleId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(roleService.getRoleById(roleId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{roleId}")
@@ -46,6 +51,10 @@ public class RoleController {
 
     @PutMapping("/update/{roleId}")
     public ResponseEntity<RoleResponse> deleteRole(@PathVariable Long roleId, @RequestBody RoleRequest roleRequest){
-        return new ResponseEntity<>(roleService.updateRole(roleId, roleRequest), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(roleService.updateRole(roleId, roleRequest), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

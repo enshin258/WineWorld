@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 
@@ -43,12 +44,20 @@ public class GenreController {
 
     @GetMapping("/get/{genreId}")
     public ResponseEntity<GenreResponse> getGenre(@PathVariable Long genreId){
-        return new ResponseEntity<>(genreService.getGenre(genreId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(genreService.getGenre(genreId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/update/{genreId}")
     public ResponseEntity<GenreResponse> updateGenre(@PathVariable Long genreId, @RequestBody GenreRequest genreRequest){
-        return new ResponseEntity<>(genreService.updateGenre(genreId, genreRequest), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(genreService.updateGenre(genreId, genreRequest), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
