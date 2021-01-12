@@ -115,9 +115,12 @@ public class ProductService {
         productToUpdate.setLocation(locationRepository.findById(productRequest.getLocationId()).orElseThrow(EntityNotFoundException::new));
         productToUpdate.setAlcoholLevel(productRequest.getAlcoholLevel());
         productToUpdate.setName(productRequest.getName());
-        String fileName = saveImage(productRequest.getPicture());
-        productToUpdate.setPictureUrl("http://localhost:8080/images/" + fileName);
-        deleteImage(fileName);
+
+        if(productRequest.getPicture() != null){
+            String fileName = saveImage(productRequest.getPicture());
+            productToUpdate.setPictureUrl("http://localhost:8080/images/" + fileName);
+        }
+    
         productToUpdate.setPrice(productRequest.getPrice());
         productToUpdate.setProducer(productRequest.getProducer());
         productToUpdate.setVolume(productRequest.getVolume());

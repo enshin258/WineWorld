@@ -158,8 +158,8 @@
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="image"> IMAGE</label>
                             <div class="col-md-12">
-                                <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)" disabled>
-                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''"  formControlName="image" (change)="onUpdateWineChange($event)" name="image" class="input-file" type="file" (change)="handleFile($event.target.files)">
+                                <input [ngClass]="!isUpdateWineEditable ? '' : ' image field'" name="image" class="input-file" type="file" disabled>
+                                <input [ngClass]="!isUpdateWineEditable ? 'image field' : ''"  formControlName="image" name="image" class="input-file" type="file" (change)="handleUploadFile($event.target.files)">
                             </div>
                         </div>
 
