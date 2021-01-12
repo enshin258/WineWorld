@@ -2,13 +2,13 @@ package com.wineworld.demo.controllers;
 
 import com.wineworld.demo.dtos.order.OrderRequest;
 import com.wineworld.demo.dtos.order.OrderResponse;
-import com.wineworld.demo.dtos.orderposition.OrderPositionRequest;
 import com.wineworld.demo.dtos.orderposition.OrderPositionResponse;
 import com.wineworld.demo.services.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,7 +24,11 @@ public class OrderController {
 
     @GetMapping("/get/{orderId}")
     public ResponseEntity<OrderResponse> getOrder(@PathVariable Long orderId){
-        return new ResponseEntity<>(orderService.getOrder(orderId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(orderService.getOrder(orderId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/position/get/all/{orderId}")

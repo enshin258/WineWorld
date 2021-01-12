@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -36,7 +37,11 @@ public class LocationController {
 
     @GetMapping("/get/{locationId}")
     public ResponseEntity<LocationResponse> getLocation(@PathVariable Long locationId){
-        return new ResponseEntity<>(locationService.getLocationById(locationId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(locationService.getLocationById(locationId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{locationId}")
@@ -47,6 +52,10 @@ public class LocationController {
 
     @PutMapping("/update/{locationId}")
     public ResponseEntity<LocationResponse> updateLocation(@PathVariable Long locationId, @RequestBody LocationRequest locationRequest){
-        return new ResponseEntity<>(locationService.updateLocation(locationId, locationRequest), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(locationService.updateLocation(locationId, locationRequest), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

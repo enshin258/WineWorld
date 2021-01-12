@@ -4,10 +4,12 @@ import com.wineworld.demo.dtos.order.OrderResponse;
 import com.wineworld.demo.dtos.user.UserRequest;
 import com.wineworld.demo.dtos.user.UserResponse;
 import com.wineworld.demo.services.UserService;
+import org.hibernate.annotations.NotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -37,18 +39,32 @@ public class UserController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<UserResponse> getUserByID(@PathVariable Long id){
-        UserResponse userResponse = userService.getUserByID(id);
-        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+        try {
+            UserResponse userResponse = userService.getUserByID(id);
+            return new ResponseEntity<>(userResponse, HttpStatus.OK);
+        }catch (EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
+    @NotFound
     @GetMapping("/get/orders/{userId}")
     public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.getUserOrders(userId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.getUserOrders(userId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/get/by/login/{login}")
     public ResponseEntity<UserResponse> getUserByLogin(@PathVariable String login) {
-        return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{userId}")
@@ -59,7 +75,11 @@ public class UserController {
 
     @PutMapping("/renew/{userId}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest){
-        return new ResponseEntity<>(userService.updateUser(userId, userRequest), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.updateUser(userId, userRequest), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/by/name/{login}")

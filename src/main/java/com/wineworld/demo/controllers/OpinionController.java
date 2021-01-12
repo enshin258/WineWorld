@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -36,18 +37,30 @@ public class OpinionController {
 
     @GetMapping("/get/opinions/{userId}")
     public ResponseEntity<List<OpinionResponse>> getUserOpinions(@PathVariable Long userId){
-        return new ResponseEntity<>(opinionService.getUserOpinions(userId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(opinionService.getUserOpinions(userId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
     @GetMapping("/get/products/{productId}")
     public ResponseEntity<List<OpinionResponse>> getOpinions(@PathVariable Long productId){
-        return new ResponseEntity<>(opinionService.getAllOpinions(productId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(opinionService.getAllOpinions(productId), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/modernize/{opinionId}")
     public ResponseEntity<OpinionResponse> updateOpinion(@PathVariable Long opinionId, @RequestBody OpinionRequest opinionRequest){
-        return new ResponseEntity<>(opinionService.updateOpinion(opinionId, opinionRequest), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(opinionService.updateOpinion(opinionId, opinionRequest), HttpStatus.OK);
+        }catch(EntityNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
