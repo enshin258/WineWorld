@@ -3,13 +3,15 @@ import {Injectable} from '@angular/core';
 import {ProductMiniature} from '../models/product_miniature';
 import {ShoppingCartPosition} from '../models/shoping_cart_position';
 import {Order} from "../models/order";
+import { Observable } from 'rxjs';
+import { BookedOrder } from '../models/booked_order';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   private getOrderUrl = 'http://localhost:8080/order/get/';
-  private getUserOrdersUrl = 'http://localhost:8080/order/get/all/';
+  private getUserOrdersUrl = 'http://localhost:8080/user/get/orders/';
   private getOrderPositionsUrl =
     'http://localhost:8080/order/position/get/all/';
   private addOrderUrl = 'http://localhost:8080/order/make';
@@ -24,8 +26,9 @@ export class OrderService {
     return this.http.get(this.getOrderUrl + orderId.toString());
   }
 
-  getUserOrders(userId: number) {
-    return this.http.get(this.getUserOrdersUrl + userId.toString());
+  getUserOrders(userId: number): Observable<BookedOrder[]> {
+    return this.http.get<BookedOrder[]>(this.getUserOrdersUrl + userId.toString(),
+    {withCredentials: true});
   }
 
   getOrderPositions(orderId: number) {

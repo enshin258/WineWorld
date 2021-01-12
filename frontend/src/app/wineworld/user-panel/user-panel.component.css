@@ -39,3 +39,7 @@ h2 {
 .disabled {
     display: none;
 }
+
+.pointer {
+    cursor: pointer;
+}
