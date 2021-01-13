@@ -1,9 +1,8 @@
 export interface RecomendedWineResponse {
     title: string;
-    descirption: string;
-    rating: number;
+    description: string;
+    averageRating: number;
     imageUrl: string;
     price: number;
-    link: string;
 }
   

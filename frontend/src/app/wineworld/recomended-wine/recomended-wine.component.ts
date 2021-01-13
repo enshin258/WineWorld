@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RecomendedWineRequest } from 'src/app/models/recomended_wine_request';
+import { RecomendedWineResponse } from 'src/app/models/recomended_wine_response';
 import { RecomendedWineService } from 'src/app/services/recomended-wine.service';
 
 @Component({
@@ -10,10 +12,13 @@ import { RecomendedWineService } from 'src/app/services/recomended-wine.service'
 })
 export class RecomendedWineComponent implements OnInit {
   recomend_wines_form: FormGroup;
+  recomended_wines: RecomendedWineResponse[];
 
   constructor(
     private formBuilder: FormBuilder,
-    private wineRecomendationService: RecomendedWineService
+    private wineRecomendationService: RecomendedWineService,
+    private router: Router,
+
 
   ) {
     this.recomend_wines_form = this.formBuilder.group({
@@ -21,7 +26,9 @@ export class RecomendedWineComponent implements OnInit {
       wine_max_price: [null, Validators.required],
       wine_min_rating: [null, Validators.required],
       number_of_wines: [null, Validators.required]
-    })
+    });
+
+    this.recomended_wines = this.wineRecomendationService.recomended_wines;
    }
 
   ngOnInit(): void {
@@ -36,7 +43,13 @@ export class RecomendedWineComponent implements OnInit {
     }
 
     this.wineRecomendationService.getRecomendedWines(recomendedWineRequest).subscribe((data)=>{
+      this.wineRecomendationService.recomended_wines = data.recommendedWines;
+      
       console.log(data);
-    });
+      var url = this.router.url;
+      this.router.navigateByUrl(url, { skipLocationChange: true }).then(() => {
+        this.router.navigate([url]);
+      });
+    });    
   }
 }

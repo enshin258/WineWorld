@@ -161,27 +161,24 @@
 
     <!-- Recomended wines -->
     <div class="recomended_wines_section">
-        <!-- <div class="recomended_wine_div">
-            <hr/>
+        <div class="recomended_wine_div">
             <div *ngFor="let recomended_wine of recomended_wines" class="row">
-                <div class="col-sm-4">
-                    <img src="{{recomended_wine.image}}" width="128" height="128" />
+                <div class="col-sm-1">
+                    <img src="{{recomended_wine.imageUrl}}" width="128" height="128" />
                 </div>
-                <div class="col-sm-2">
-                    <div class="recomended-wine-name">{{recomended_wine.name}}</div>
+                <div class="col-sm-8">
+                    <div class="recomended-wine-name">{{recomended_wine.title}}</div>
                     <div class="recomended-wine-description">{{recomended_wine.description}}</div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <label>Rating</label>
-                    <div class="recomended-wine-rating">{{recomended_wine.rating}}</div>
+                    <div class="recomended-wine-rating">{{recomended_wine.averageRating}}</div>
                     <label>Price</label>
                     <div class="recomended-wine-price">{{recomended_wine.price}}</div>
-                    <label>Where to buy</label>
-                    <a href="{{recomended_wine.shop}}"></a>
                 </div>
             </div>
             <hr/>
-        </div> -->
+        </div>
     </div>
 </div>
