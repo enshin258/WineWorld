@@ -15,7 +15,7 @@ export class ProductsService {
   private getProductsCountUrl = 'http://localhost:8080/products/get/count/';
   private getProductUrl = 'http://localhost:8080/products/get/';
   private addProductUrl = 'http://localhost:8080/products/add';
-  private updateProductUrl = 'http://localhost:8080/products/update';
+  private updateProductUrl = 'http://localhost:8080/products/update/';
   private deleteProductUrl = 'http://localhost:8080/products/delete/';
   private getAllProductOpinionsUrl = 'http://localhost:8080/get/all/opinions/';
   private getProductsMiniaturesUrl = 'http://localhost:8080/mini/get/';
@@ -61,8 +61,25 @@ export class ProductsService {
       withCredentials: true});
   }
 
-  updateProduct(product: Product) {
-    return this.http.patch(this.updateProductUrl, product);
+  updateProduct(product: Add_product, productId: number) {
+    var formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("price", product.price.toString());
+    if(product.picture == null){
+      formData.append("picture", new Blob(), "empty");
+    }
+    else{
+      formData.append("picture", product.picture, product.picture.name);
+    }
+    formData.append("genreId", product.genreId.toString());
+    formData.append("productDescription", product.productDescription);
+    formData.append("locationId", product.locationId.toString());
+    formData.append("producer", product.producer);
+    formData.append("alcoholLevel", product.alcoholLevel.toString());
+    formData.append("year", product.year.toString());
+    formData.append("volume", product.volume.toString());
+    return this.http.put(this.updateProductUrl + productId.toString(), formData,
+    {withCredentials: true});
   }
 
   deleteProduct(productId: number) {

@@ -23,6 +23,7 @@ export class AdminPanelComponent implements OnInit {
   updateWineForm: FormGroup;
   updateWineFormChanged= false;
   updateWineId: number;
+  uploadUpdateFile: File;
   updatedWineData: Product = {
     productId: 0,
     name: 'Name',
@@ -182,7 +183,51 @@ export class AdminPanelComponent implements OnInit {
     }
     else {
       if(this.updateWineForm.touched && this.updateWineFormChanged){
-        console.log('time to post changes in wines');
+
+        var locationId: number;
+        var genreId: number;
+        try {
+          locationId = this.addWineForm.get('location').value.match(/\d+/)[0];
+        } catch (error) {
+          locationId = this.updatedWineData.locationId;
+        }
+
+        try {
+          genreId = this.addWineForm.get('category').value.match(/\d+/)[0];
+        } catch (error) {
+          genreId = this.updatedWineData.genreId;
+        }
+
+        var modifiedProduct: Add_product = {
+          name: this.updatedWineData.name,
+          price: this.updatedWineData.price,
+          picture: null,
+          genreId: this.updatedWineData.genreId,
+          productDescription: this.updatedWineData.productDescription,
+          locationId: this.updatedWineData.locationId,
+          producer: this.updatedWineData.producer,
+          alcoholLevel: this.updatedWineData.alcoholLevel,
+          year: this.updatedWineData.year,
+          volume: this.updatedWineData.volume
+        };
+        
+        if(this.updateWineForm.get('name').value != null) modifiedProduct.name = this.updateWineForm.get('name').value;
+        if(this.updateWineForm.get('price').value != null) modifiedProduct.price = this.updateWineForm.get('price').value;
+        if(this.updateWineForm.get('description').value != null) modifiedProduct.productDescription = this.updateWineForm.get('description').value;
+        if(this.updateWineForm.get('producer').value != null) modifiedProduct.producer = this.updateWineForm.get('producer').value;
+        if(this.updateWineForm.get('alcohol_level').value != null) modifiedProduct.alcoholLevel = this.updateWineForm.get('alcohol_level').value;
+        if(this.updateWineForm.get('year').value != null) modifiedProduct.year = this.updateWineForm.get('year').value;
+        if(this.updateWineForm.get('volume').value != null) modifiedProduct.volume = this.updateWineForm.get('volume').value;
+        if(this.uploadUpdateFile != null) modifiedProduct.picture = this.uploadUpdateFile;
+        modifiedProduct.genreId = genreId;
+        modifiedProduct.locationId =locationId;
+
+
+        console.log(modifiedProduct);
+
+        this.productService.updateProduct(modifiedProduct, this.updatedWineData.productId).subscribe((data) => {
+          console.log(data);
+        })
       }
       this.updateWineButtonText = "Edit";
       this.updateWineFormChanged = false;
@@ -365,6 +410,11 @@ export class AdminPanelComponent implements OnInit {
 
   handleFile(files: FileList){
     this.uploadFile = files.item(0);
+  }
+
+  handleUploadFile(files: FileList){
+    this.updateWineFormChanged = true;
+    this.uploadUpdateFile = files.item(0);
   }
 
   onUpdateCategoryIdChange(value: string){

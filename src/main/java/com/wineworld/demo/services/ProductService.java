@@ -40,6 +40,7 @@ public class ProductService {
         this.genreRepository = genreRepository;
         modelMapper = ModelMapperConfig.getOpinionMapping();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
         ModelMapperConfig.addProductMappings(modelMapper);
     }
 
@@ -115,13 +116,17 @@ public class ProductService {
         productToUpdate.setLocation(locationRepository.findById(productRequest.getLocationId()).orElseThrow(EntityNotFoundException::new));
         productToUpdate.setAlcoholLevel(productRequest.getAlcoholLevel());
         productToUpdate.setName(productRequest.getName());
-        String fileName = saveImage(productRequest.getPicture());
-        productToUpdate.setPictureUrl("http://localhost:8080/images/" + fileName);
-        deleteImage(fileName);
+
+        if(!productRequest.getPicture().isEmpty()){
+            String fileName = saveImage(productRequest.getPicture());
+            productToUpdate.setPictureUrl("http://localhost:8080/images/" + fileName);
+        }
+    
         productToUpdate.setPrice(productRequest.getPrice());
         productToUpdate.setProducer(productRequest.getProducer());
         productToUpdate.setVolume(productRequest.getVolume());
         productToUpdate.setYear(productRequest.getYear());
+        productToUpdate.setProductDescription(productRequest.getProductDescription());
         productRepository.save(productToUpdate);
         return modelMapper.map(productToUpdate, ProductResponse.class);
     }
