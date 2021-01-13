@@ -62,7 +62,23 @@ export class ProductsService {
   }
 
   updateProduct(product: Add_product, productId: number) {
-    return this.http.put(this.updateProductUrl + productId.toString(), product,
+    var formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("price", product.price.toString());
+    if(product.picture == null){
+      formData.append("picture", new Blob(), "empty");
+    }
+    else{
+      formData.append("picture", product.picture, product.picture.name);
+    }
+    formData.append("genreId", product.genreId.toString());
+    formData.append("productDescription", product.productDescription);
+    formData.append("locationId", product.locationId.toString());
+    formData.append("producer", product.producer);
+    formData.append("alcoholLevel", product.alcoholLevel.toString());
+    formData.append("year", product.year.toString());
+    formData.append("volume", product.volume.toString());
+    return this.http.put(this.updateProductUrl + productId.toString(), formData,
     {withCredentials: true});
   }
 

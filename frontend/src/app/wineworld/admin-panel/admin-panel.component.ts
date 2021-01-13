@@ -213,9 +213,9 @@ export class AdminPanelComponent implements OnInit {
         
         if(this.updateWineForm.get('name').value != null) modifiedProduct.name = this.updateWineForm.get('name').value;
         if(this.updateWineForm.get('price').value != null) modifiedProduct.price = this.updateWineForm.get('price').value;
-        if(this.updateWineForm.get('productDescription').value != null) modifiedProduct.productDescription = this.updateWineForm.get('productDescription').value;
+        if(this.updateWineForm.get('description').value != null) modifiedProduct.productDescription = this.updateWineForm.get('description').value;
         if(this.updateWineForm.get('producer').value != null) modifiedProduct.producer = this.updateWineForm.get('producer').value;
-        if(this.updateWineForm.get('alcoholLevel').value != null) modifiedProduct.alcoholLevel = this.updateWineForm.get('alcoholLevel').value;
+        if(this.updateWineForm.get('alcohol_level').value != null) modifiedProduct.alcoholLevel = this.updateWineForm.get('alcohol_level').value;
         if(this.updateWineForm.get('year').value != null) modifiedProduct.year = this.updateWineForm.get('year').value;
         if(this.updateWineForm.get('volume').value != null) modifiedProduct.volume = this.updateWineForm.get('volume').value;
         if(this.uploadUpdateFile != null) modifiedProduct.picture = this.uploadUpdateFile;
