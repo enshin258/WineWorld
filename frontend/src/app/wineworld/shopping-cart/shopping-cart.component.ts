@@ -7,6 +7,7 @@ import {Order} from "../../models/order";
 import { DatePipe } from "@angular/common";
 import {OrderPosition} from "../../models/order_position";
 import {User} from "../../models/user";
+import { Router } from '@angular/router';
 
 declare let paypal: any;
 
@@ -101,15 +102,20 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
           orderPositions: orderPositions
         };
         console.log(order);
-        this.orderService.addOrder(order).subscribe((data) => {
-          console.log(data);
-        })
+        this.orderService.addOrder(order).subscribe((addedData) => {
+          console.log(addedData);
+        });
+        this.orderService.emptyCart();
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/']);
+        });
       })
     }
   };
 
   constructor(private orderService: OrderService, private formBuilder: FormBuilder,
-              private userService: UsersService, private datePipe: DatePipe) {
+              private userService: UsersService, private datePipe: DatePipe,
+              private router: Router) {
     this.isUserLoggedIn = (this.userService.loginData != null);
   }
 

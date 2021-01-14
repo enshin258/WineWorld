@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                    .permitAll()
                    .antMatchers("/user/register/**")
                    .permitAll()
-               .antMatchers("/**").permitAll()
+            //    .antMatchers("/**").permitAll()
                    .and()
                .authorizeRequests()
                    .antMatchers("/payment").hasAnyAuthority("USER", "ADMIN")
@@ -102,15 +102,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             }
         };
     }
-
-    // @Bean
-    // public WebMvcConfigurationSupport webConfigure(){
-    //     return new WebMvcConfigurationSupport(){
-    //         @Override
-    //         public void addResourceHandlers(ResourceHandlerRegistry registry) { 
-    //                 registry.addResourceHandler("/**")
-    //                      .addResourceLocations("classpath:/static/");
-    //         }
-    //     };
-    // }
 }

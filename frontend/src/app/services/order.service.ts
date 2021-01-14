@@ -106,4 +106,8 @@ export class OrderService {
     });
     return total;
   }
+
+  emptyCart(){
+    this.cart = [];
+  }
 }
