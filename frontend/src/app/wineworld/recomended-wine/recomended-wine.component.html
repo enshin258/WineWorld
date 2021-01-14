@@ -162,20 +162,22 @@
     <!-- Recomended wines -->
     <div class="recomended_wines_section">
         <div class="recomended_wine_div">
-            <div *ngFor="let recomended_wine of recomended_wines" class="row">
-                <div class="col-sm-1">
-                    <img src="{{recomended_wine.imageUrl}}" width="128" height="128" />
+            <div *ngFor="let recomended_wine of recomended_wines" class="recomended_wine_item row">
+                <div class="col-sm-2">
+                    <img id="recomended_wine_img" src="{{recomended_wine.imageUrl}}" width="128" height="128" />
                 </div>
                 <div class="col-sm-8">
-                    <div class="recomended-wine-name">{{recomended_wine.title}}</div>
-                    <div class="recomended-wine-description">{{recomended_wine.description}}</div>
+                    <div id="recomended_wine_title" class="recomended-wine-name">{{recomended_wine.title}}</div>
+                    <div id="recomended_wine_desctiption" class="recomended-wine-description">{{recomended_wine.description}}</div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-1">
                     <label>Rating</label>
-                    <div class="recomended-wine-rating">{{recomended_wine.averageRating}}</div>
+                    <div id="recomended_wine_rating" class="recomended-wine-rating">{{recomended_wine.averageRating}}</div>
+                </div>
+                <div class="col-sm-1">
                     <label>Price</label>
-                    <div class="recomended-wine-price">{{recomended_wine.price}}</div>
+                    <div id="recomended_wine_price" class="recomended-wine-price">{{recomended_wine.price}}</div>
                 </div>
             </div>
             <hr/>
