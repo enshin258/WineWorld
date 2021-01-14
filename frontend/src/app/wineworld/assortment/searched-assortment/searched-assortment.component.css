@@ -25,3 +25,15 @@
 .img-fluid {
     border: 3px solid #e14a59;
 }
+
+#search_text {
+    min-width: 82vw;
+    width: 82vw;
+    max-width: 82vw;
+    font-size: 32px;
+    color: #e14a59;
+    text-align: center;
+    font-weight: 800;
+    border: 3px solid #656d78;
+    margin: 10px;
+}

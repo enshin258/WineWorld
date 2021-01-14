@@ -1,5 +1,5 @@
 <div class="container">
-    <p id="category_name">Category {{ categoryId }}</p>
+    <p id="category_name">{{ categoryName }}</p>
     <div id="products" class="row view-group">
         <div *ngFor="let product of products" [routerLink]="['/product', product.productId]" class="item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 grid-group-item">
             <div class="thumbnail card">

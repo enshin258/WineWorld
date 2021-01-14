@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { Count } from 'src/app/models/count';
 import { ProductMiniature } from 'src/app/models/product_miniature';
+import { CategoryService } from 'src/app/services/category.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,6 +14,8 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CategoryComponent implements OnInit {
   categoryId: number;
+  categoryName: string = "";
+  categories: Category[];
   products: ProductMiniature[];
   readonly pageSize: number = 20;
   currentPage: number;
@@ -21,7 +25,8 @@ export class CategoryComponent implements OnInit {
     private productsService: ProductsService,
     private orderService: OrderService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {
     this.currentPage = 1;
     //to refresh router after every category change
@@ -30,6 +35,18 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+
+    this.categoryService.getAllCategories().subscribe((data)=> {
+      this.categories = data;
+      this.categories.forEach((category)=> {
+        if(category.genreId == this.categoryId) {
+          this.categoryName = category.name;
+        }
+      });
+    });
+
+
+
     this.getPagesCount();
     this.productsService
       .getProductMiniaturesOfCategory(
