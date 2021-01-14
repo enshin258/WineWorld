@@ -11,6 +11,7 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { HistoryOfWineComponent } from './history-of-wine/history-of-wine.component';
+import { RecomendedWineComponent } from './recomended-wine/recomended-wine.component';
 
 const routes: Routes = [
   { path: '', component: AssortmentComponent },
@@ -23,8 +24,8 @@ const routes: Routes = [
   { path: 'user-panel', component: UserPanelComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'contact', component: ContactComponent},
-  { path: 'history-of-wine', component: HistoryOfWineComponent}
-
+  { path: 'history-of-wine', component: HistoryOfWineComponent},
+  { path: 'recomended-wine', component: RecomendedWineComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,186 @@
+<!-- SEARCHING -->
+<div id="container">
+    <form class="card" [formGroup]="recomend_wines_form">
+        <div class="card-header bg-dark text-light">
+            <i class="fa fa-shopping-card" aria-hidden="true"></i> Recomend wine
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="wine_genre"> Wine Genre</label>
+                        <div>
+                            <select formControlName='wine_genre' class="custom-select">
+                                <option value="wine" selected>wine</option>
+                                <option value="white_wine">white wine</option>
+                                <option value="dry_white_wine">dry white wine</option>
+                                <option value="assyrtiko">assyrtiko</option>
+                                <option value="pinot_blanc">pinot blanc</option>
+                                <option value="cortese">cortese</option>
+                                <option value="roussanne">roussanne</option>
+                                <option value="moschofilero">moschofilero</option>
+                                <option value="muscadet">muscadet</option>
+                                <option value="viognier">viognier</option>
+                                <option value="verdicchio">verdicchio</option>
+                                <option value="greco">greco</option>
+                                <option value="marsanne">marsanne</option>
+                                <option value="white_burgundy">white burgundy</option>
+                                <option value="chardonnay">chardonnay</option>
+                                <option value="gruener_veltliner">gruener veltliner</option>
+                                <option value="white_rioja">white rioja</option>
+                                <option value="frascati">frascati</option>
+                                <option value="gavi">gavi</option>
+                                <option value="l_acadie_blanc">l acadie blanc</option>
+                                <option value="trebbiano">trebbiano</option>
+                                <option value="sauvignon_blanc">sauvignon blanc</option>
+                                <option value="catarratto">catarratto</option>
+                                <option value="albarino">albarino</option>
+                                <option value="arneis">arneis</option>
+                                <option value="verdejo">verdejo</option>
+                                <option value="vermentino">vermentino</option>
+                                <option value="soave">soave</option>
+                                <option value="pinot_grigio">pinot grigio</option>
+                                <option value="dry_riesling">dry riesling</option>
+                                <option value="torrontes">torrontes</option>
+                                <option value="mueller_thurgau">mueller thurgau</option>
+                                <option value="grechetto">grechetto</option>
+                                <option value="gewurztraminer">gewurztraminer</option>
+                                <option value="chenin_blanc">chenin blanc</option>
+                                <option value="white_bordeaux">white bordeaux</option>
+                                <option value="semillon">semillon</option>
+                                <option value="riesling">riesling</option>
+                                <option value="sauternes">sauternes</option>
+                                <option value="sylvaner">sylvaner</option>
+                                <option value="lillet_blanc">lillet blanc</option>
+                                <option value="red_wine">red wine</option>
+                                <option value="dry_red_wine">dry red wine</option>
+                                <option value="petite_sirah">petite sirah</option>
+                                <option value="zweigelt">zweigelt</option>
+                                <option value="baco_noir">baco noir</option>
+                                <option value="bonarda">bonarda</option>
+                                <option value="cabernet_franc">cabernet franc</option>
+                                <option value="bairrada">bairrada</option>
+                                <option value="barbera_wine">barbera wine</option>
+                                <option value="primitivo">primitivo</option>
+                                <option value="pinot_noir">pinot noir</option>
+                                <option value="nebbiolo">nebbiolo</option>
+                                <option value="dolcetto">dolcetto</option>
+                                <option value="tannat">tannat</option>
+                                <option value="negroamaro">negroamaro</option>
+                                <option value="red_burgundy">red burgundy</option>
+                                <option value="corvina">corvina</option>
+                                <option value="rioja">rioja</option>
+                                <option value="cotes_du_rhone">cotes du rhone</option>
+                                <option value="grenache">grenache</option>
+                                <option value="malbec">malbec</option>
+                                <option value="zinfandel">zinfandel</option>
+                                <option value="sangiovese">sangiovese</option>
+                                <option value="carignan">carignan</option>
+                                <option value="carmenere">carmenere</option>
+                                <option value="cesanese">cesanese</option>
+                                <option value="cabernet_sauvignon">cabernet sauvignon</option>
+                                <option value="aglianico">aglianico</option>
+                                <option value="tempranillo">tempranillo</option>
+                                <option value="shiraz">shiraz</option>
+                                <option value="mourvedre">mourvedre</option>
+                                <option value="merlot">merlot</option>
+                                <option value="nero_d_avola">nero d avola</option>
+                                <option value="bordeaux">bordeaux</option>
+                                <option value="marsala">marsala</option>
+                                <option value="port">port</option>
+                                <option value="gamay">gamay</option>
+                                <option value="dornfelder">dornfelder</option>
+                                <option value="concord_wine">concord wine</option>
+                                <option value="sparkling_red_wine">sparkling red wine</option>
+                                <option value="pinotage">pinotage</option>
+                                <option value="agiorgitiko">agiorgitiko</option>
+                                <option value="dessert_wine">dessert wine</option>
+                                <option value="pedro_ximenez">pedro ximenez</option>
+                                <option value="moscato">moscato</option>
+                                <option value="late_harvest">late harvest</option>
+                                <option value="ice_wine">ice wine</option>
+                                <option value="white_port">white port</option>
+                                <option value="lambrusco_dolce">lambrusco dolce</option>
+                                <option value="madeira">madeira</option>
+                                <option value="banyuls">banyuls</option>
+                                <option value="vin_santo">vin santo</option>
+                                <option value="port">port</option>
+                                <option value="rose_wine">rose wine</option>
+                                <option value="sparkling_rose">sparkling rose</option>
+                                <option value="sparkling_wine">sparkling wine</option>
+                                <option value="cava">cava</option>
+                                <option value="cremant">cremant</option>
+                                <option value="champagne">champagne</option>
+                                <option value="prosecco">prosecco</option>
+                                <option value="spumante">spumante</option>
+                                <option value="sparkling_rose">sparkling rose</option>
+                                <option value="sherry">sherry</option>
+                                <option value="cream_sherry">cream sherry</option>
+                                <option value="dry_sherry">dry sherry</option>
+                                <option value="vermouth">vermouth</option>
+                                <option value="dry_vermouth">dry vermouth</option>
+                                <option value="fruit_wine">fruit wine</option>
+                                <option value="mead">mead</option>
+                                                                
+                              </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="comment_description"> Max price (in USD)</label>
+                        <div>
+                            <input formControlName='wine_max_price' type="number" class="form-control" id="wine_max_price" placeholder="Max price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="comment_description"> Minimum rating (from 0 to 1)</label>
+                        <div>
+                            <input formControlName='wine_min_rating' type="number" class="form-control" id="wine_min_rating" placeholder="Minimum rating">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="comment_description"> Number of recomended wines</label>
+                        <div>
+                            <input formControlName='number_of_wines' type="number" class="form-control" id="number_of_wines" placeholder="Number of recomended wines">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="checkout float-right column">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button id="singlebutton" (click)="onRecomendWines()" type="submit" name="singlebutton" class="btn btn-danger">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Recomended wines -->
+    <div class="recomended_wines_section">
+        <div class="recomended_wine_div">
+            <div *ngFor="let recomended_wine of recomended_wines" class="recomended_wine_item row">
+                <div class="col-sm-2">
+                    <img id="recomended_wine_img" src="{{recomended_wine.imageUrl}}" width="128" height="128" />
+                </div>
+                <div class="col-sm-8">
+                    <div id="recomended_wine_title" class="recomended-wine-name">{{recomended_wine.title}}</div>
+                    <div id="recomended_wine_desctiption" class="recomended-wine-description">{{recomended_wine.description}}</div>
+                </div>
+
+                <div class="col-sm-1">
+                    <label>Rating</label>
+                    <div id="recomended_wine_rating" class="recomended-wine-rating">{{recomended_wine.averageRating.toFixed(2)}}</div>
+                </div>
+                <div class="col-sm-1">
+                    <label>Price</label>
+                    <div id="recomended_wine_price" class="recomended-wine-price">{{recomended_wine.price}}</div>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>
